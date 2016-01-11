@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p == NULL && q == NULL){
+            return true;
+        }
+        else if((p == NULL && q != NULL) || (p != NULL && q == NULL)){
+            return false;
+        }
+        else{
+            //此处注意先要判断val是否相等，之后再调用两个isSameTree
+            if(p -> val == q -> val){
+                return isSameTree(p -> left, q -> left) && isSameTree(p -> right, q -> right);
+            }
+            //不要落下这里的return false
+            return false;
+        }
+    }
+};
+
+//注意对p，q是否为NULL的几种情况的讨论（树的问题，一定要记得讨论根节点是否为NULL！！）
