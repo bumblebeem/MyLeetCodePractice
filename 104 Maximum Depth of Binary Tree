@@ -60,3 +60,33 @@ public:
 };
 
 //竟然忘记了加上第50行处if(parent.empty())的判断。。。parent队列空了说明这一层的节点都处理完了，此时需要深度加一
+
+/*
+Best Answer Found in Discussion
+more concise than my BFS
+*/
+int maxDepth(TreeNode *root)
+{
+    if(root == NULL)
+        return 0;
+
+    int res = 0;
+    queue<TreeNode *> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        ++ res;
+        for(int i = 0, n = q.size(); i < n; ++ i)
+        {
+            TreeNode *p = q.front();
+            q.pop();
+
+            if(p -> left != NULL)
+                q.push(p -> left);
+            if(p -> right != NULL)
+                q.push(p -> right);
+        }
+    }
+
+    return res;
+}
