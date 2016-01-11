@@ -1,0 +1,54 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+/*
+Method 1, Recursive
+*/
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(root){
+            TreeNode* temp = root -> right;
+            root -> right = root -> left;
+            root -> left = temp;
+            invertTree(root -> left);
+            invertTree(root -> right);
+        }
+        return root;
+    }
+};
+
+/*
+Method 2, Iterative(BFS)
+*/
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(! root){
+            return NULL;
+        }
+        queue<TreeNode*> invert_queue;
+        invert_queue.push(root);
+        while(! invert_queue.empty()){
+            TreeNode* cur = invert_queue.front();
+            if(cur -> left){
+                invert_queue.push(cur -> left);
+            }
+            if(cur -> right){
+                invert_queue.push(cur -> right);
+            }
+            TreeNode* temp = cur -> left;
+            cur -> left = cur -> right;
+            cur -> right = temp;
+            invert_queue.pop();
+        }
+        return root;
+    }
+};
