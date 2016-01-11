@@ -7,6 +7,9 @@
  * };
  */
  
+/*
+Method 1, Recursive
+*/
 int max(int a, int b){
     return a > b ? a : b;
 }
@@ -21,3 +24,39 @@ int maxDepth(struct TreeNode* root) {
 //与tree相关的问题，注意先要判断root是否为NULL
 
 //return的深度，最后需要加一！！
+
+
+/*
+Method 2, Iterative(BFS)
+*/
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root == NULL){
+            return 0;
+        }
+        int depth = 0;
+        queue<TreeNode*> parent, children;
+        parent.push(root);
+        while(! parent.empty()){
+            TreeNode* current_node = parent.front();
+            if(current_node -> left){
+                children.push(current_node -> left);
+            }
+            if(current_node -> right){
+                children.push(current_node -> right);
+            }
+            parent.pop();
+            if(parent.empty()){
+                while(! children.empty()){
+                    parent.push(children.front());
+                    children.pop();
+                }
+                depth ++;
+            }
+        }
+        return depth;
+    }
+};
+
+//时隔四个月之后重新用BFS的时候，竟然忘记了加上第50行处if(parent.empty())的判断
