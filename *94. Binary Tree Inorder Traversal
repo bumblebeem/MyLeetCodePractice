@@ -35,3 +35,27 @@ public:
 //这道题的理解还非常有问题，出现很多处错误，
 //比如25行要新定义一个节点temp，取出stack的top元素的val，而不是直接用cur的val；
 //再比如最后19行里，一直没有考虑到cur != NULL这个条件!!
+
+//可以对while循环进行如下改写，但是从时间和空间复杂度上并没有得到优化
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if(! root){
+            return result;
+        }
+        stack<TreeNode*> inorder_stack;
+        TreeNode* cur = root;
+        while(! inorder_stack.empty() || cur){
+            while(cur){
+                inorder_stack.push(cur);
+                cur = cur -> left;
+            }
+            cur = inorder_stack.top();
+            result.push_back(cur -> val);
+            inorder_stack.pop();
+            cur = cur -> right;
+        }
+        return result;
+    }
+};
