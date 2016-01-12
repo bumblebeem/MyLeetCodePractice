@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if(root == NULL){
+            return result;
+        }
+        stack<TreeNode*> preorder_stack;
+        preorder_stack.push(root);
+        while(! preorder_stack.empty()){
+            TreeNode* cur = preorder_stack.top();
+            result.push_back(cur -> val);
+            preorder_stack.pop();
+            if(cur -> right){
+                preorder_stack.push(cur -> right);
+            }
+            if(cur -> left){
+                preorder_stack.push(cur -> left);
+            }
+        }
+        return result;
+    }
+};
+
+//简单的DFS遍历问题，注意这里使用的是stack，而不同于BFS遍历中使用的queue，其他没什么区别
