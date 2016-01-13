@@ -1,0 +1,71 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+ /*
+  Try the recursive way first, just use the inorder tranverse of BST,
+  in order to find out the kth smallest element
+ */
+class Solution {
+public:
+    int count = 0;        //因为后边函数用的是传值而不是传引用，
+    int result = 0;       //所以需要这两个全局变量
+
+    int kthSmallest(TreeNode* root, int k) {
+        inorderTranverse(root, k);
+        return result;
+    }
+    
+    void inorderTranverse(TreeNode* root, int k){
+        if(root == NULL){
+            return;
+        }
+        inorderTranverse(root -> left, k);
+        count ++;
+        if(k == count){
+            result = root -> val;
+        }
+        inorderTranverse(root -> right, k);
+    }
+};
+
+/*
+  This the second method, do the first method in a iterative way
+  line 49 的条件需要注意还有cur != NULL
+  注意count++的位置，在else里边，不在if里边
+*/
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        int count = 0;
+        TreeNode* cur = root;
+        stack<TreeNode*> inorder_stack;
+        inorder_stack.push(cur);
+        
+        while(! inorder_stack.empty() || cur != NULL){
+            if(cur){
+                inorder_stack.push(cur);
+                cur = cur -> left;
+            }
+            else{
+                TreeNode* top = inorder_stack.top();
+                if(++ count == k){
+                    return top -> val;
+                }
+                cur = top -> right;
+                inorder_stack.pop();
+            }
+        }
+    }
+};
+
+/*
+  Method Three, 本质上应该还是DFS，然而不需要额外的空间（即不需要stack）
+*/
+//https://leetcode.com/discuss/54316/simple-and-clean-java-solution-with-explanation
