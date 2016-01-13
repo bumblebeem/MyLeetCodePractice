@@ -30,3 +30,5 @@ public:
 
 //line 19-21 missed for the first time, draw the picture more carefully on scratch paper next time,
 //in order to understand the problems themselves better
+
+//A more intuitive way might be: (1) Loop through level 0 to level n - 2; (2) Traverse this level and connect children.
