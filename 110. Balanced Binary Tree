@@ -1,0 +1,72 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+ /*
+  Here is solution one, inspired by the following link:
+  https://leetcode.com/discuss/22898/the-bottom-up-o-n-solution-would-be-better
+ */
+class Solution {
+public:
+    int height(TreeNode* root){
+        if(root == NULL){
+            return 0;
+        }
+        int left = height(root -> left);
+        if(left == -1){
+            return -1;
+        }
+        int right = height(root -> right);
+        if(right == -1){
+            return -1;
+        }
+        if(abs(left - right) > 1){
+            return -1;
+        }
+        return max(height(root -> left), height(root -> right)) + 1;
+    }
+
+    bool isBalanced(TreeNode* root) {
+        return height(root) != -1;
+    }
+};
+
+/*
+  Here is another solution, which time complexity would be O(N^2)
+*/
+class Solution {
+public:
+    int abs(int a, int b){
+        if(a > b){
+            return a - b;
+        }
+        else{
+            return b - a;
+        }
+    }
+
+    int height(TreeNode* treenode){
+        if(treenode == NULL){
+            return 0;
+        }
+        return max(height(treenode->left), height(treenode->right)) + 1;
+    }
+    
+    bool isBalanced(TreeNode* root) {
+        if(!root){
+            return true;
+        }
+        if(abs(height(root->left), height(root->right)) <= 1 
+        && isBalanced(root->left) 
+        && isBalanced(root->right)){
+            return true;
+        }
+        return false;
+    }
+};
