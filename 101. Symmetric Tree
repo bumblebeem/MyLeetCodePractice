@@ -1,0 +1,114 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(root == NULL){
+            return true;
+        }
+        return helper(root -> left, root -> right);
+    }
+    
+    bool helper(TreeNode* left, TreeNode* right){
+        if(left == NULL && right == NULL){
+            return true;
+        }
+        else if(left == NULL || right == NULL){
+            return false;
+        }
+        else{
+            return left -> val == right -> val
+                    && helper(left -> left, right -> right)
+                    && helper(left -> right, right -> left);
+        }
+    }
+};
+
+/*
+  First it comes the recursive method, which is trivial, haha! 
+  The recursive method to solve tree questions seem very familiar to each other!
+*/
+
+/*
+  Here is an iterative solution with two stacks
+  第一次写忘记了line 63-65,hehe
+  line 74 could be replaced by line 73
+*/
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(! root){
+            return true;
+        }
+        stack<TreeNode*> stack_one, stack_two;
+        stack_one.push(root -> left);
+        stack_two.push(root -> right);
+        while(! stack_one.empty() && ! stack_two.empty()){
+            TreeNode* left = stack_one.top();
+            TreeNode* right = stack_two.top();
+            stack_one.pop();
+            stack_two.pop();
+            if(left == NULL && right == NULL){
+                continue;
+            }
+            else if(left == NULL || right == NULL){
+                return false;
+            }
+            if(left -> val != right -> val){
+                return false;
+            }
+            else{
+                stack_one.push(left -> left);
+                stack_one.push(left -> right);
+                stack_two.push(right -> right);
+                stack_two.push(right -> left);
+            }
+        }
+        return stack_one.empty() && stack_one.empty();
+        //return true
+    }
+};
+
+/*
+  The above solution could be further modified by using only one stack
+*/
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(! root){
+            return true;
+        }
+        stack<TreeNode*> stack;
+        stack.push(root -> left);
+        stack.push(root -> right);
+        while(! stack.empty()){
+            TreeNode* left = stack.top();
+            stack.pop();
+            TreeNode* right = stack.top();
+            stack.pop();
+            if(left == NULL && right == NULL){
+                continue;
+            }
+            else if(left == NULL || right == NULL){
+                return false;
+            }
+            if(left -> val != right -> val){
+                return false;
+            }
+            else{
+                stack.push(left -> left);
+                stack.push(right -> right);
+                stack.push(left -> right);
+                stack.push(right -> left);
+            }
+        }
+        return true;
+    }
+};
