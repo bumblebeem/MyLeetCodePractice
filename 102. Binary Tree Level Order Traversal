@@ -1,0 +1,84 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+/*
+  Here is the basic solution based on BFS.
+*/
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> res;
+        vector<int> lvl;
+        if(! root){
+            return res;
+        }
+        queue<TreeNode*> p, c;
+        TreeNode* curNode = root;
+        p.push(curNode);
+        while(! p.empty()){
+            curNode = p.front();
+            if(curNode -> left){
+                c.push(curNode -> left);
+            }
+            if(curNode -> right){
+                c.push(curNode -> right);
+            }
+            lvl.push_back(curNode -> val);
+            p.pop();
+            if(p.empty()){
+                res.push_back(lvl);
+                lvl.clear();
+                while(! c.empty()){
+                    p.push(c.front());
+                    c.pop();
+                }
+            }
+        }
+    }
+};
+
+/*
+  Here comes the better solution, which I learned from the discussion...
+  用NULL作为层与层节点直接的分界线！！只用一个队列！
+*/
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        if(root == NULL){
+            return result;
+        }
+        queue<TreeNode*> q;
+        q.push(root);
+        q.push(NULL);
+        vector<int> cur_vec;
+        while(! q.empty()){
+            TreeNode* cur = q.front();
+            q.pop();
+            if(cur != NULL){
+                cur_vec.push_back(cur -> val);
+                if(cur -> left){
+                    q.push(cur -> left);
+                }
+                if(cur -> right){
+                    q.push(cur -> right);
+                }
+            }
+            else{
+                result.push_back(cur_vec);
+                cur_vec.clear();
+                if(! q.empty()){
+                    q.push(NULL);
+                }
+            }
+        }
+        return result;
+    }
+};
