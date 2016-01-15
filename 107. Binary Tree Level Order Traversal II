@@ -1,0 +1,47 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ /*
+  It's just the basic BFS, need to reverse the result though
+  line 42, the use of the function "reverse"
+  line 34, used to forget in another OJ problem, this time I remember!
+ */
+class Solution {
+public:
+    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+        vector<vector<int>> res;
+        if(! root){
+            return res;
+        }
+        vector<int> level;
+        queue<TreeNode*> parent, child;
+        parent.push(root);
+        while(! parent.empty()){
+            TreeNode* cur = parent.front();
+            parent.pop();
+            if(cur -> left != NULL){
+                child.push(cur -> left);
+            }
+            if(cur -> right != NULL){
+                child.push(cur -> right);
+            }
+            level.push_back(cur -> val);
+            if(parent.empty()){
+                while(!child.empty()){
+                    parent.push(child.front());
+                    child.pop();
+                }
+                res.push_back(level);
+                level.clear();
+            }
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+};
