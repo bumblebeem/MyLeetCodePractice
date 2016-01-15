@@ -46,5 +46,5 @@ public:
     }
 };
 
-//the following link seems to present a even better thought
+//the following link seems to present a even better thought (without the call of reverse function)
 //https://leetcode.com/discuss/5353/there-better-regular-level-order-traversal-reverse-result
