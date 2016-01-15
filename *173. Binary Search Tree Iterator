@@ -48,3 +48,5 @@ public:
  * BSTIterator i = BSTIterator(root);
  * while (i.hasNext()) cout << i.next();
  */
+
+//I don't think I fully understand the code's structure of this problem
