@@ -1,0 +1,75 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+ /*
+  Actually, this following method is kind of trivial, it's just the BFS, 
+  and each time just record the last element of each level
+ */
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> res, temp;
+        queue<TreeNode*> p, c;
+        if(! root){
+            return res;
+        }
+        TreeNode* curNode = root;
+        p.push(curNode);
+        while(! p.empty()){
+            curNode = p.front();
+            if(curNode -> left){
+                c.push(curNode -> left);
+            }
+            if(curNode -> right){
+                c.push(curNode -> right);
+            }
+            temp.push_back(curNode -> val);
+            p.pop();
+            if(p.empty()){
+                res.push_back(temp.back());
+                temp.clear();
+                while(! c.empty()){
+                    p.push(c.front());
+                    c.pop();
+                }
+            }
+        }
+        return res;
+    }
+};
+
+/*
+  Here is another solution, the two key points are as follows:
+  1. Each depth of the tree only select one node.
+  2. View depth is current size of result list. (Most Imortant! line 67 - 69)
+  
+  should also notice line 71 & 72, must call root -> right rather than root -> left,
+  because we are looking for the "right" side view, not "left" side view
+*/
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> res;
+        rightRecursive(res, root, 1);
+        return res;
+    }
+    
+    void rightRecursive(vector<int>& res, TreeNode* root, int level){
+        if(root == NULL){
+            return;
+        }
+        if(res.size() < level){
+            res.push_back(root -> val);
+        }
+        
+        rightRecursive(res, root -> right, level + 1);
+        rightRecursive(res, root -> left, level + 1);
+    }
+};
