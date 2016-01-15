@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        if(root == NULL){
+            return false;
+        }
+        if(root -> left == NULL && root -> right == NULL){
+            return sum - root -> val == 0;
+        }
+        return hasPathSum(root -> left, sum - root -> val) || hasPathSum(root -> right, sum - root -> val);
+    }
+};
+
+/*
+  Yo! I passed it with only ONE shot! Get some hints from the discussion though...
+  And after yesterday's practice, it seems I do better in understanding the concept of recursive functions.
+  
+  The basic idea is to subtract the value of current node from sum until it reaches a leaf node
+  and the subtraction equals 0, then we know that we got a hit. 
+  Otherwise the subtraction at the end could not be 0.
+*/
