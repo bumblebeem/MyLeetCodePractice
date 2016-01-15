@@ -45,3 +45,6 @@ public:
         return res;
     }
 };
+
+//the following link seems to present a even better thought
+//https://leetcode.com/discuss/5353/there-better-regular-level-order-traversal-reverse-result
