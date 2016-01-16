@@ -1,0 +1,65 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+ /*
+  Recursive
+ */
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if(! root){
+            return 0;
+        }
+        if(root -> left == NULL){
+            return minDepth(root -> right) + 1;
+        }
+        if(root -> right == NULL){
+            return minDepth(root -> left) + 1;
+        }
+        return min(minDepth(root -> left), minDepth(root -> right)) + 1;
+    }
+};
+
+/*
+  Iterative
+  Use only one queue to do the BFS, use a NULL pointer(or whatever) to distinguish the last element of a certain level
+*/
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        int min_depth = 1;
+        if(root == NULL){
+            return 0;
+        }
+        queue<TreeNode*> q;
+        q.push(root);
+        q.push(NULL);
+        while(! q.empty()){
+            TreeNode* cur = q.front();
+            q.pop();
+            if(cur == NULL){
+                q.push(NULL);
+                min_depth ++;
+            }
+            else{
+                if(cur -> left == NULL && cur -> right == NULL){
+                    return min_depth;
+                }
+                if(cur -> left){
+                    q.push(cur -> left);
+                }
+                if(cur -> right){
+                    q.push(cur -> right);
+                }
+            }
+        }
+        return min_depth;
+    }
+};
