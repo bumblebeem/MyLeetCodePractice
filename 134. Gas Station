@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int start = 0;
+        int sum_of_gas = 0;
+        int cost_of_gas = 0;
+        int cur_gas = 0;
+        for(int i = 0; i < gas.size(); i ++){
+            cur_gas += gas[i] - cost[i];
+            cost_of_gas += cost[i];
+            sum_of_gas += gas[i];
+            if(cur_gas < 0){
+                start = i + 1;
+                cur_gas = 0;
+            }
+        }
+        if(cost_of_gas > sum_of_gas){
+            return -1;
+        }
+        return start;
+    }
+};
+
+/*
+  Greedy类型的题目，理解得还是不好。。。
+
+  If the sum of total gas is smaller than the sum of total gas cost,
+  then we have no solution.
+  
+  Once current gas becomes lower than 0, we set the new start station.
+*/
