@@ -1,0 +1,19 @@
+//This question could be transformed into question 53
+//https://en.wikipedia.org/wiki/Maximum_subarray_problem
+//https://leetcode.com/discuss/48378/kadanes-algorithm-since-mentioned-about-interviewer-twists
+
+int maxProfit(int* prices, int pricesSize) {
+    int max = 0, curMax = 0;
+    for(int i = 1; i < pricesSize; i ++){
+        curMax += prices[i] - prices[i - 1];
+        if(curMax > max){
+            max = curMax;
+        }
+        if(curMax < 0){
+            curMax = 0;
+        }
+    }
+    return max;
+}
+
+
