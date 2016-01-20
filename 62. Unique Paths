@@ -1,0 +1,64 @@
+//https://leetcode.com/discuss/38353/0ms-5-lines-dp-solution-in-c-with-explanations
+//The above link's explanation is awesome!
+
+//Obviously, the O(M*N) solution(space complexity) is trivial! Below is my C code of this meaningless method...
+int uniquePaths(int m, int n) {
+    int naivedp[100][100];
+    for(int i = 0; i < m; i ++){
+        naivedp[i][0] = 1;
+    }
+    for(int j = 0; j < n; j ++){
+        naivedp[0][j] = 1;
+    }
+    for(int i = 1; i < m; i ++){
+        for(int j = 1; j < n; j ++){
+            naivedp[i][j] = naivedp[i - 1][j] + naivedp[i][j - 1];
+        }
+    }
+    return naivedp[m - 1][n - 1];
+}
+
+
+//So here is the first try of optimazation, we only store current row and the previous row
+//line 26 - 28 further ensure the space complexity would be the minimum of m and n
+//line 30 - 31, initialize the vector with element of 1, not 0
+//line 39, that's m - 1, not m...
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        if(m > n){
+            return uniquePaths(n, m);
+        }
+        vector<int> pre(m, 1);
+        vector<int> cur(m, 1);
+        for(int j = 1; j < n; j ++){
+            for(int i = 1; i < m; i ++){
+                cur[i] = cur[i - 1] + pre[i];
+            }
+            swap(cur, pre);
+        }
+        return pre[m - 1];
+    }
+};
+
+
+//Now comes the most difficult optimazation!
+
+//"Further inspecting the above code, we find that keeping two columns is used to recover pre[i],
+//which is just cur[i] before its update. So there is even no need to use two vectors and one is just enough.
+//Now the space is further saved and the code also gets much shorter."
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        if(m > n){
+            return uniquePaths(n, m);
+        }
+        vector<int> cur(m, 1);
+        for(int j = 1; j < n; j ++){
+            for(int i = 1; i < m; i ++){
+                cur[i] += cur[i - 1];
+            }
+        }
+        return cur[m - 1];
+    }
+};
