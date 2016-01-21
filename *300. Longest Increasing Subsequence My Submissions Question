@@ -1,0 +1,23 @@
+//First comes the naive version of this problem, not naive for me though...
+//the time complexity is O(n^2)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        if(nums.size() <= 0){
+            return 0;
+        }
+        vector<int> dp(nums.size(), 1);
+        int cur_max = 1;
+        for(int i = 1; i < nums.size(); i ++){
+            for(int j = 0; j < i; j ++){
+                if(nums[i] > nums[j]){
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }
+            }
+            cur_max = max(cur_max, dp[i]);
+        }
+        return cur_max;
+    }
+};
+
+//http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
