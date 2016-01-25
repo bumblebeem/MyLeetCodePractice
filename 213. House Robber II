@@ -1,0 +1,27 @@
+//https://leetcode.com/discuss/36544/simple-ac-solution-in-java-in-o-n-with-explanation
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if(nums.size() == 0){
+            return 0;
+        }
+        if(nums.size() == 1){
+            return nums[0];
+        }
+        
+        vector<int> a(nums.begin() + 1, nums.end());
+        vector<int> b(nums.begin(), nums.end() - 1);
+        
+        return max(rob_original(a), rob_original(b));
+    }
+    
+    int rob_original(vector<int>& nums){
+        int pre = 0, cur = 0;
+        for(int i = 0; i < nums.size(); i ++){
+            int temp = max(cur, pre + nums[i]);
+            pre = cur;
+            cur = temp;
+        }
+        return cur;
+    }
+};
