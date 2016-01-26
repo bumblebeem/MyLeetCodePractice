@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+ //Solution 1, DRAW THE PICTURE correctly is the key...
+ /* Here are some explanation of this method
+  * Well, since the head pointer may also be modified, we create a new_head that points to it to facilitate the reverse process.
+  * For the example list 1 -> 2 -> 3 -> 4 -> 5 in the problem statement, it will become 0 -> 1 -> 2 -> 3 -> 4 -> 5 (we init new_head -> val to be 0).
+  * Then we set a pointer pre to new_head and another cur to head. Then we keep inserting cur -> next after pre until cur becomes the last node. 
+  */
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode newHead = new ListNode(0);
+        newHead.next = head;
+        ListNode cur = head;
+        while(cur != null && cur.next != null){
+            ListNode temp = newHead.next;
+            newHead.next = cur.next;
+            cur.next = cur.next.next;
+            newHead.next.next = temp;
+        }
+        return newHead.next;
+    }
+}
+
+//Solution 2, a recursive solution
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+}
+
+//here is a good link about this problem
+//https://leetcode.com/discuss/43994/8ms-c-iterative-and-recursive-solutions-with-explanations
