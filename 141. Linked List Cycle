@@ -1,0 +1,31 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if(head == null){
+            return false;
+        }
+        ListNode walk = head;
+        ListNode run = head;
+        while(run.next != null && run.next.next != null){
+            run = run.next.next;
+            walk = walk.next;
+            if(run == walk){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+//line 19需要特别注意，因为run便利的快，所以需要判断的是run.next.next和run.next，而不是run.next.next和walk.next
+//而且需要把run.next这个条件写在前边，否则就有溢出的可能。。。
