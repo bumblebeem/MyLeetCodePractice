@@ -1,0 +1,34 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode firstHead = new ListNode(0);
+        ListNode secondHead = new ListNode(0);
+        ListNode curLess = firstHead;
+        ListNode curLarge = secondHead;
+        while(head != null){
+            if(head.val < x){
+                curLess.next = head;
+                curLess = curLess.next;
+            }else{
+                curLarge.next = head;
+                curLarge = curLarge.next;
+            }
+            head = head.next;
+        }
+        curLarge.next = null;       //This is very important!!
+        curLess.next = secondHead.next;
+        return firstHead.next;
+    }
+}
+
+//https://leetcode.com/discuss/22895/concise-java-code-with-explanation-one-pass
+//The basic idea is to maintain two queues, the first one stores all nodes with val less than x , 
+//and the second queue stores all the rest nodes. 
+//Then concat these two queues. Remember to set the tail of second queue a null next, or u will get TLE.
