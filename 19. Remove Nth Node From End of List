@@ -24,3 +24,7 @@ public class Solution {
         return start.next;
     }
 }
+
+//This question insprires us how to use two pointers to help us in certain situations
+//Plus, I need to pay attention to line 11 - 14, which tells me that:
+//在Java中传递参数时，原始类型是传值，对象是传引用
