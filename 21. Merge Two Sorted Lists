@@ -28,5 +28,8 @@ public class Solution {
 
  //recusive
  //pay attention to line 19 & 22
-
+ 
+ //Of course, we could also use two pointers, pointed to the head of these two lists seperately,
+ //simply compared the elements the pointers pointed to and let the pointers move backwards.
+ //But this iterative solution is kind of easy and trivial...
 
