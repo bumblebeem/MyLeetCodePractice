@@ -64,6 +64,8 @@ public:
 /*
 Best Answer Found in Discussion
 more concise than my BFS
+
+line 81 is key to reduce to two queue into one queue
 */
 int maxDepth(TreeNode *root)
 {
