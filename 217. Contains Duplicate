@@ -1,0 +1,21 @@
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> distinct = new HashSet<Integer>();
+        for(int i : nums){
+            if(distinct.contains(i)){
+                return true;
+            }
+            distinct.add(i);
+        }
+        return false;
+    }
+}
+
+
+class Solution(object):
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        return len(nums) != len(set(nums))
