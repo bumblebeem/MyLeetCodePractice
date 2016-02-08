@@ -24,3 +24,7 @@ public class Solution {
         return head;
     }
 }
+
+
+//https://leetcode.com/discuss/82917/simple-java-solution-with-explanation
+//Above is my discussion
