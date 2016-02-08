@@ -26,9 +26,38 @@ public:
     }
 };
 
-//line 15 should be root -> left, not root!
+//line 15 should be root->left, not root. Otherwise, line 18's cur->left might overflow
+//line 19 should be cur->next, not cur. Otherwise line 20's cur->next might overflow
 
 //line 19-21 missed for the first time, draw the picture more carefully on scratch paper next time,
 //in order to understand the problems themselves better
 
 //A more intuitive way might be: (1) Loop through level 0 to level n - 2; (2) Traverse this level and connect children.
+
+//Following is my java solution...
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if(root == null){
+            return;
+        }
+        while(root.left != null){
+            TreeLinkNode cur = root;
+            while(cur != null){
+                cur.left.next = cur.right;
+                if(cur.next != null){
+                    cur.right.next = cur.next.left;
+                }
+                cur = cur.next;
+            }
+            root = root.left;
+        }
+    }
+}
