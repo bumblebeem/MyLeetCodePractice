@@ -27,5 +27,5 @@ public class Solution {
     }
 }
 
-//line 19需要特别注意，因为run便利的快，所以需要判断的是run.next.next和run.next，而不是run.next.next和walk.next
+//line 19需要特别注意，因为run遍历得快，所以需要判断的是run.next.next和run.next，而不是run.next.next和walk.next
 //而且需要把run.next这个条件写在前边，否则就有溢出的可能。。。
