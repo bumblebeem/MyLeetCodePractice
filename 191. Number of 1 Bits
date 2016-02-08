@@ -9,3 +9,11 @@ public class Solution {
         return count;
     }
 }
+
+
+//Pay attention to line 7!!
+//We need to use bit shifting unsigned operation >>> (while >> depends on sign extension)!!
+//line 5 cannot use n > 0!!
+
+//see this https://leetcode.com/discuss/30605/simple-java-solution-bit-shifting
+//for a great explanation, I made mistakes on both curial points...
