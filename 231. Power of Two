@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n <= 0){
+            return false;
+        }
+        return ((n - 1) & n) == 0;
+    }
+};
+
+
+//It's all about bit manipulation, 
+//refer to my evernote(use key word "bit manipulation") for further explanation
