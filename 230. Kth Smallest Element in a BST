@@ -39,6 +39,7 @@ public:
   This the second method, do the first method in a iterative way
   line 49 的条件需要注意还有cur != NULL
   注意count++的位置，在else里边，不在if里边
+  Similar to Problem #94!!
 */
 class Solution {
 public:
