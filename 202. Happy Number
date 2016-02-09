@@ -1,0 +1,47 @@
+//Here is an interesting solution
+//https://leetcode.com/discuss/33055/my-solution-in-c-o-1-space-and-no-magic-math-property-involved
+public class Solution {
+    public boolean isHappy(int n) {
+        int slow = n;
+        int fast = n;
+        do{
+            slow = digitSquareSum(slow);
+            fast = digitSquareSum(fast);
+            fast = digitSquareSum(fast);
+        }while(slow != fast);
+        return slow == 1;
+    }
+    
+    public int digitSquareSum(int n){
+        int sum = 0;
+        while(n > 0){
+            int temp = n % 10;
+            sum += temp * temp;
+            n /= 10;
+        }
+        return sum;
+    }
+}
+
+
+public class Solution {
+    public boolean isHappy(int n) {
+        Set<Integer> testLoop = new HashSet<Integer>();
+        int squareSum, temp;
+        while(testLoop.add(n)){
+            squareSum = 0;
+            while(n > 0){
+                temp = n % 10;
+                squareSum += temp * temp;
+                n /= 10;
+            }
+            if(squareSum == 1){
+                return true;
+            }
+            else{
+                n = squareSum;
+            }
+        }
+        return false;
+    }
+}
