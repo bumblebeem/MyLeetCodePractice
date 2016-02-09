@@ -1,9 +1,12 @@
 //Here are two solutions, the naive one and the optimized one
 
+//For a very clear explanation, refer to the following link
+//https://leetcode.com/discuss/38360/10-lines-28ms-o-n-space-dp-solution-in-c-with-explanations
+
 //Naive one
 //However, there're still something I should pay attention to:
-//line 10 - 11, retrive the length and width of the two-dimension vector
-//line 12, how to set the initial values of a two-dimension vector
+//line 13 - 14, retrive the length and width of the two-dimension vector
+//line 15, how to set the initial values of a two-dimension vector
 class Solution {
 public:
     int minPathSum(vector<vector<int>>& grid) {
