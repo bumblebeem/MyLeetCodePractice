@@ -20,9 +20,9 @@ int uniquePaths(int m, int n) {
 
 
 //So here is the first try of optimazation, we only store current row and the previous row
-//line 26 - 28 further ensure the space complexity would be the minimum of m and n
-//line 30 - 31, initialize the vector with element of 1, not 0
-//line 39, that's m - 1, not m...
+//line 29 - 31 further ensure the space complexity would be the minimum of m and n
+//line 32 - 33, initialize the vector with element of 1, not 0
+//line 40, that's m - 1, not m...
 class Solution {
 public:
     int uniquePaths(int m, int n) {
