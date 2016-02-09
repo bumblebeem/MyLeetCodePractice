@@ -1,0 +1,43 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int zero = 0;
+        int two = nums.size() - 1;
+        for(int i = 0; i <= two; i ++){
+            if(nums[i] == 0){
+                swap(nums[i], nums[zero ++]);
+            }
+            if(nums[i] == 2){
+                swap(nums[i --], nums[two --]);
+            }
+        }
+    }
+};
+
+
+//At the second time I encountered this problem, I remembered the basic
+//idea, but still miss some crucial details. For instance,
+//***line 6 should be i <= two, not i <= nums.size() - 1
+//***line 8 nums[i], line 11 nums[i --]
+
+
+//Below is a Java solution
+public class Solution {
+    public void sortColors(int[] nums) {
+        int index_zero = 0;
+        int index_two = nums.length - 1;
+        for(int i = 0; i <= index_two; i ++){
+            if(nums[i] == 0){
+                nums[i] = nums[index_zero];
+                nums[index_zero] = 0;
+                index_zero ++;
+            }
+            else if(nums[i] == 2){
+                nums[i] = nums[index_two];
+                nums[index_two] = 2;
+                index_two --;
+                i --;
+            }
+        }
+    }
+}
