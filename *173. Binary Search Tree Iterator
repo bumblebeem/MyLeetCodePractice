@@ -49,4 +49,5 @@ public:
  * while (i.hasNext()) cout << i.next();
  */
 
-//I don't think I fully understand the code's structure of this problem
+//I don't think I fully understand the code's structure of this problem.
+//It's just a binary tree inorder tranverse.
