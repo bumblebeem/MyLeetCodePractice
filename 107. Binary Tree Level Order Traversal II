@@ -9,8 +9,8 @@
  */
  /*
   It's just the basic BFS, need to reverse the result though
-  line 42, the use of the function "reverse"
-  line 34, used to forget in another OJ problem, this time I remember!
+  line 44, the use of the function "reverse"
+  line 36, used to forget it in another OJ problem, this time I remember!
  */
 class Solution {
 public:
