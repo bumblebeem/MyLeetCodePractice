@@ -46,7 +46,7 @@ public:
 };
 
 /*
-  Here is another solution, the two key points are as follows:
+  Here is another solution, the two key points are as follows:(a modified preorder traversal)
   1. Each depth of the tree only select one node.
   2. View depth is current size of result list. (Most Imortant! line 68 - 70)
   
