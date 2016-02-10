@@ -38,8 +38,8 @@ public:
 
 /*
   Here is an iterative solution with two stacks
-  第一次写忘记了line 63-65,hehe
-  line 74 could be replaced by line 73
+  第一次写忘记了line 64-66,hehe
+  line 74 could be replaced by line 75
 */
 class Solution {
 public:
