@@ -1,0 +1,23 @@
+bool searchMatrix(int** matrix, int matrixRowSize, int matrixColSize, int target) {
+    if(matrix[0][0] > target || matrix[matrixRowSize - 1][matrixColSize - 1] < target){
+        return false;
+    }
+    int i = 0;
+    int j = matrixColSize - 1;
+    while(i < matrixRowSize && j >= 0){
+        if(matrix[i][j] == target){
+            return true;
+        }else if(matrix[i][j] < target){
+            i ++;
+        }else if(matrix[i][j] > target){
+            j --;
+        }
+    }
+    return false;
+}
+
+
+//Don't mess up col and row...
+
+//***The key is to find out we should start the serach from the upper right corner of the matrix!!
+//https://leetcode.com/discuss/48852/my-concise-o-m-n-java-solution
