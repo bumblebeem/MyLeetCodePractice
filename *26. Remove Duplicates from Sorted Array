@@ -1,0 +1,22 @@
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length == 0){
+            return 0;
+        }
+        int i = 1, non_duplicate = 0;
+        while(i < nums.length){
+            if(nums[non_duplicate] == nums[i]){
+                i ++;
+            }
+            else{
+                nums[++ non_duplicate] = nums[i ++];
+            }
+        }
+        return non_duplicate + 1;
+    }
+}
+
+
+//similar to "27.Remove Element"
+//line 12, should be ++non_duplicate, not non_duplicata++
+//line 6, i starts from 1, not 0
