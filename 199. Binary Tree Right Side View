@@ -48,9 +48,9 @@ public:
 /*
   Here is another solution, the two key points are as follows:
   1. Each depth of the tree only select one node.
-  2. View depth is current size of result list. (Most Imortant! line 67 - 69)
+  2. View depth is current size of result list. (Most Imortant! line 68 - 70)
   
-  should also notice line 71 & 72, must call root -> right rather than root -> left,
+  should also notice line 72 & 73, must call root -> right rather than root -> left,
   because we are looking for the "right" side view, not "left" side view
 */
 class Solution {
