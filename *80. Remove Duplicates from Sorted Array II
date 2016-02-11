@@ -1,0 +1,26 @@
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length <= 2){
+            return nums.length;
+        }
+        int count = 1;
+        int new_length = 1;
+        for(int j = 1; j < nums.length; j ++){
+            if(nums[j - 1] != nums[j]){
+                nums[new_length ++] = nums[j];
+                count = 1;
+            }
+            else{
+                if(count < 2){
+                    nums[new_length ++] = nums[j];
+                    count ++;
+                }
+            }
+        }
+        return new_length;
+    }
+}
+
+
+//A little bit tricky... See the following link for the expansion of this problem
+//http://www.sigmainfy.com/blog/leetcode-remove-duplicates-from-sorted-array-i-and-ii.html
