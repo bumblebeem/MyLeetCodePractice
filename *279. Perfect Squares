@@ -1,5 +1,6 @@
 //It's not easy to code (details need to be taken care of)...
-//line 9, Integer.MAX_VALUE的用法
+//For instance, line 9 must be n + 1, not n; line 13 - 15 is the key!
+//line 10, Integer.MAX_VALUE的用法
 public class Solution {
     public int numSquares(int n) {
         if(n <= 0){
