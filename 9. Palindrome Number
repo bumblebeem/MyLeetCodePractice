@@ -1,0 +1,18 @@
+public class Solution {
+    public boolean isPalindrome(int x) {
+        if(x < 0 || (x != 0 && x % 10 == 0)){
+            return false;
+        }
+        int sum = 0;
+        while(x > sum){
+            sum = sum * 10 + x % 10;
+            x /= 10;
+        }
+        return (x == sum) || (x == sum / 10);
+    }
+}
+
+
+//Only need to go through half of the digits of x
+//if the palidrome has even digits, falls into x == sum
+//if the palidrome has odd digits, falls into x == sum / 10 
