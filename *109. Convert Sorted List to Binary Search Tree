@@ -42,10 +42,12 @@ public class Solution {
         }
         int mid = start + (end - start) / 2;
         
-        TreeNode left = inorderTraverseHelper(start, mid - 1);
+        TreeNode treenode = new TreeNode(0);
         
-        TreeNode treenode = new TreeNode(cur.val);
+        TreeNode left = inorderTraverseHelper(start, mid - 1);
         treenode.left = left;
+        
+        treenode.val = cur.val;
         cur = cur.next;
         
         TreeNode right = inorderTraverseHelper(mid + 1, end);
@@ -56,5 +58,5 @@ public class Solution {
 }
 
 
-//Lots of details need to be paid attention to... e.g. line 19, 41, 45 - 52
+//Lots of details need to be paid attention to... e.g. line 19, 41, 45 - 54
 //The basic idea is not that hard, though. Use inorder traverse.
