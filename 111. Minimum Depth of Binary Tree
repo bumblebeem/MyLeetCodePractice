@@ -63,3 +63,45 @@ public:
         return min_depth;
     }
 };
+
+
+//Use Java to solve it!
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int min_depth = 1;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        queue.add(null);
+        while(! queue.isEmpty()){
+            TreeNode cur = queue.poll();
+            if(cur == null){
+                min_depth ++;
+                queue.add(null);
+            }
+            else{
+                if(cur.left == null && cur.right == null){
+                    return min_depth;
+                }
+                if(cur.left != null){
+                    queue.add(cur.left);
+                }
+                if(cur.right != null){
+                    queue.add(cur.right);
+                }
+            }
+        }
+        return min_depth;
+    }
+}
