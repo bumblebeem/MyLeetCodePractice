@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+    
+    private boolean isValidBST(TreeNode root, long min, long max){
+        if(root == null){
+            return true;
+        }
+        if(root.val >= max || root.val <= min){
+            return false;
+        }
+        return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
+    }
+}
+
+
+//The val of the TreeNode is int, 
+//that's why we can use Long.MIN_VALUE and Long.MAX_VALUE and still pass the boundary cases.
+
+//Main idea is just inorder traverse. 
+//The minimum and maximum values come from the parent node 
+//and if the value of current node is between minimum and maximum value, 
+//then visit left and right subtree for inorder traverse.
