@@ -1,0 +1,115 @@
+//Below link is a great explanation of this problem!
+//https://leetcode.com/discuss/38336/solutions-partition-priority_queue-multiset-respectively
+
+//Method 1: Use method similar to quiksort, with a pivot!
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int left = 0, right = nums.length - 1;
+        while(true){
+            int pos = partition(nums, left, right);
+            if(pos + 1 == k){
+                return nums[pos];
+            }else if(pos + 1 < k){
+                left = pos + 1;
+            }else{
+                right = pos - 1;
+            }
+        }
+    }
+    
+    private int partition(int[] nums, int left, int right){
+        int pivot = nums[left];
+        int l = left + 1, r = right;
+        while(l <= r){
+            if(pivot > nums[l] && pivot < nums[r]){
+                int temp = nums[l];
+                nums[l] = nums[r];
+                nums[r] = temp;
+                l ++;
+                r --;
+            }
+            if(nums[l] >= pivot){
+                l ++;
+            }
+            if(nums[r] <= pivot){
+                r --;
+            }
+        }
+        int temp = nums[left];
+        nums[left] = nums[r];
+        nums[r] = temp;
+        return r;
+    }
+}
+
+
+//Method 2: Use heap sort
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        build_max_heap(nums);
+        for(int i = 0; i < k - 1; i ++){          //if we use i < k here, line 57 should be return nums[heapSize];
+            int temp = nums[0];
+            nums[0] = nums[heapSize - 1];
+            nums[heapSize - 1] = temp;
+            heapSize --;
+            max_heapify(nums, 0);
+        }
+        return nums[0];
+    }
+    
+    public int getLeftChild(int index){
+        return (index << 1) + 1;
+    }
+    
+    public int getRightChild(int index){
+        return (index << 1) + 2;
+    }
+    
+    public void max_heapify(int[] nums, int index){
+        int max = index;
+        
+        int leftChild = getLeftChild(index), rightChild = getRightChild(index);
+        if(leftChild < heapSize && nums[leftChild] > nums[max]){
+            max = leftChild;
+        }
+        if(rightChild < heapSize && nums[rightChild] > nums[max]){
+            max = rightChild;
+        }
+        
+        if(index != max){
+            int temp = nums[max];
+            nums[max] = nums[index];
+            nums[index] = temp;
+            max_heapify(nums, max);
+        }
+    }
+    
+    public void build_max_heap(int[] nums){
+        heapSize = nums.length;
+        for(int i = (heapSize >> 1) - 1; i >= 0; i --){   //pay attention to i's initialization
+            max_heapify(nums, i);
+        }
+    }
+    
+    private int heapSize;
+}
+
+
+//Method 3: Built-in priority queue
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> myqueue = new PriorityQueue<Integer>(k);
+        for(int i : nums){
+            if(myqueue.size() < k){
+                myqueue.add(i);
+            }
+            else{
+                if(i > myqueue.peek()){
+                    myqueue.poll();
+                    myqueue.add(i);
+                }
+            }
+        }
+        return myqueue.peek();
+    }
+}
