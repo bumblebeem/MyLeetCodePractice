@@ -22,4 +22,5 @@ public class Solution {
 
 //met this question in the OA of Course Hero...
 //注意line 19
-//每个else if里边的!stack.empty()这个条件！
+//注意每个else if里边的!stack.empty()这个条件！
+//注意每个else if里边后两个条件的先后顺序，不能颠倒！
