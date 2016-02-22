@@ -47,7 +47,7 @@ public class Solution {
 //https://leetcode.com/discuss/43994/8ms-c-iterative-and-recursive-solutions-with-explanations
 
 
-//Here is the Java version solution
+//Here is a more concise solution
 /**
  * Definition for singly-linked list.
  * public class ListNode {
