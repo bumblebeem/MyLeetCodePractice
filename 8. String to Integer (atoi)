@@ -1,0 +1,39 @@
+public class Solution {
+    public int myAtoi(String str) {
+        if(str == null || str.length() == 0){
+            return 0;
+        }
+        
+        int i = 0;
+        double result = 0;
+        boolean flag = true;
+        
+        str = str.trim();
+        if(str.charAt(i) == '+'){
+            i ++;
+        }
+        else if(str.charAt(i) == '-'){
+            flag = false;
+            i ++;
+        }
+        while(i < str.length() && Character.isDigit(str.charAt(i))){
+            result = result * 10 + (str.charAt(i) - '0');
+            i ++;
+        }
+        if(flag == false){
+            result = -result;
+        }
+        if(result > Integer.MAX_VALUE){
+            result = Integer.MAX_VALUE;
+        }
+        if(result < Integer.MIN_VALUE){
+            result = Integer.MIN_VALUE;
+        }
+        return (int)result;
+    }
+}
+
+
+//line 11, 要先用trim()去掉空格
+//line 15必须是else if,否则line 12，15的charAt(i)需改成charAt(0)
+//result先用double,防止溢出line 26 - 31,最后return之前再进行强制类型转换
