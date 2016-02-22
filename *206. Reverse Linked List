@@ -45,3 +45,29 @@ public class Solution {
 
 //here is a good link about this problem
 //https://leetcode.com/discuss/43994/8ms-c-iterative-and-recursive-solutions-with-explanations
+
+
+//Here is the Java version solution
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode temp = null, beforeHead = null;
+        while(head != null){
+            temp = head.next;
+            head.next = beforeHead;
+            beforeHead = head;
+            head = temp;
+        }
+        return beforeHead;
+    }
+}
