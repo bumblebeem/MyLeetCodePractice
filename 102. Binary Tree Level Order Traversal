@@ -82,3 +82,42 @@ public:
         return result;
     }
 };
+
+/*
+  上一种利用null的方法摘抄自路人，路人果然是又坑又low啊，还是用一个变量记录每个level的节点数比较高端
+*/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
+        if(root == null){
+            return result;
+        }
+        
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.add(root);
+        while(! q.isEmpty()){
+            int levelNum = q.size();
+            List<Integer> subList = new LinkedList<Integer>();
+            for(int i = 0; i < levelNum; i ++){
+                if(q.peek().left != null){
+                    q.add(q.peek().left);
+                }
+                if(q.peek().right != null){
+                    q.add(q.peek().right);
+                }
+                subList.add(q.poll().val);
+            }
+            result.add(subList);
+        }
+        return result;
+    }
+}
