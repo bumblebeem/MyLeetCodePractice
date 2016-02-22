@@ -19,4 +19,9 @@ public class Solution {
 }
 
 
+//This code relies on the simple observation that once all of the numbers from nums2 have been merged into nums1, 
+//the rest of the numbers in nums1 that were not moved are already in the correct place.
+//That's why we have line 15 while(j >= 0), but don't have while(i >= 0)
+
+
 //Notice the difference between this one and Problem No.21
