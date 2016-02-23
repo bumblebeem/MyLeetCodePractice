@@ -25,3 +25,6 @@ public class Solution {
 
 
 //line 11,只需要判断到len1 - len2 + 1就可以了，而不需要到len1全部结束！
+
+//Here is a good link:
+//https://leetcode.com/discuss/38998/explained-4ms-easy-c-solution
