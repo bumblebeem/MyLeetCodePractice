@@ -1,0 +1,16 @@
+public class Solution {
+    public String convertToTitle(int n) {
+        StringBuilder res = new StringBuilder();
+        
+        while(n > 0){
+            res.insert(0, (char)((n - 1) % 26 + 'A') );
+            n = (n - 1) / 26;
+        }
+        
+        return res.toString();
+    }
+}
+
+
+//With StringBuilder
+//就是一个26进制的问题，不过要注意line 6，7是n-1，而不是n
