@@ -1,25 +1,24 @@
-class Solution {
-public:
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+public class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
         int start = 0;
+        int sum_of_cost = 0;
         int sum_of_gas = 0;
-        int cost_of_gas = 0;
         int cur_gas = 0;
-        for(int i = 0; i < gas.size(); i ++){
+        for(int i = 0; i < gas.length; i ++){
             cur_gas += gas[i] - cost[i];
-            cost_of_gas += cost[i];
             sum_of_gas += gas[i];
+            sum_of_cost += cost[i];
             if(cur_gas < 0){
                 start = i + 1;
                 cur_gas = 0;
             }
         }
-        if(cost_of_gas > sum_of_gas){
+        if(sum_of_cost > sum_of_gas){
             return -1;
         }
         return start;
     }
-};
+}
 
 /*
   Greedy类型的题目，理解得还是不好。。。
