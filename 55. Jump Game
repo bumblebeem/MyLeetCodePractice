@@ -1,3 +1,4 @@
+//Following two solution were created totally by myself, yeah!
 public class Solution {
     public boolean canJump(int[] nums) {
         int last = nums.length - 1;
@@ -10,6 +11,17 @@ public class Solution {
     }
 }
 
+public class Solution {
+    public boolean canJump(int[] nums) {
+        int reach = 0;
+        for(int i = 0; i < nums.length && i <= reach; i ++){
+            if(i + nums[i] >= reach){
+                reach = i + nums[i];
+            }
+        }
+        return reach >= nums.length - 1;
+    }
+}
 
 //Idea is to work backwards from the last index. 
 //Keep track of the smallest index that can "jump" to the last index. 
