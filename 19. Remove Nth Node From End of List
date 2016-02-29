@@ -25,6 +25,8 @@ public class Solution {
     }
 }
 
-//This question insprires us how to use two pointers to help us in certain situations
-//Plus, I need to pay attention to line 11 - 14, which tells me that:
+//1. Use two pointers in order to solve it in one pass!
+//2. Need to pay attention to line 11 - 14, which tells me that:
 //在Java中传递参数时，原始类型是传值，对象是传引用
+//*3. line 16, iterate for n + 1 times, not n times!!
+//*4. 运用一个额外的start，注意理解！
