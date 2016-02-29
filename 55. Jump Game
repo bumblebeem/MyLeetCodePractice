@@ -1,4 +1,6 @@
 //Following two solution were created totally by myself, yeah!
+//Notice the difference between line 6 and line 18, different end conditions
+//for these two while loop.
 public class Solution {
     public boolean canJump(int[] nums) {
         int last = nums.length - 1;
