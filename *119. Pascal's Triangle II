@@ -1,0 +1,52 @@
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> res = new ArrayList<Integer>();
+        if(rowIndex < 0){
+            return res;
+        }
+        for(int i = 0; i <= rowIndex; i ++){
+            res.add(0, 1);
+            for(int j = 1; j < res.size() - 1; j ++){
+                res.set(j, res.get(j) + res.get(j + 1));
+            }
+        }
+        return res;
+    }
+}
+
+
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> res = new ArrayList<Integer>();
+        if(rowIndex < 0){
+            return res;
+        }
+        for(int i = 0; i <= rowIndex; i ++){
+            res.add(1);
+            for(int j = i - 1; j > 0; j --){
+                res.set(j, res.get(j) + res.get(j - 1));
+            }
+        }
+        return res;
+    }
+}
+
+
+//这两个解法在第8行和25行不同，因为导致之后的两个for循环也不相同，一个从前往后，一个从后往前
+//在纸上写下执行过程，更便于理解。。。
+//若用如下的C++，似乎理解起来更简单，究其原因，是因为对于List的操作不熟悉
+
+
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> res(rowIndex + 1, 0);
+        res[0] = 1;
+        for(int i = 0; i <= rowIndex; i ++){
+            for(int j = i; j > 0; j --){
+                res[j] = res[j] + res[j - 1];
+            }
+        }
+        return res;
+    }
+};
