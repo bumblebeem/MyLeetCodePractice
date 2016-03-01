@@ -1,0 +1,58 @@
+//Method 1, using a hashmap(according to the description of this problem, 
+//it's very easy to come up with this idea).
+//However, need to pay attention to line 22 - 29, 并不是在这个else的情况下直接put就行了，
+//还要进行一次判断！第一次自己写的时候没有做对。
+
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        if(s.length() != t.length()){
+            return false;
+        }
+        HashMap<Character, Character> map = new HashMap<Character, Character>();
+        for(int i = 0; i < s.length(); i ++){
+            char a = s.charAt(i);
+            char b = t.charAt(i);
+            if(map.containsKey(a)){
+                if(map.get(a).equals(b)){
+                    continue;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{   //map doesn't contain key a
+                if(! map.containsValue(b)){
+                    map.put(a, b);
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+
+
+//*Method 2, without a map
+//https://leetcode.com/discuss/33889/short-java-solution-without-maps
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        if(s.length() != t.length()){
+            return false;
+        }
+        int[] m = new int[512];
+        Arrays.fill(m, -1);
+        for(int i = 0; i < s.length(); i ++){
+            if(m[s.charAt(i)] != m[t.charAt(i) + 256]){
+                return false;
+            }else{
+                m[s.charAt(i)] = m[t.charAt(i) + 256] = i;
+            }
+        }
+        return true;
+    }
+}
+
+//a ground truth about the above solution:
+//This solution only works with ASCII, because the length of ASCII is 256.
