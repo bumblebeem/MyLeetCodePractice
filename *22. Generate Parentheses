@@ -1,0 +1,26 @@
+public class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new LinkedList<String>();
+        backTracking(res, "", 0, 0, n);
+        return res;
+    }
+    
+    private void backTracking(List<String> res, String temp, int open, int close, int num){
+        if(open == num && close == num){
+            res.add(temp);
+            return;
+        }
+        
+        if(open < num){
+            backTracking(res, temp + "(", open + 1, close, num);
+        }
+        if(close < open){
+            backTracking(res, temp + ")", open, close + 1, num);
+        }
+    }
+}
+
+
+//不太明白这个backtracking的解法，，，下边还有一个iterative的解法，更是没明白。。。
+
+//https://leetcode.com/discuss/11509/an-iterative-method
