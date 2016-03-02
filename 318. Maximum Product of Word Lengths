@@ -29,3 +29,41 @@ public class Solution {
 //lower case letters
 
 //Pay attention to line 18!! "==" has higher priority than "&"!!
+
+
+//We van further trying to optimize it(actually makes it runs slower on OJ...) by sorting the array "words" first,
+// and then pruning at line 57-59 and 63. Pay attention to line 44-48 on how to write a Comparator!!
+public class Solution {
+    public int maxProduct(String[] words) {
+        if(words == null || words.length == 0){
+            return 0;
+        }
+        
+        int max = 0;
+        int[] bytes = new int[words.length];
+        Arrays.sort(words, new Comparator<String>(){
+           public int compare(String a, String b){
+               return b.length() - a.length();
+           } 
+        });
+        
+        for(int i = 0; i < words.length; i ++){
+            for(int j = 0; j < words[i].length(); j ++){
+                bytes[i] |= 1 << words[i].charAt(j) - 'a';
+            }
+        }
+        
+        for(int i = 0; i < words.length; i ++){
+            if(words[i].length() * words[i].length() < max){
+                break;
+            }
+            for(int j = i + 1; j < words.length; j ++){
+                if((bytes[i] & bytes[j]) == 0){
+                    max = Math.max(max, words[i].length() * words[j].length());
+                    break;
+                }
+            }
+        }
+        return max;
+    }
+}
