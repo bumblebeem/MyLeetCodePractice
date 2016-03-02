@@ -1,0 +1,31 @@
+public class Solution {
+    public int maxProduct(String[] words) {
+        if(words == null || words.length == 0){
+            return 0;
+        }
+        
+        int max = 0;
+        int[] bytes = new int[words.length];
+        
+        for(int i = 0; i < words.length; i ++){
+            for(int j = 0; j < words[i].length(); j ++){
+                bytes[i] |= 1 << words[i].charAt(j) - 'a';
+            }
+        }
+        
+        for(int i = 0; i < words.length; i ++){
+            for(int j = i + 1; j < words.length; j ++){
+                if((bytes[i] & bytes[j]) == 0){
+                    max = Math.max(max, words[i].length() * words[j].length());
+                }
+            }
+        }
+        return max;
+    }
+}
+
+
+//line 10 - 14 is key, use an integer of 26 bits to represent the showing up times of each 
+//lower case letters
+
+//Pay attention to line 18!! "==" has higher priority than "&"!!
