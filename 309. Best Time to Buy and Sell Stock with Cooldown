@@ -1,0 +1,32 @@
+public class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length <= 1 || prices == null){
+            return 0;
+        }
+        
+        int buy_i = -prices[0];
+        int sell_i = 0;
+        int buy_im1 = buy_i;    //stands for buying at index i minus 1
+        int sell_im1 = 0;
+        int sell_im2 = 0;
+        
+        for(int i = 1; i < prices.length; i ++){
+            sell_i = Math.max(sell_im1, buy_im1 + prices[i]);
+            buy_i = Math.max(buy_im1, sell_im2 - prices[i]);
+            sell_im2 = sell_im1;
+            sell_im1 = sell_i;
+            buy_im1 = buy_i;
+        }
+        return sell_i;
+    }
+}
+
+
+//Here are two great explanations on this solution:
+//https://leetcode.com/discuss/71354/share-my-thinking-process
+//https://leetcode.com/discuss/71391/easiest-java-solution-with-explanations
+
+//To come up with the original recursive equation is tricky, but optimize to O(1) space is much more tricky...
+//The common recursive equation is as follow:
+//sell[i] = max(sell[i - 1], buy[i - 1] + prices[i])
+//buy[i] = max(buy[i - 1], sell[i - 2] - prices[i])
