@@ -1,0 +1,54 @@
+public class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        res.add(new ArrayList<Integer>());
+        
+        for(int i = 0; i < nums.length; i ++){
+            List<List<Integer>> temp_res = new ArrayList<List<Integer>>();
+            for(int j = 0; j <= i; j ++){
+                for(List<Integer> l : res){
+                    List<Integer> newl = new ArrayList<Integer>(l);
+                    newl.add(j, nums[i]);
+                    temp_res.add(newl);
+                }
+            }
+            res = temp_res;
+        }
+        
+        return res;
+    }
+}
+
+
+//Because of line 9, so we need the temp_res in line 7; because of line 8's iteration need to use line 9's l for 
+//multiple times, so we need line 10's newl.
+//https://leetcode.com/discuss/19510/my-ac-simple-iterative-java-python-solution
+
+
+//https://leetcode.com/discuss/18212/my-elegant-recursive-c-solution-with-inline-explanation
+//Following is another solution based on the link above, I think the basic idea is to let every element to 
+//be the first element in the process.
+//Because of the swap, I wrote it in C++...
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> res;
+        
+        permutationRecursive(nums, 0, res);
+        
+        return res;
+    }
+    
+    void permutationRecursive(vector<int>& nums, int begin, vector<vector<int>>& res){
+        if(begin >= nums.size()){
+            res.push_back(nums);
+            return;
+        }
+        
+        for(int i = begin; i < nums.size(); i ++){
+            swap(nums[begin], nums[i]);
+            permutationRecursive(nums, begin + 1, res);
+            swap(nums[begin], nums[i]);
+        }
+    }
+};
