@@ -17,6 +17,5 @@ public class Solution {
 //into the List, the size will be enlarged, so we need a variable to deal with this,
 //i.e. we cannot write "int j = res.size() - 1" on line 7
 
-//https://leetcode.com/discuss/10068/share-my-solution
-//Didn't quite understand this solution, but I run it on the paper, at least find out 
-//how this solution runs.
+//http://fisherlei.blogspot.com/2012/12/leetcode-gray-code.html
+//所以其实是一道找规律的题目。。？
