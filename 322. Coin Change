@@ -1,0 +1,21 @@
+public class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        for(int i = 1; i <= amount; i ++){
+            for(int coin : coins){
+                if(coin <= i && dp[i - coin] != Integer.MAX_VALUE){
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        return (dp[amount]  == Integer.MAX_VALUE) ? -1 : dp[amount];
+    }
+}
+
+
+//line 4 & 5将除了第0个元素之外的数组元素都初始化成Integer.MAX_VALUE，
+//之后需要特别注意line 8的dp[i - coin] != Integer.MAX_VALUE这个判断，
+//这个判断的意义是，如果dp[i - coin] == Integer.MAX_VALUE，那么目前还没有
+//可以得到数值为i - coin的amount的方法！所以就不执行line 9的语句。
