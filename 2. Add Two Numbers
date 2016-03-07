@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode cur = head;
+        int carry = 0;
+        while(l1 != null || l2 != null){
+            int sum = 0;
+            if(l1 != null){
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if(l2 != null){
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            sum += carry;
+            cur.next = new ListNode(sum % 10);
+            cur = cur.next;
+            carry = sum / 10;
+        }
+        if(carry == 1){
+            cur.next = new ListNode(1);
+        }
+        return head.next;
+    }
+}
+
+
+//line 29,注意处理可能发生的最高位的进位
+//line 25,new一个新的next
+
+//*while循环里经常忘记让循环的变量自增或自减，实在不该！！
