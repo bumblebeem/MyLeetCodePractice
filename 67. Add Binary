@@ -10,8 +10,8 @@ public class Solution {
             if(j >= 0){
                 tempsum += b.charAt(j --) - '0';
             }
-            carry = tempsum / 2;
             sum.append(tempsum % 2);
+            carry = tempsum / 2;
         }
         if(carry != 0){
             sum.append("1");
@@ -22,3 +22,28 @@ public class Solution {
 
 
 //The use of StringBuilder
+
+//Below is a solution(I prefered!) without using StringBuilder...
+
+
+public class Solution {
+    public String addBinary(String a, String b) {
+        String sum = ""; 
+        int i = a.length() - 1, j = b.length() - 1, carry = 0;
+        while(i >=0 || j >= 0){
+            int tempsum = carry;
+            if(i >= 0){
+                tempsum += a.charAt(i --) - '0';
+            }
+            if(j >= 0){
+                tempsum += b.charAt(j --) - '0';
+            }
+            sum = (char)(tempsum % 2 + '0') + sum;
+            carry = tempsum / 2;
+        }
+        if(carry != 0){
+            sum = "1" + sum;
+        }
+        return sum;
+    }
+}
