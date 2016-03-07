@@ -19,3 +19,23 @@ public class Solution {
 //之后需要特别注意line 8的dp[i - coin] != Integer.MAX_VALUE这个判断，
 //这个判断的意义是，如果dp[i - coin] == Integer.MAX_VALUE，那么目前还没有
 //可以得到数值为i - coin的amount的方法！所以就不执行line 9的语句。
+
+//或者也可以如下边方法一样，将dp数组除去0号元素以外的值初始化为任何一个大于amount但是小于Integer.MAX_VALUE
+//的数（i.e.一个不可能的数，达到一个amount的硬币数不可能比这个amount还大），这样就不需要在line 34处进行额外的判断，
+//节省了少许时间。 PS:这里如果直接初始化成Integer.MAX_VALUE，当line 35出现Integer.MAX_VALUE + 1时会溢出成负数
+
+public class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for(int i = 1; i <= amount; i ++){
+            for(int coin : coins){
+                if(coin <= i){
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        return (dp[amount] > amount) ? -1 : dp[amount];
+    }
+}
