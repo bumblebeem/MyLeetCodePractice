@@ -1,0 +1,25 @@
+public class Solution {
+    public String getHint(String secret, String guess) {
+        int bulls = 0;
+        int cows = 0;
+        int[] secretcow = new int[10];
+        int[] guesscow = new int[10];
+        for(int i = 0; i < secret.length(); i ++){
+            if(secret.charAt(i) == guess.charAt(i)){
+                bulls ++;
+            }
+            else{
+                secretcow[secret.charAt(i) - '0'] ++;
+                guesscow[guess.charAt(i) - '0'] ++;
+            }
+        }
+        for(int i = 0; i < 10; i ++){
+            cows += Math.min(secretcow[i], guesscow[i]);
+        }
+        return String.valueOf(bulls) + "A" + String.valueOf(cows) + "B";
+    }
+}
+
+
+//Here is an one-pass solution
+//https://leetcode.com/discuss/67031/one-pass-java-solution
