@@ -1,0 +1,61 @@
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        String[] strs = str.split("\\s");
+        if(pattern.length() != strs.length){
+            return false;
+        }
+        
+        HashMap<Character, String> hashmap = new HashMap<Character, String>();
+        for(int i = 0; i < pattern.length(); i ++){
+            if(hashmap.containsKey(pattern.charAt(i))){
+                if(! hashmap.get(pattern.charAt(i)).equals(strs[i])){
+                    return false;
+                }
+            }
+            else{
+                if(hashmap.containsValue(strs[i])){
+                    return false;
+                }
+                hashmap.put(pattern.charAt(i), strs[i]);
+            }
+        }
+        return true;
+    }
+}
+
+
+//*注意String中用 == 往往比较的是String的reference是不是一样，而用.equals比较的才是String的内容一不一样！
+//line 9的for循环里边的部分if else之类的写错了很多，还需要再理解。。。
+
+
+//However the containsValue in line 16 of above solution takes O(n) time, which is not efficient.
+//So we modify the code by using two hashmaps in the following solution.
+
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        String[] strs = str.split("\\s");
+        if(pattern.length() != strs.length){
+            return false;
+        }
+        
+        HashMap<Character, String> hm1 = new HashMap<Character, String>();
+        HashMap<String, Character> hm2 =  new HashMap<String, Character>();
+        for(int i = 0; i < pattern.length(); i ++){
+            if(hm1.containsKey(pattern.charAt(i))){
+                if(! hm1.get(pattern.charAt(i)).equals(strs[i])){
+                    return false;
+                }
+            }
+            else{
+                if(hm2.containsKey(strs[i])){
+                    return false;
+                }
+                else{
+                    hm1.put(pattern.charAt(i), strs[i]);
+                    hm2.put(strs[i], pattern.charAt(i));
+                }
+            }
+        }
+        return true;
+    }
+}
