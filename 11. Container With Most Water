@@ -1,0 +1,29 @@
+public class Solution {
+    public int maxArea(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int mostwater = Math.min(height[left], height[right]) * (right - left);
+        
+        while(left < right){
+            mostwater = Math.max(mostwater, (right - left) * Math.min(height[left], height[right]) );
+            
+            if(height[left] < height[right]){
+                left ++;
+            }
+            else{
+                right --;
+            }
+        }
+        
+        return mostwater;
+    }
+}
+
+
+//https://leetcode.com/discuss/59635/easy-concise-java-o-n-solution-with-proof-and-explanation
+//The proof in the above link is great!
+
+//The basic idea is starting by evaluating the widest container, using the first and the last line. 
+//All other possible containers are less wide, so to hold more water, they need to be higher. 
+//Thus, after evaluating that widest container, skip lines at both ends that don't support a higher height. 
+//Then evaluate that new container we arrived at. Repeat until there are no more possible containers left.
