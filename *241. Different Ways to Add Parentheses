@@ -1,0 +1,80 @@
+public class Solution {
+    public List<Integer> diffWaysToCompute(String input) {
+        List<Integer> res = new ArrayList<Integer>();
+        for(int k = 0; k < input.length(); k ++){
+            char c = input.charAt(k);
+            if(c == '*' || c == '+' || c == '-'){
+                String s1 = input.substring(0, k);
+                String s2 = input.substring(k + 1, input.length());
+                List<Integer> l1 = diffWaysToCompute(s1);
+                List<Integer> l2 = diffWaysToCompute(s2);
+                for(int i : l1){
+                    for(int j : l2){
+                        if(c == '*'){
+                            res.add(i * j);
+                        }
+                        else if(c == '+'){
+                            res.add(i + j);
+                        }
+                        else if(c == '-'){
+                            res.add(i - j);
+                        }
+                    }
+                }
+            }
+        }
+        if(res.size() == 0){
+            res.add(Integer.valueOf(input));
+        }
+        return res;
+    }
+}
+
+
+//For the above solution, line 9 & 10 is the key!
+//Below is the essential point of this problem, to use DP
+
+public class Solution {
+    public List<Integer> diffWaysToCompute(String input) {
+        List<Integer> res = new ArrayList<Integer>();
+        HashMap<String, List<Integer>> hashmap = new HashMap<String, List<Integer>>();
+        for(int k = 0; k < input.length(); k ++){
+            char c = input.charAt(k);
+            if(c == '*' || c == '+' || c == '-'){
+                String s1 = input.substring(0, k);
+                String s2 = input.substring(k + 1, input.length());
+                List<Integer> l1, l2;
+                if(hashmap.containsKey(s1)){
+                    l1 = hashmap.get(s1);
+                }
+                else{
+                    l1 = diffWaysToCompute(s1);
+                }
+                if(hashmap.containsKey(s2)){
+                    l2 = hashmap.get(s2);
+                }
+                else{
+                    l2 = diffWaysToCompute(s2);
+                }
+                for(int i : l1){
+                    for(int j : l2){
+                        if(c == '*'){
+                            res.add(i * j);
+                        }
+                        else if(c == '+'){
+                            res.add(i + j);
+                        }
+                        else if(c == '-'){
+                            res.add(i - j);
+                        }
+                    }
+                }
+            }
+        }
+        if(res.size() == 0){
+            res.add(Integer.valueOf(input));
+        }
+        hashmap.put(input, res);
+        return res;
+    }
+}
