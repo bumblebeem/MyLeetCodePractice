@@ -1,0 +1,23 @@
+public class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        getCombine(res, new ArrayList<Integer>(), 1, n, k);
+        return res;
+    }
+    
+    private void getCombine(List<List<Integer>> res, List<Integer> temp, int start, int n, int k){
+        if(k == 0){
+            res.add(new ArrayList<Integer>(temp));
+            return;
+        }
+        for(int i = start; i <= n; i ++){
+            temp.add(i);
+            getCombine(res, temp, i + 1, n, k - 1);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
+
+
+//这道题目一上来就想到了backtracking的思路，然而还是参考了discussion
+//严重发现所有backtracking类型的题目都异常的类似，需要再多做一些之后回头总结一番！
