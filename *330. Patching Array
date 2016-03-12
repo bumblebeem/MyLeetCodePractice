@@ -1,0 +1,22 @@
+public class Solution {
+    public int minPatches(int[] nums, int n) {
+        int res = 0;
+        int i = 0;
+        long missing = 1;
+        while(missing <= n){
+            if(i < nums.length && nums[i] <= missing ){
+                missing += nums[i];
+                i ++;
+            }
+            else{
+                res ++;
+                missing += missing;
+            }
+        }
+        return res;
+    }
+}
+
+
+//must use long instead int for the variable missing in line 5
+//https://leetcode.com/discuss/82822/solution-explanation
