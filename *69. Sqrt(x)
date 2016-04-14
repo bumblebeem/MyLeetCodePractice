@@ -22,3 +22,7 @@ public class Solution {
 
 //Newton's Method, don't know it...
 //https://leetcode.com/discuss/58631/3-4-short-lines-integer-newton-every-language
+
+
+//Bit manipulation solution...
+//https://leetcode.com/discuss/8897/share-my-o-log-n-solution-using-bit-manipulation
