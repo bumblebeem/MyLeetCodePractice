@@ -1,0 +1,22 @@
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length == 0){
+            return "";
+        }
+        StringBuilder lcp = new StringBuilder();
+        for(int i = 0; i < strs[0].length(); i ++){
+            char c = strs[0].charAt(i);
+            for(String s : strs){
+                if(i > s.length() - 1 || s.charAt(i) != c){
+                    return lcp.toString();
+                }
+            }
+            lcp.append(c);
+        }
+        return lcp.toString();
+    }
+}
+
+
+//第七行可以随便挑一个数组strs中的字符串进行循环，
+//之后将这个字符串与strs中的所有其他字符串逐位进行比较
