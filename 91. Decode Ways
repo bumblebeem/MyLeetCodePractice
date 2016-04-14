@@ -1,0 +1,58 @@
+//Solution 1: top-down dp
+public class Solution {
+    public int numDecodings(String s) {
+        if(s == null || s.length() == 0){
+            return 0;
+        }
+        
+        int[] dp = new int[s.length() + 1];
+        dp[s.length()] = 1;
+        dp[s.length() - 1] = s.charAt(s.length() - 1) == '0' ? 0 : 1;
+        
+        for(int i = s.length() - 2; i >= 0; i --){
+            int first = Integer.valueOf(s.substring(i, i + 1));
+            int second = Integer.valueOf(s.substring(i, i + 2));
+            if(second >= 10 && second <= 26){
+                dp[i] += dp[i + 2];
+            }
+            if(first != 0){
+                dp[i] += dp[i + 1];
+            }
+        }
+        
+        return dp[0];
+    }
+}
+
+
+
+//Solution 2: bottom-up dp
+public class Solution {
+    public int numDecodings(String s) {
+        if(s == null || s.length() == 0){
+            return 0;
+        }
+        
+        int[] dp = new int[s.length() + 1];
+        dp[0] = 1;
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+        
+        for(int i = 2; i <= s.length(); i ++){
+            int first = Integer.valueOf(s.substring(i - 1, i));
+            int second = Integer.valueOf(s.substring(i - 2, i));
+            if(second >= 10 && second <= 26){
+                dp[i] += dp[i - 2];
+            }
+            if(first != 0){
+                dp[i] += dp[i - 1];
+            }
+        }
+        
+        return dp[s.length()];
+    }
+}
+
+
+
+//Solution 3, only use constant space
+//https://leetcode.com/discuss/21090/a-concise-dp-solution
