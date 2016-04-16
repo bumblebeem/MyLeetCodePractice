@@ -31,6 +31,7 @@ public class Solution {
 
 
 //res[0] means the value if we don't rob root, res[1] means the value if we rob root
+//注意理解line 25 & 26
 
 
 //Here is a very good explanation link:
