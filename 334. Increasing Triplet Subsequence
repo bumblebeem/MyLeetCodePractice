@@ -1,0 +1,18 @@
+public class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        int first_min = Integer.MAX_VALUE, second_min = Integer.MAX_VALUE;
+        for(int i : nums){
+            if(i <= first_min){
+                first_min = i;
+            }else if(i <= second_min){
+                second_min = i;
+            }else{
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
+//https://leetcode.com/discuss/86593/clean-and-short-with-comments-c
