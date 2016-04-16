@@ -1,0 +1,52 @@
+public class Solution {
+    private Set<Integer> occupied_cols = new HashSet<Integer>();
+    private Set<Integer> occupied_diags = new HashSet<Integer>();
+    private Set<Integer> occupied_antidiags = new HashSet<Integer>();
+    private int board_size;
+    
+    public int totalNQueens(int n) {
+        board_size = n;
+        return totalNQueensHelper(0, 0);
+    }
+    
+    private int totalNQueensHelper(int row, int count){
+        for(int i = 0; i < board_size; i ++){
+            if(occupied_cols.contains(i)){
+                continue;
+            }
+            int diag = i - row;
+            if(occupied_diags.contains(diag)){
+                continue;
+            }
+            int antidiag = i + row;
+            if(occupied_antidiags.contains(antidiag)){
+                continue;
+            }
+            
+            if(row == board_size - 1){
+                count ++;
+            }else{
+                occupied_cols.add(i);
+                occupied_diags.add(diag);
+                occupied_antidiags.add(antidiag);
+                
+                count = totalNQueensHelper(row + 1, count);
+                
+                occupied_cols.remove(i);
+                occupied_diags.remove(diag);
+                occupied_antidiags.remove(antidiag);
+            }
+        }
+        
+        return count;
+    }
+}
+
+
+//1. Use back_tracking as the basic idea.
+//2. line 26 - 38 is the key, line 35 - 37 are used to recover.
+//*3. The method using "col + row" and "col - row" to detect diagonal is really brilliant!! 
+
+
+//Excelent explanation here:
+//https://leetcode.com/discuss/18411/accepted-java-solution
