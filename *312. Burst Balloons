@@ -1,0 +1,37 @@
+public class Solution {
+    public int maxCoins(int[] nums) {
+        int[] newNums = new int[nums.length + 2];
+        int length = 1;
+        for(int x : nums){
+            if(x > 0){
+                newNums[length ++] = x;
+            }
+        }
+        newNums[0] = newNums[length ++] = 1;
+        
+        int[][] dp = new int[length][length];
+        for(int interval = 2; interval < length; interval ++){
+            for(int left = 0; left + interval < length; left ++){
+                int right = left + interval;
+                for(int i = left + 1; i < right; i ++){
+                    dp[left][right] = Math.max(dp[left][right], dp[left][i] + newNums[left] * newNums[i] * newNums[right] + dp[i][right]);
+                }
+            }
+        }
+        
+        return dp[0][length - 1];
+    }
+}
+
+
+//https://leetcode.com/discuss/72216/share-some-analysis-and-explanations
+//Noticed that there is also a memorization version of this problem.
+
+//1. In line 17, not sure how to understand "newNums[left] * newNums[i] * newNums[right]", why it is not
+//"newNums[i - 1] * newNums[i] * newNums[i + 1]"?
+//Because: the problem is i-th ballon is the last one to burst in the region [left, right]. Therefore the i-1 and i+1 may be long gone......
+//2. dp[i][j] means the maximum we could get if we burst the balloons within the range from i to j (inclusive i and j).
+
+
+//Yet another solution
+//https://leetcode.com/discuss/72186/c-dynamic-programming-o-n-3-32-ms-with-comments
