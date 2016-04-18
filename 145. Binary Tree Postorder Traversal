@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new LinkedList<Integer>();
+        if(root == null){
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        TreeNode last_pop = root;
+        while(!stack.isEmpty()){
+            TreeNode top = stack.peek();
+            if(top.left != null && top.left != last_pop && top.right != last_pop){
+                stack.push(top.left);
+            }
+            else if(top.right != null && top.right != last_pop && (top.left == null || top.left == last_pop)){
+                stack.push(top.right);
+            }else{
+                stack.pop();
+                last_pop = top;
+                res.add(top.val);
+            }
+        }
+        return res;
+    }
+}
+
+
+//https://leetcode.com/discuss/9736/accepted-code-with-explaination-does-anyone-have-better-idea
+//Read this link along with my note in Evernote!
+
+//Yet another solution, recursive or morris traversal
+//https://leetcode.com/discuss/36711/solutions-iterative-recursive-traversal-different-solutions
