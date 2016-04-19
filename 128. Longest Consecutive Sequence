@@ -1,0 +1,32 @@
+public class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashMap<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
+        int length = 0;
+        
+        for(int n : nums){
+            if(hashmap.containsKey(n)){
+                //duplciate elements in array nums
+                continue;
+            }else{
+                int leftbound = hashmap.containsKey(n - 1) ? hashmap.get(n - 1) : 0;
+                int rightbound = hashmap.containsKey(n + 1) ? hashmap.get(n + 1) : 0;
+                
+                //sum stands for max length using current n
+                int sum = leftbound + rightbound + 1;
+                //update max length if available
+                length = Math.max(sum, length);
+                
+                //extend the length to the boundary(s)
+                hashmap.put(n, sum);
+                hashmap.put(n - leftbound, sum);
+                hashmap.put(n + rightbound, sum);
+            }
+        }
+        
+        return length;
+    }
+}
+
+
+//Need to notice that for this solution, the values between leftbound and rightbound may be garbage, right?
+//https://leetcode.com/discuss/18886/my-really-simple-java-o-n-solution-accepted
