@@ -34,4 +34,6 @@ public class Solution {
 //Thus we can finish it in linear time.
 
 //https://leetcode.com/discuss/10046/share-my-short-solution
-//https://leetcode.com/discuss/16171/sharing-my-simple-c-code-o-n-time-o-1-space
+
+//Yet another solution:
+//https://leetcode.com/discuss/45812/7-lines-c-c
