@@ -30,3 +30,6 @@ public class Solution {
 
 //Need to notice that for this solution, the values between leftbound and rightbound may be garbage, right?
 //https://leetcode.com/discuss/18886/my-really-simple-java-o-n-solution-accepted
+
+//Pretty much the same thought, but a different implementation below:
+//https://leetcode.com/discuss/16711/possibly-shortest-cpp-solution-only-6-lines
