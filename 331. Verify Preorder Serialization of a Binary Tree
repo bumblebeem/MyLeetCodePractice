@@ -1,0 +1,20 @@
+public class Solution {
+    public boolean isValidSerialization(String preorder) {
+        //define the degree of a node as "degree = indegree - outdegree"
+        
+        String[] nodes = preorder.split(",");
+        int degree = -1;   //the degree of the root is -1
+        
+        for(String node : nodes){
+            degree ++;   //enter a new node, indegree increases by 1, so degree increases by 1
+            if(degree > 0){
+                return false;
+            }
+            if(! node.equals("#")){
+                degree -= 2;  //if node equals to "#", there is no outdegree, we do nothing; otherwise, outdegree increases by 2, thus degree decreases by 2
+            }
+        }
+        
+        return degree == 0;
+    }
+}
