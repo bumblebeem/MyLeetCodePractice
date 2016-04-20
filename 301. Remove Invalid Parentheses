@@ -1,0 +1,90 @@
+//BFS solution
+//https://leetcode.com/discuss/67842/share-my-java-bfs-solution
+public class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+        List<String> res = new ArrayList<String>();
+        
+        if(s == null){
+            return res;
+        }
+        
+        Set<String> visited = new HashSet<String>();
+        Queue<String> queue = new LinkedList<String>();
+        
+        queue.add(s);
+        visited.add(s);
+        
+        //Notice the use of this parameter, without it, we'll
+        //get all the possible solutions in res.
+        boolean found = false;
+        
+        while(! queue.isEmpty()){
+            String cur = queue.poll();
+            
+            if(isValid(cur)){
+                res.add(cur);
+                found = true;
+            }
+            
+            if(found){
+                continue;
+            }
+            
+            for(int i = 0; i < cur.length(); i ++){
+                if(cur.charAt(i) != '(' && cur.charAt(i) != ')'){
+                    continue;
+                }
+                
+                String next = cur.substring(0, i) + cur.substring(i + 1);
+                
+                if(! visited.contains(next)){
+                    queue.add(next);
+                    visited.add(next);
+                }
+            }
+        }
+        
+        return res;
+    }
+    
+    //we could use a counter or a stack to check if the parentheses are valid
+    private boolean isValid(String s){
+        int count = 0;
+        
+        for(int i = 0; i < s.length(); i ++){
+            char c = s.charAt(i);
+            if(c == '('){
+                count ++;
+            }
+            if(c == ')'){
+                count --;
+                if(count < 0){
+                    return false;
+                }
+            }
+        }
+        
+        return count == 0;
+    }
+}
+
+/* A very good Q&A for this problem, exactly the question I had when first time trying to implement it.
+Q: I think there is something wrong with your answer. Whenever you got a solution,
+you should store the length of this solution. And after that, when you get a string from your queue, 
+if the length of it is smaller than the length of the solution, you should immediately break the while loop.
+ex. input="()(()" Your code will get the answer ["()()","()",""] if you don't set the length of solution to be 4 when you get "()()". 
+
+A: There is no such problem with this code. It actually generates only ["()()"] on the given input "()(()". 
+You may find it weird since the code does not explicitly record the maximum length of the valid parentheses.
+However, it does it implicitly. For a string of parentheses to be valid, its number of parentheses should be even. 
+And at any time, strings in queue will only differ in length of 1 (this is the implicit control). 
+When we find "()()" to be valid, both "()" and "" have not been added to queue yet and all the shorter strings are of length of 3, 
+which must be invalid.
+*/
+
+
+
+//*DFS solution
+//https://leetcode.com/discuss/72208/easiest-9ms-java-solution
+//https://leetcode.com/discuss/81478/easy-short-concise-and-fast-java-dfs-3-ms-solution
+//Don't quite understand...
