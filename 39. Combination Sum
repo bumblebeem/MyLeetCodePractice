@@ -23,3 +23,4 @@ public class Solution {
 //line 11 , 15中的cur和new ArrayList<Integer>(cur)可以互换。。。
 //line 11可以写成：res.add(new ArrayList<Integer>(cur));
 //line 15同时改写成：getCombination(i, res, cur, candidates, target - candidates[i]);
+//总之，这两个地方至少有一个地方需要new一个ArrayList，否则就会出错。。。
