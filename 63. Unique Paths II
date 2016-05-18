@@ -1,0 +1,32 @@
+public class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int cols = obstacleGrid[0].length;
+        int rows = obstacleGrid.length;
+        int[][] dp = new int[rows + 1][cols + 1];
+        
+        dp[1][0] = 1;
+        for(int i = 1; i <= rows; i ++) {
+            for(int j = 1; j <= cols; j ++) {
+                if(obstacleGrid[i - 1][j - 1] == 1) {
+                    dp[i][j] = 0;
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                }
+            }
+        }
+        
+        return dp[rows][cols];
+    }
+}
+
+
+//pay attention to line 5 and line 10
+//line 7 could also be "dp[0][1] = 1;", it's just to deal with dp[1][1](boundary case)
+
+
+//Similar to Unique Paths I, we can further optimize the space complexity
+//https://leetcode.com/discuss/38358/4ms-o-n-dp-solution-in-c-with-explanations
+
+
+//if we are allowed to manipulate the original matrix, we have the following solution(didn't fully understand)
+//https://leetcode.com/discuss/15756/java-solution-using-dynamic-programming-o-1-space
