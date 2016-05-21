@@ -1,1 +1,45 @@
-65. Valid Number
+public class Solution {
+    public boolean isNumber(String s) {
+        s = s.trim();
+        int i = 0;
+        
+        if(i < s.length() && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
+            i ++;
+        }
+        
+        int numOfNums = 0, numOfPoints = 0;
+        while(i < s.length() && ((s.charAt(i) >= '0' && s.charAt(i) <= '9') || s.charAt(i) =='.')) {
+            if(s.charAt(i) == '.'){
+                numOfPoints ++;
+            } else {
+                numOfNums ++;
+            }
+            i ++;
+        }
+        if(numOfNums == 0 || numOfPoints > 1) {
+            return false;
+        }
+        
+        if(i < s.length() && s.charAt(i) == 'e') {
+            i ++;
+            if(i < s.length() && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
+                i ++;
+            }
+            
+            numOfNums = 0;
+            while(i < s.length() && s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                i ++;
+                numOfNums ++;
+            }
+            if(numOfNums  == 0) {
+                return false;
+            }
+        }
+        
+        return i == s.length();
+    }
+}
+
+
+//The point of this question is to let the interviewee ask what's the definition of a valid number before 
+//trying to implement it. However, the implementation is still hard for me...
