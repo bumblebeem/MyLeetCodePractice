@@ -34,4 +34,5 @@ public class Solution {
 
 
 //https://leetcode.com/discuss/25580/simple-java-solution-with-clear-explanation
+//使用dummy是因为防止head也在reverse的范围里
 //*line25 - 28
