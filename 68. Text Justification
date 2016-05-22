@@ -1,0 +1,91 @@
+public class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> res = new LinkedList<String>();
+        
+        for(int begin = 0, end; begin < words.length; begin = end) {
+            /* get current line's begin and end index */
+            int curLen = -1;
+            for(end = begin; end < words.length && curLen + 1 + words[end].length() <= maxWidth; end ++) {
+                curLen += 1 + words[end].length();
+            }
+            
+            StringBuilder sb = new StringBuilder(words[begin]);
+            int space = 1, extra = 0;    //1 space is already in curLen
+            //if neither only 1 word in this line nor the last line
+            if(end != begin + 1 && end != words.length) {
+                /*
+                  space是普通词与词之间的间隔，extra是最左边的几个可能比普通间隔多出一个空格的间隔
+                */
+                space += (maxWidth - curLen) / (end - 1 - begin); 
+                extra = (maxWidth - curLen) % (end - 1 - begin);
+            }
+            
+            //when initialize sb, we already add the word at index of begin (line 12)
+            for(int i = begin + 1; i < end; i ++) {
+                for(int j = 0; j < space; j ++) {
+                    sb.append(' ');
+                }
+                if(extra-- > 0) {    //extra-- > 0 is brilliant!
+                    sb.append(' ');
+                }
+                sb.append(words[i]);
+            }
+            int rest = maxWidth - sb.length();
+            while(rest-- > 0) {
+                sb.append(' ');
+            }
+            res.add(sb.toString());
+        }
+        
+        return res;
+    }
+}
+
+
+
+
+public class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> res = new LinkedList<String>();
+        
+        for(int begin = 0, end; begin < words.length; begin = end) {
+            int curLen = -1;
+            for(end = begin; end < words.length && curLen + 1 + words[end].length() <= maxWidth; end ++) {
+                curLen += 1 + words[end].length();
+            }
+            
+            StringBuilder sb = new StringBuilder();
+            int diff = end - begin - 1;
+            if(end == words.length || diff == 0) {
+                for(int i = begin; i < end; i ++) {
+                    sb.append(words[i] + " ");
+                }
+                // while(sb.length() < maxWidth) {
+                //     sb.append(" ");
+                // }
+                //line 67 - 70注释掉，换成line 63 - 65就错了，不懂啊。。。
+                sb.deleteCharAt(sb.length() - 1);
+                for (int i = sb.length(); i < maxWidth; i++) {
+                    sb.append(" ");
+                }
+            } else {
+                int space = (maxWidth - curLen) / diff;
+                int extra = (maxWidth - curLen) % diff;
+                for(int i = begin; i < end; i ++) {
+                    sb.append(words[i]);
+                    if(i < end - 1) {
+                        for(int j = 0; j <= space; j ++){
+                            sb.append(" ");
+                        }
+                        if(extra-- > 0) {
+                            sb.append(" ");
+                        }
+                    }
+                }
+            }
+            res.add(sb.toString());
+        }
+        
+        return res;
+    }
+}
