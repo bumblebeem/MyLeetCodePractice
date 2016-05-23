@@ -1,0 +1,31 @@
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        int indexS = 0, indexP = 0, match = -1, starIndex = -1;
+        while(indexS < s.length()) {
+            if(indexP < p.length() && (p.charAt(indexP) == s.charAt(indexS) || p.charAt(indexP) == '?')){
+                indexS ++;
+                indexP ++;
+            } else if(indexP < p.length() && p.charAt(indexP) == '*') {
+                starIndex = indexP;
+                match = indexS;
+                indexP ++;
+            } else if(starIndex != -1) {
+                indexP = starIndex + 1;
+                match ++;
+                indexS = match;
+            } else {
+                return false;
+            }
+        }
+        
+        while(indexP < p.length() && p.charAt(indexP) == '*'){
+            indexP ++;
+        }
+        
+        return indexP == p.length();
+    }
+}
+
+
+//http://yucoding.blogspot.com/2013/02/leetcode-question-123-wildcard-matching.html
+//Very hard to understand... Didn't get it...
