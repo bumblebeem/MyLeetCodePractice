@@ -1,0 +1,42 @@
+public class Solution {
+    public String largestNumber(int[] nums) {
+        if(nums == null || nums.length == 0) {
+            return "";
+        }
+        
+        String[] numsString = new String[nums.length];
+        for(int i = 0; i < nums.length; i ++){
+            numsString[i] = Integer.toString(nums[i]);
+        }
+        
+        Comparator<String> comp = new Comparator<String>(){
+            public int compare(String s1, String s2) {
+                String str1 = s1 + s2;
+                String str2 = s2 + s1;
+                return str1.compareTo(str2);
+            }
+        };
+        Arrays.sort(numsString, comp);
+        
+        if(numsString[numsString.length - 1].equals("0")) {
+            return "0";
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = numsString.length - 1; i >=0; i --) {
+            sb.append(numsString[i]);
+        }
+        return sb.toString();
+    }
+}
+
+
+//line 12 - 19, 对于Comparator的学习
+//这里是ascending order排序的，sort之后numsString的最后一个元素是最大的
+
+//line 16,对于String类中的compareTo方法的学习
+//returns the value 0 if the argument string is equal to this string; 
+//a value less than 0 if this string is lexicographically less than the string argument;
+//and a value greater than 0 if this string is lexicographically greater than the string argument.
+
+//https://docs.oracle.com/javase/7/docs/api/java/util/Comparator.html
+//https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#compareTo(java.lang.String)
