@@ -1,0 +1,79 @@
+//Solution 1: one-way BFS
+public class Solution {
+    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+        wordList.add(endWord);
+        Queue<String> reached = new LinkedList<String>();
+        reached.add(beginWord);
+        int distance = 1;
+        while(!reached.isEmpty()) {
+            int curSize = reached.size();
+            for(int j = 0; j < curSize; j ++) {
+                String curWord = reached.poll();
+                if(curWord.equals(endWord)) {
+                    return distance;
+                }
+                for(int i = 0; i < curWord.length(); i ++) {
+                    char[] curWordChar = curWord.toCharArray();
+                    for(char c = 'a'; c <= 'z'; c ++) {
+                        curWordChar[i] = c;
+                        String transformedWord = new String(curWordChar);
+                        if(wordList.contains(transformedWord)) {
+                            reached.add(transformedWord);
+                            wordList.remove(transformedWord);
+                        }
+                    }
+                }
+            }
+            distance ++;
+        }
+        return wordList.contains(endWord) ? 0 : distance;
+    }
+}
+//line 16如果放在line 15的for循环的外边，在line 17的for循环里就要储存改变前的curWordChar[i]的值，
+//之后在line 17的for循环结束之后再还原回去
+
+
+//Solution 2: two-way BFS!!
+public class Solution {
+    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+        HashSet<String> beginSet = new HashSet<String>();
+        HashSet<String> endSet = new HashSet<String>();
+        HashSet<String> visited = new HashSet<String>();
+        int distance = 1;
+        
+        beginSet.add(beginWord);
+        endSet.add(endWord);
+        while(!beginSet.isEmpty() && !endSet.isEmpty()) {
+            if(beginSet.size() > endSet.size()) {
+                HashSet<String> temp = beginSet;
+                beginSet = endSet;
+                endSet = temp;
+            }
+            
+            HashSet<String> next = new HashSet<String>();
+            for(String curWord : beginSet) {
+                for(int i = 0; i < curWord.length(); i ++) {
+                    char[] curWordChar = curWord.toCharArray();
+                    for(char c = 'a'; c < 'z'; c ++) {
+                        curWordChar[i] = c;
+                        String transformedWord = new String(curWordChar);
+                        
+                        if(endSet.contains(transformedWord)) {
+                            return distance + 1;
+                        }
+                        
+                        if(!visited.contains(transformedWord) && wordList.contains(transformedWord)) {
+                            visited.add(transformedWord);
+                            wordList.remove(transformedWord);
+                            next.add(transformedWord);
+                        }
+                    }
+                }
+            }
+            beginSet = next;
+            distance ++;
+        }
+        
+        return 0;
+    }
+}
