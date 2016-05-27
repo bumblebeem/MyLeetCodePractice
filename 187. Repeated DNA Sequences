@@ -1,0 +1,21 @@
+public class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        HashSet<String> seen = new HashSet<String>();
+        HashSet<String> seenagain = new HashSet<String>();
+        for(int i = 0; i + 9 < s.length(); i ++) {
+            String cur = s.substring(i, i + 10);
+            if(!seen.add(cur)) {
+                seenagain.add(cur);
+            }
+        }
+        return new ArrayList<String>(seenagain);
+    }
+}
+
+
+//pay attention to grammar of line 11, use HashSet directly to initialize ArrayList
+//line 7, HashSet.add(E), return true if this set did not already contain the specified element
+
+
+//https://leetcode.com/discuss/questions/oj/repeated-dna-sequences?sort=hot
+//There are also solutions using bit manipulation, didn't understand..
