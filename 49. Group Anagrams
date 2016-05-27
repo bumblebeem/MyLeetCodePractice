@@ -1,0 +1,22 @@
+public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs == null || strs.length == 0) {
+            return new ArrayList<List<String>>();
+        }
+        HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+        Arrays.sort(strs);
+        for(String s : strs) {
+            char[] temp = s.toCharArray();
+            Arrays.sort(temp);
+            String key = new String(temp);
+            if(!map.containsKey(key)) {
+                map.put(key, new ArrayList<String>());
+            }
+            map.get(key).add(s);
+        }
+        return new ArrayList<List<String>>(map.values());
+    }
+}
+
+
+//line 17, .values() functions, returns a collection view of the values contained in this map.
