@@ -1,0 +1,26 @@
+//O(n) solution
+//keep a moving window expand until sum>=s, then shrink util sum<s. Each time after shrinking, update length.
+//line 19,如果sum曾经达到过s,min的值就不会是Integer.MAX_VALUE了，借此判断是否存在解
+public class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        int i = 0, j = 0;
+        int sum = 0;
+        int min = Integer.MAX_VALUE;
+        
+        while(j < nums.length) {
+            sum += nums[j ++];
+            
+            while(sum >= s) {
+                min = Math.min(min, j - i);
+                sum -= nums[i ++];
+            }
+        }
+        
+        return min == Integer.MAX_VALUE ? 0 : min;
+    }
+}
+
+
+//O(nlogn) solution, didn't understand..
+//https://leetcode.com/discuss/63385/o-n-o-nlogn-solutions-both-o-1-space
+//https://leetcode.com/discuss/35378/solutions-java-with-time-complexity-nlogn-with-explanation
