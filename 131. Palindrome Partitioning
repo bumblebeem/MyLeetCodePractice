@@ -1,0 +1,61 @@
+public class Solution {
+    public List<List<String>> partition(String s) {
+        List<String> list = new ArrayList<String>();
+        List<List<String>> res = new ArrayList<List<String>>();
+        dfs(res, list, 0, s);
+        return res;
+    }
+    
+    private void dfs(List<List<String>> res, List<String> list, int start, String s){
+        if(start == s.length()) {
+            res.add(new ArrayList<String>(list));
+            return;
+        }
+        for(int i = start; i < s.length(); i ++){
+            if(isPalindrome(s, start, i)){
+                list.add(s.substring(start, i + 1));     //取的substring的下标是[start, i + 1)
+                dfs(res, list, i + 1, s);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+    
+    //这个函数又写错了啊，这！！
+    public boolean isPalindrome(String s, int low, int high) {
+        while(low < high) {
+            if(s.charAt(low ++) != s.charAt(high --)){
+                return false;
+            }
+        } 
+        return true;
+    }
+}
+
+
+//dp solution, don't quite understand... And lots of details needs to be paid attention to...
+//https://leetcode.com/discuss/9623/my-java-dp-only-solution-without-recursion-o-n-2
+public class Solution {
+    public List<List<String>> partition(String s) {
+        int len = s.length();
+        List<List<String>>[] res = new List[len + 1];
+        res[0] = new ArrayList<List<String>>();
+        res[0].add(new ArrayList<String>());
+        
+        boolean[][] palindrome = new boolean[len][len];
+        for(int i = 0; i < len; i ++) {
+            res[i + 1] = new ArrayList<List<String>>();
+            for(int left = 0; left <= i; left ++) {
+                if(s.charAt(left) == s.charAt(i) && (i - left <= 1 || palindrome[left + 1][i - 1] == true)) {
+                    palindrome[left][i] = true;
+                    String str = s.substring(left, i + 1);
+                    for(List<String> l : res[left]){
+                        List<String> temp = new ArrayList<String>(l);
+                        temp.add(str);
+                        res[i + 1].add(temp);
+                    }
+                }
+            }
+        }
+        return res[len];
+    }
+}
