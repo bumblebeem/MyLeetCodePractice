@@ -1,0 +1,29 @@
+public class Solution {
+    public String reverseVowels(String s) {
+        if(s == null || s.length() == 0){
+            return s;
+        }
+        HashSet<String> vowels = new HashSet<String>(Arrays.asList("a", "e", "i", "o", "u", "A", "E", "I", "O", "U"));
+        char[] str = s.toCharArray();
+        int start = 0, end = str.length - 1;
+        while(start < end) {
+            while(start < end && !vowels.contains(str[start] + "")) {
+                start ++;
+            }
+            while(start < end && !vowels.contains(str[end] + "")) {
+                end --;
+            }
+            char temp = str[start];
+            str[start] = str[end];
+            str[end] = temp;
+            start ++;
+            end --;
+        }
+        
+        return new String(str);
+    }
+}
+
+
+//Some details need to be paid attention to (line 6, 10's grammar)
+//line 10, 13, can't be start < str.length, end > 0, must be start < end
