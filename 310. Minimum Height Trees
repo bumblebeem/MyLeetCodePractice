@@ -1,0 +1,44 @@
+public class Solution {
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+        List<Integer> leaves = new ArrayList<Integer>();
+        if(n <= 1){
+            leaves.add(0);
+            return leaves;
+        }
+        
+        Map<Integer, Set<Integer>> graph = new HashMap<>();
+        for(int i = 0; i < n; i ++) {
+            graph.put(i, new HashSet<Integer>());
+        }
+        for(int[] edge : edges) {
+            graph.get(edge[0]).add(edge[1]);
+            graph.get(edge[1]).add(edge[0]);
+        }
+        
+        for(int i = 0; i < n; i ++) {
+            if(graph.get(i).size() == 1) {
+                leaves.add(i);
+            }
+        }
+        
+        while(n > 2) {
+            List<Integer> newLeaves = new ArrayList<Integer>();
+            for(int leaf : leaves) {
+                for(int neighbor : graph.get(leaf)) {
+                    graph.get(leaf).remove(neighbor);
+                    graph.get(neighbor).remove(leaf);
+                    n --;
+                    if(graph.get(neighbor).size() == 1){
+                        newLeaves.add(neighbor);
+                    }
+                }
+            }
+            leaves = newLeaves;
+        }
+        return leaves;
+    }
+}
+
+
+//https://leetcode.com/discuss/71763/share-some-thoughts
+//The explanation of this above link is great! Plus, knowing the idea, the implementation is still tricky..
