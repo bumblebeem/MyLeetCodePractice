@@ -1,0 +1,43 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        
+        int len = 1;
+        ListNode cur = head;
+        while(cur.next != null) {
+            len ++;
+            cur = cur.next;
+        }
+        
+        ListNode newHead = head;
+        k %= len;
+        if(k != 0) {
+            cur.next = head;
+            for(int i = 0; i < len - k; i ++){
+                cur = cur.next;
+            }
+            newHead = cur.next;
+            cur.next = null;
+        }
+        return newHead;
+    }
+}
+
+
+//There is no trick for this problem. Some people used slow/fast pointers to find the tail node,
+//but I don't see the benefit (in the sense that it doesn't reduce the pointer move op) to do so. 
+//So I just used one loop to find the length first.
+
+
+//It's fairly easy to come up with the two-pointer solution first though...
+//https://leetcode.com/discuss/9533/share-my-java-solution-with-explanation
