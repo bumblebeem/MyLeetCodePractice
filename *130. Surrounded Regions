@@ -1,0 +1,122 @@
+//The idea comes from the observation that if a region is NOT captured, it is connected to the boundry. 
+
+//BFS
+public class Solution {
+    class Point {
+        int x;
+        int y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    
+    public void solve(char[][] board) {
+        if(board.length == 0 || board == null) {
+            return;
+        }
+        int rows = board.length, cols = board[0].length;
+        int[][] direction = { {-1, 0}, {1, 0}, {0, 1}, {0, -1} };
+        for(int i = 0; i < rows; i ++) {
+            for(int j = 0; j < cols; j ++) {
+                if( (i == 0 || j == 0 || i == rows - 1 || j == cols - 1) && board[i][j] == 'O'){
+                    Queue<Point> queue = new LinkedList<Point>();
+                    queue.add(new Point(i, j));
+                    board[i][j] = '*';
+                    while(! queue.isEmpty()) {
+                        Point point = queue.poll();
+                        for(int k = 0; k < 4; k ++){
+                            int x = direction[k][0] + point.x;
+                            int y = direction[k][1] + point.y;
+                            if (x >= 0 && x < rows && y >= 0 && y < cols && board[x][y] == 'O') {
+                                board[x][y] = '*';
+                                queue.add(new Point(x, y));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        for(int i = 0; i < rows; i ++) {
+            for(int j = 0; j < cols; j ++) {
+                if(board[i][j] == '*') {
+                    board[i][j] = 'O';
+                } else if(board[i][j] == 'O') {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+}
+
+
+//DFS
+public class Solution {
+    public void solve(char[][] board) {
+        if(board.length == 0 || board[0].length == 0) {
+            return;
+        }
+        int row = board.length;
+        int col = board[0].length;
+        if(row < 2 || col < 2) {
+            return;
+        }
+        
+        for(int i = 0; i < col; i ++) {
+            if(board[0][i] == 'O'){
+                boundaryDFS(board, row, col, 0, i);
+            }
+            if(board[row - 1][i] == 'O') {
+                boundaryDFS(board, row, col, row - 1, i);
+            }
+        }
+        
+        for(int i = 0; i < row; i ++) {
+            if(board[i][0] == 'O'){
+                boundaryDFS(board, row, col, i, 0);
+            }
+            if(board[i][col - 1] == 'O') {
+                boundaryDFS(board, row, col, i, col - 1);
+            }
+        }
+        
+        for(int i = 0; i < row; i ++) {
+            for(int j = 0; j < col; j ++) {
+                if(board[i][j] == '*') {
+                    board[i][j] = 'O';
+                }else if(board[i][j] == 'O') {  //this "else if" can't be "if"...
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+    
+    private void boundaryDFS(char[][] board, int row, int col, int i, int j) {
+        // if(i < 0 || j < 0 || i >= row || j >= col) {
+        //     return;
+        // }
+        if(board[i][j] == 'O'){
+            board[i][j] = '*';
+            if(i + 1 < row - 1){
+                boundaryDFS(board, row, col, i + 1, j);
+            }
+            if(i - 1 > 0) {
+                boundaryDFS(board, row, col, i - 1, j);
+            }
+            if(j + 1 < col - 1) {
+                boundaryDFS(board, row, col, i, j + 1);
+            }
+            if(j - 1 > 0) {
+                boundaryDFS(board, row, col, i, j - 1);
+            }
+        }
+    }
+}
+//*line 47, 50, 53, 56's condition!!! Read the first anwser of the following post carefully!!! Don't understand...
+//Anyway, DFS could be overflow, we'd better use BFS
+//https://leetcode.com/discuss/42445/a-really-simple-and-readable-c-solution%EF%BC%8Conly-cost-12ms
+
+
+//Union-Find, the first answer in the following link
+//https://leetcode.com/discuss/6285/solve-it-using-union-find
