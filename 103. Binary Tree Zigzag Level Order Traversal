@@ -1,0 +1,110 @@
+//use two stacks, very straight forward solution
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(root == null) {
+            return res;
+        }
+        
+        Stack<TreeNode> stack1 = new Stack<TreeNode>();
+        Stack<TreeNode> stack2 = new Stack<TreeNode>();
+        stack1.push(root);
+        while(!stack1.isEmpty() || !stack2.isEmpty()) {
+            List<Integer> temp = new ArrayList<Integer>();
+            while(!stack1.isEmpty()) {
+                TreeNode cur = stack1.pop();
+                temp.add(cur.val);
+                if(cur.left != null) {
+                    stack2.push(cur.left);
+                }
+                if(cur.right != null) {
+                    stack2.push(cur.right);
+                }
+            }
+            res.add(temp);
+            temp = new ArrayList<Integer>();
+            while(!stack2.isEmpty()) {
+                TreeNode cur = stack2.pop();
+                temp.add(cur.val);
+                if(cur.right != null) {
+                    stack1.push(cur.right);
+                }
+                if(cur.left != null) {
+                    stack1.push(cur.left);
+                }
+            }
+            if(!temp.isEmpty()) {
+                res.add(temp);
+            }
+        }
+        
+        return res;
+    }
+}
+
+
+//use deque instead of two stacks, notice that flag's initial value! (can't set it to false, otherwise zigzag would be reversed)
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(root == null) {
+            return res;
+        }
+        
+        Deque<TreeNode> deque = new LinkedList<TreeNode>();
+        deque.addFirst(root);
+        boolean flag = true;
+        while(!deque.isEmpty()) {
+            int size = deque.size();
+            if(flag){
+                flag = false;
+            }else{
+                flag = true;
+            }
+            List<Integer> temp = new ArrayList<Integer>();
+            while(size -- > 0) {
+                if(flag) {
+                    TreeNode cur = deque.pollLast();
+                    temp.add(cur.val);
+                    if(cur.right != null) {
+                        deque.addFirst(cur.right);
+                    }
+                    if(cur.left != null) {
+                        deque.addFirst(cur.left);
+                    }
+                } else {
+                    TreeNode cur = deque.pollFirst();
+                    temp.add(cur.val);
+                    if(cur.left != null) {
+                        deque.addLast(cur.left);
+                    }
+                    if(cur.right != null) {
+                        deque.addLast(cur.right);
+                    }
+                }
+            }
+            if(! temp.isEmpty()) {
+                res.add(temp);
+            }
+        }
+        return res;
+    }
+}
