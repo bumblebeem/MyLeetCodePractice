@@ -1,0 +1,48 @@
+public class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        List<Integer> res = new LinkedList<Integer>();
+        if(nums.length == 0 || nums == null) {
+            return res;
+        }
+        
+        int count1 = 0, count2 = 0, majority1 = nums[0], majority2 = nums[0];
+        for(int i = 0; i < nums.length; i ++){
+            if(nums[i] == majority1){
+                count1 ++;
+            } else if(nums[i] == majority2) {
+                count2 ++;
+            } else if(count1 == 0) {
+                majority1 = nums[i];
+                count1 = 1;
+            } else if(count2 == 0) {
+                majority2 = nums[i];
+                count2 = 1;
+            } else {
+                count1 --;
+                count2 --;
+            }
+        }
+        
+        count1 = 0;
+        count2 = 0;
+        for(int i : nums) {
+            if(i == majority1) {
+                count1 ++;
+            }else if(i == majority2) {
+                count2 ++;
+            }
+        }
+        
+        if(count1 > nums.length / 3){
+            res.add(majority1);
+        }
+        if(count2 > nums.length / 3){
+            res.add(majority2);
+        }
+        return res;
+    }
+}
+
+
+//Very similar to Majority Element...
+//Notice that there could be at most two such element in the problem.
