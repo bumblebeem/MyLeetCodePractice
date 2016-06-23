@@ -47,6 +47,7 @@ public class Solution {
     }
 }
 
+//主要是不太懂容易发现下边的规律啊。。
 
 //1.Start from its last element, traverse backward to find the first one with index i that satisfy num[i-1] < num[i]. 
 //So, elements from num[i] to num[n-1] is reversely sorted.
