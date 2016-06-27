@@ -1,0 +1,26 @@
+public class Solution {
+    public int numDistinct(String s, String t) {
+        int[][] dp = new int[t.length() + 1][s.length() + 1];
+        for(int i = 0; i <= s.length(); i ++) {
+            dp[0][i] = 1;
+        }
+        
+        for(int i = 1; i <= t.length(); i ++) {
+            for(int j = 1; j <= s.length(); j ++) {
+                if(t.charAt(i - 1) == s.charAt(j - 1)) {
+                    dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = dp[i][j - 1];
+                }
+            }
+        }
+        
+        return dp[t.length()][s.length()];
+    }
+}
+
+
+//难点：1.想到用DP的方法求解 2.搞清楚DP数组的含义
+//dp[i][j]的含义是，利用“字符串s中的前j个字符”可以组成多少“字符串t中的前i个字符”
+
+//https://leetcode.com/discuss/19735/a-dp-solution-with-clarification-and-explanation
