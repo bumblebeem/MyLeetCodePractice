@@ -92,3 +92,29 @@ int maxDepth(TreeNode *root)
 
     return res;
 }
+
+//Java version, don't forget line 107
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        int depth = 0;
+        if(root == null) {
+            return depth;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while(!queue.isEmpty()) {
+            depth ++;
+            int levelSize = queue.size();
+            for(int i = 0; i < levelSize; i ++) {
+                TreeNode cur = queue.poll();
+                if(cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if(cur.right != null) {
+                    queue.add(cur.right);
+                }
+            }
+        }
+        return depth;
+    }
+}
