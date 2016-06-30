@@ -1,0 +1,37 @@
+public class Solution {
+    public int addDigits(int num) {
+        int sum = num;
+        while(sum > 9) {
+            num = sum;
+            sum = 0;
+            while(num > 9){
+                sum += num % 10;
+                num /= 10;
+            }
+            sum += num;
+        }
+        return sum;
+        // int sum = num;
+        // while(true) {
+        //     if(sum <= 9) {
+        //         return sum;
+        //     } else {
+        //         num = sum;
+        //         sum = 0;
+        //         while(num > 9){
+        //             sum += num % 10;
+        //             num /= 10;
+        //         }
+        //         sum += num;
+        //     }
+        // }
+    }
+}
+
+
+//https://leetcode.com/discuss/52122/accepted-time-space-line-solution-with-detail-explanations
+public class Solution {
+    public int addDigits(int num) {
+        return 1 + (num - 1) % 9;
+    }
+}
