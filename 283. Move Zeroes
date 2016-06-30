@@ -1,17 +1,17 @@
 public class Solution {
     public void moveZeroes(int[] nums) {
-        int non_zero = 0;
-        for(int i = 0; i < nums.length; i ++){
-            if(nums[i] != 0){
-                nums[non_zero] = nums[i];
-                non_zero ++;
+        int pointer1 = 0, pointer2 = 0;
+        while(pointer2 < nums.length) {
+            if(nums[pointer2] != 0) {
+                nums[pointer1 ++] = nums[pointer2];
             }
+            pointer2 ++;
         }
-        for(int i = non_zero; i < nums.length; i ++){
+        for(int i = pointer1; i < nums.length; i ++) {
             nums[i] = 0;
         }
     }
 }
 
 
-//Nice solution! Haha!
+//Nice solution(two pointers)! Haha!
