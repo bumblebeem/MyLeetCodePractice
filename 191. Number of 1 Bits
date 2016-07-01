@@ -15,5 +15,22 @@ public class Solution {
 //We need to use bit shifting unsigned operation >>> (while >> depends on sign extension)!!
 //line 5 cannot use n > 0!!
 
+
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int count = 0;
+        while(n != 0) {
+            if((n & 1) != 0){
+                count ++;
+            }
+            n >>>= 1;
+        }
+        return count;
+    }
+}
+//Notice that == has higher priority than &!!!! line 24 must use () for n & 1!!!!
+
+
 //see this https://leetcode.com/discuss/30605/simple-java-solution-bit-shifting
 //for a great explanation, I made mistakes on both curial points...
