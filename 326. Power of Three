@@ -9,19 +9,5 @@ public class Solution {
 }
 
 
-bool isPowerOfThree(int n) {
-    if(n < 0){
-        return false;
-    }
-    if(n == 1){
-        return true;
-    }
-    long a = 3;
-    while(a < n){
-        a *= 3;
-    }
-    if(a == n){
-        return true;
-    }
-    return false;
-}
+//Shoot! This is all about math...
+//https://leetcode.com/discuss/78532/summary-all-solutions-new-method-included-at-15-30pm-jan-8th
