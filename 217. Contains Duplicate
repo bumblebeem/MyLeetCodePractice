@@ -23,7 +23,6 @@ public class Solution {
     }
 }
 
-//In line 16, if we use HashSet instead of Set, will get TLE...... Don't know why
 
 class Solution(object):
     def containsDuplicate(self, nums):
