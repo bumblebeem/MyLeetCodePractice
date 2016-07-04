@@ -31,5 +31,47 @@ public class Solution {
  
  //Of course, we could also use two pointers, pointed to the head of these two lists seperately,
  //simply compared the elements the pointers pointed to and let the pointers move backwards.
- //But this iterative solution is kind of easy and trivial...
+ 
+ 
+ /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null){
+            return l2;
+        }
+        if(l2 == null){
+            return l1;
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode cur = new ListNode(0);
+        cur = dummy;
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                cur.next = l1;
+                l1 = l1.next;
+            } else {
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        if(l1 == null && l2 != null){
+            cur.next = l2;
+        }
+        if(l1 != null && l2 == null){
+            cur.next = l1;
+        }
+        return dummy.next;
+    }
+}
+
+//C++，用指向指针的指针，思路更清晰; iterative
+//https://discuss.leetcode.com/topic/6187/14-line-clean-c-solution
 
