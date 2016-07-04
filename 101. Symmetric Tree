@@ -76,6 +76,46 @@ public:
     }
 };
 
+//Java version using two queues
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        Queue<TreeNode> q1 = new LinkedList<TreeNode>();
+        Queue<TreeNode> q2 = new LinkedList<TreeNode>();
+        q1.add(root);
+        q2.add(root);
+        while(!q1.isEmpty() && !q2.isEmpty()){
+            TreeNode left = q1.poll();
+            TreeNode right = q2.poll();
+            if(left == null && right == null){
+                continue;
+            } else if(left == null || right == null){
+                return false;
+            } else if(left.val != right.val){
+                return false;
+            } else {
+                q1.add(left.left);
+                q1.add(left.right);
+                q2.add(right.right);
+                q2.add(right.left);
+            }
+        }
+        return q1.isEmpty() && q2.isEmpty();
+    }
+}
+
+
 /*
   The above solution could be further modified by using only one stack
 */
@@ -112,3 +152,41 @@ public:
         return true;
     }
 };
+
+//Java version using one queue
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.add(root.left);
+        q.add(root.right);
+        while(!q.isEmpty()){
+            TreeNode left = q.poll();
+            TreeNode right = q.poll();
+            if(left == null && right == null){
+                continue;
+            } else if(left == null || right == null){
+                return false;
+            } else if(left.val != right.val){
+                return false;
+            } else {
+                q.add(left.left);
+                q.add(right.right);
+                q.add(left.right);
+                q.add(right.left);
+            }
+        }
+        return true;
+    }
+}
