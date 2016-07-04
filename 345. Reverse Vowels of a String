@@ -27,4 +27,4 @@ public class Solution {
 
 //Some details need to be paid attention to (line 6, 10's grammar)
 //line 10, 13, can't be start < str.length, end > 0, must be start < end
-//要把字符串转化成字符数组！
+//要把字符串转化成字符数组！line 7, 23
