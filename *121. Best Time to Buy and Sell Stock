@@ -17,3 +17,15 @@ int maxProfit(int* prices, int pricesSize) {
 }
 
 
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int cur_max = 0, max = 0;
+        for(int i = 1; i < prices.length; i ++){
+            cur_max += prices[i] - prices[i - 1];
+            cur_max = Math.max(0, cur_max);
+            max = Math.max(cur_max, max);
+        }
+        return max;
+    }
+}
+
