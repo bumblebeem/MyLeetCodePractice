@@ -46,5 +46,46 @@ public:
     }
 };
 
+
+//Now I use Java! Don't forget line 72!
+//Notice the grammar of line 83(Add something into the front of the list).
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(root == null){
+            return res;
+        }
+        
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            List<Integer> temp = new ArrayList<Integer>();
+            int levelSize = queue.size();
+            for(int i = 0; i < levelSize; i ++) {
+                TreeNode cur = queue.poll();
+                temp.add(cur.val);
+                if(cur.left != null){
+                    queue.add(cur.left);
+                }
+                if(cur.right != null){
+                    queue.add(cur.right);
+                }
+            }
+            res.add(0, temp);
+        }
+        
+        return res;
+    }
+}
+
 //the following link seems to present a even better thought (without the call of reverse function)
 //https://leetcode.com/discuss/5353/there-better-regular-level-order-traversal-reverse-result
