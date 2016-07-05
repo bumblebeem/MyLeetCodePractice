@@ -9,7 +9,7 @@ public class Solution {
             row.add(1);     //the first 1 in the each row
             for(int j = 1; j <= i; j ++){
                 if(j == i){
-                    row.add(1);
+                    row.add(1);    //the last 1 in each row
                 }
                 else{
                     row.add(res.get(i - 1).get(j - 1) + res.get(i - 1).get(j));
