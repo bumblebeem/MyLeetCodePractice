@@ -20,3 +20,25 @@ public class Solution {
 //similar to "27.Remove Element"
 //line 12, should be ++non_duplicate, not non_duplicata++
 //line 6, i starts from 1, not 0
+
+//My own version using two pointers, 2016/07/05
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length == 0){
+            return 0;
+        } else if(nums.length == 1){
+            return 1;
+        }
+        int p1 = 0, p2 = 1;
+        while(p2 < nums.length){
+            if(nums[p2] == nums[p1]){
+                p2 ++;
+            } else {
+                p1 ++;
+                nums[p1] = nums[p2];
+                p2 ++;
+            }
+        }
+        return ++ p1;
+    }
+}
