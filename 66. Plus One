@@ -17,3 +17,25 @@ public:
         return digits;
     }
 };
+
+
+//Java version, silghtly different 
+//No need for additional variable "carry", because only if a certain digit
+//equals 9, there will be another carry. If didn't return in the for loop,
+//the result must be in the form of "1000...000"(so we have line 37 - 39).
+{
+    public int[] plusOne(int[] digits) {
+        for(int i = digits.length - 1; i >= 0; i --){
+            if(digits[i] == 9){
+                digits[i] = 0;
+            }else{
+                digits[i] ++;
+                return digits;
+            }
+        }
+        
+        int[] res = new int[digits.length + 1];
+        res[0] = 1;
+        return res;
+    }
+}
