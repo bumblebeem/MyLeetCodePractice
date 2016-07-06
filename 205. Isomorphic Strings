@@ -1,7 +1,8 @@
 //Method 1, using a hashmap(according to the description of this problem, 
 //it's very easy to come up with this idea).
-//However, need to pay attention to line 23 - 29, 并不是在这个else的情况下直接put就行了，
+//However, need to pay attention to line 24 - 30, 并不是在这个else的情况下直接put就行了，
 //还要进行一次判断！第一次自己写的时候没有做对,二刷也漏掉了。。。否则形如s="aa",t="ab"这样的就会出错
+//line 17, .equals()的使用
 
 public class Solution {
     public boolean isIsomorphic(String s, String t) {
