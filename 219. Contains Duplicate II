@@ -14,5 +14,5 @@ public class Solution {
 }
 
 
-//Use HashSet, keep a sliding window of size k.
+//Use HashSet, keep a SLIDING WINDOW of size k.
 //Notice the syntax in line 8, add the element and use the return value at the same time!
