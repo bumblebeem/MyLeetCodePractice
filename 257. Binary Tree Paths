@@ -7,24 +7,58 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
+ //DFS solution
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<String>();
         if(root != null){
-            printPath(root, "", res);
+            printPath(root, res, "");
         }
         return res;
     }
     
-    private void printPath(TreeNode root, String path, List<String> ans){
-        if(root.left == null && root.right == null){
-            ans.add(path + root.val);
+    private void printPath(TreeNode node, List<String> res, String temp){
+        if(node.left == null && node.right == null){
+            res.add(temp + node.val);
+            return;
         }
-        if(root.left != null){
-            printPath(root.left, path + root.val + "->", ans);
+        if(node.left != null){
+            printPath(node.left, res, temp + node.val + "->");
         }
-        if(root.right != null){
-            printPath(root.right, path + root.val + "->", ans);
+        if(node.right != null){
+            printPath(node.right, res, temp + node.val + "->");
         }
+    }
+}
+
+
+//BFS solution
+public class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList<String>();
+        if(root == null){
+            return res;
+        }
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        Queue<String> temp = new LinkedList<String>();
+        q.add(root);
+        temp.add("");
+        while(!q.isEmpty()){
+            TreeNode cur = q.poll();
+            String str = temp.poll();
+            if(cur.left == null && cur.right == null){
+                res.add(str + cur.val);
+            }
+            if (cur.left != null){
+                q.add(cur.left);
+                temp.add(str + cur.val + "->");
+            }
+            if(cur.right != null){
+                q.add(cur.right);
+                temp.add(str + cur.val + "->");
+            }
+        }
+        return res;
     }
 }
