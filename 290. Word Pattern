@@ -1,6 +1,6 @@
 public class Solution {
     public boolean wordPattern(String pattern, String str) {
-        String[] strs = str.split("\\s");
+        String[] strs = str.split("\\s");         //也可以用split(" ")
         if(pattern.length() != strs.length){
             return false;
         }
@@ -15,8 +15,9 @@ public class Solution {
             else{
                 if(hashmap.containsValue(strs[i])){
                     return false;
+                } else {
+                    hashmap.put(pattern.charAt(i), strs[i]);
                 }
-                hashmap.put(pattern.charAt(i), strs[i]);
             }
         }
         return true;
@@ -28,7 +29,7 @@ public class Solution {
 //line 9的for循环里边的部分if else之类的写错了很多，还需要再理解。。。
 
 
-//However the containsValue in line 16 of above solution takes O(n) time, which is not efficient.
+//*However the containsValue in line 16 of above solution takes O(n) time, which is not efficient.
 //So we modify the code by using two hashmaps in the following solution.
 
 public class Solution {
