@@ -13,10 +13,10 @@ public class Solution {
         ListNode slow = start;
         start.next = head;
         
-        for(int i = 1; i <= n + 1; i ++){
+        for(int i = 0; i < n; i ++){
             fast = fast.next;
         }
-        while(fast != null){
+        while(fast.next != null){
             fast = fast.next;
             slow = slow.next;
         }
@@ -28,5 +28,4 @@ public class Solution {
 //1. Use two pointers in order to solve it in one pass!
 //2. Need to pay attention to line 11 - 14, which tells me that:
 //在Java中传递参数时，原始类型是传值，对象是传引用
-//*3. line 16, iterate for n + 1 times, not n times!!
-//*4. 运用一个额外的start，注意理解！因为head有可能需要被remove！
+//*3. 运用一个额外的start，注意理解！因为head有可能需要被remove！
