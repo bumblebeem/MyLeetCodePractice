@@ -23,3 +23,7 @@ public class NumArray {
 // NumArray numArray = new NumArray(nums);
 // numArray.sumRange(0, 1);
 // numArray.sumRange(1, 2);
+
+
+//I think this link below is a more easy-understanding solution
+//https://discuss.leetcode.com/topic/34792/my-java-3ms-solution/2
