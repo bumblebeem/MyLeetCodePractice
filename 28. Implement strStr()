@@ -3,19 +3,19 @@ public class Solution {
         if(haystack == null || needle == null){
             return -1;
         }
-        int len1 = haystack.length();
-        int len2 = needle.length();
-        if(len2 > len1){
+        int n = needle.length();
+        int h = haystack.length();
+        if(n > h){
             return -1;
         }
-        for(int i = 0; i < len1 - len2 + 1; i ++){
-            int j = 0; 
-            for(; j < len2; j ++){
+        for(int i = 0; i < h - n + 1; i ++){
+            int j = 0;
+            for(; j < n; j ++){
                 if(haystack.charAt(i + j) != needle.charAt(j)){
                     break;
                 }
             }
-            if(j == len2){
+            if(j == n){
                 return i;
             }
         }
@@ -24,7 +24,7 @@ public class Solution {
 }
 
 
-//line 11,只需要判断到len1 - len2 + 1就可以了，而不需要到len1全部结束！
+//line 11,只需要判断到h - n + 1就可以了，而不需要到h全部结束！
 
 //Here is a good link:
 //https://leetcode.com/discuss/38998/explained-4ms-easy-c-solution
