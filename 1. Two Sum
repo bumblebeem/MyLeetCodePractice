@@ -16,4 +16,5 @@ public class Solution {
 }
 
 
-
+//A good explanation if I forget this problem AGAIN...
+//https://discuss.leetcode.com/topic/16687/my-short-java-solution-o-n-hashmap
