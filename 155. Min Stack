@@ -38,7 +38,7 @@ class MinStack {
 //the value not the reference!!
 
 
-//Here is a more concise solution with only one stack used, little bit hard to understand..
+//Here is a more concise solution with only one stack used, harder to understand..
 class MinStack {
     Stack<Integer> stack = new Stack<Integer>();
     int min = Integer.MAX_VALUE;
