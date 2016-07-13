@@ -19,8 +19,8 @@ class MinStack {
             minStack.pop();
         }
         stack.pop();
-        // int x = stack.pop();
-        // if (!minStack.isEmpty() && x == minStack.peek()) {
+        // int peek = stack.pop();
+        // if (!minStack.isEmpty() && peek == minStack.peek()) {
         //         minStack.pop();
         // }
     }
@@ -33,7 +33,6 @@ class MinStack {
         return minStack.peek();
     }
 }
-
 
 //*We can't use "minStack.peek() == stack.peek()" on line 18, because we need to compare 
 //the value not the reference!!
