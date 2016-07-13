@@ -37,3 +37,21 @@ Notice that, if a duplicate number has bit i as 0, then, two copies of it will b
 
 by XoRing all numbers in the first group, we can get the first number. by XoRing all numbers in the second group, we can get the second number.
 */
+
+
+//Basic straight forward solution:
+public class Solution {
+    public int[] singleNumber(int[] nums) {
+        Set<Integer> hashset = new HashSet<Integer>();
+        for(int a : nums){
+            if(!hashset.add(a)){
+                hashset.remove(a);
+            }
+        }
+        int[] res = new int[2];
+        Iterator<Integer> ite = hashset.iterator();
+        res[0] = ite.next();
+        res[1] = ite.next();
+        return res;
+    }
+}
