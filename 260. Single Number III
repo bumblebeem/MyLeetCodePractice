@@ -18,11 +18,11 @@ public class Solution {
     }
 }
 
-//line 8, could also use bit manipulation to get the difference, however it's tricky for me... 
+//1. line 8, could also use bit manipulation to get the difference, however it's tricky for me... 
 //Notice this bit could be any bit who is non-zero in the XOR result (such bit could help us 
 //distinguish these two target numbers)
-//line 3, review the declaration of Java array...
-//line 10, == has higher priority than &. 
+//2. line 3, review the declaration of Java array...
+//*3. line 10, == has higher priority than &. 
 //You might want to wrap your operations in () to specify your own priority. 
 
 /*Idea:
