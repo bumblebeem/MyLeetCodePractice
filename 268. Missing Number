@@ -20,3 +20,19 @@ public class Solution {
 }
 
 
+//O(n)space, linear time trivial solution
+public class Solution {
+    public int missingNumber(int[] nums) {
+        int[] helper = new int[nums.length + 1];
+        for(int a : nums){
+            helper[a] = 1;
+        }
+        int i = 0;
+        for(; i < helper.length; i ++){
+            if(helper[i] == 0){
+                break;
+            }
+        }
+        return i;
+    }
+}
