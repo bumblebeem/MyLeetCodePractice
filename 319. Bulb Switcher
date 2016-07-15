@@ -9,3 +9,11 @@ class Solution(object):
 
 //this code calculate the number of square numbers less or equal than n,
 //which would be the answer of this question
+
+
+//Java version, 注意17行的强制类型转换！！
+public class Solution {
+    public int bulbSwitch(int n) {
+        return (int)Math.sqrt(n);
+    }
+}
