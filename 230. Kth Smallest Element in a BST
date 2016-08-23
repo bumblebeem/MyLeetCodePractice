@@ -137,3 +137,7 @@ public class Solution {
 
 //Here is a excellent link! MUST SEE!主要是第一种解法，没理解但很重要！！
 //https://discuss.leetcode.com/topic/17810/3-ways-implemented-in-java-binary-search-in-order-iterative-recursive
+
+
+//Follow-up的解法
+//https://discuss.leetcode.com/topic/17668/what-if-you-could-modify-the-bst-node-s-structure
