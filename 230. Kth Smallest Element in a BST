@@ -13,32 +13,46 @@
   in order to find out the kth smallest element
  */
 class Solution {
-public:
-    int count = 0;        //因为后边函数用的是传值而不是传引用，
-    int result = 0;       //所以需要这两个全局变量
+    public int count = 0;        //因为后边函数用的是传值而不是传引用，
+    public int result = 0;       //所以需要这两个全局变量
 
-    int kthSmallest(TreeNode* root, int k) {
+    public int kthSmallest(TreeNode root, int k) {
         inorderTranverse(root, k);
         return result;
     }
     
-    void inorderTranverse(TreeNode* root, int k){
+    public void inorderTranverse(TreeNode root, int k){
         if(root == NULL){
             return;
         }
-        inorderTranverse(root -> left, k);
+        inorderTranverse(root.left, k);
         count ++;
         if(k == count){
-            result = root -> val;
+            result = root.val;
             return;
         }
-        inorderTranverse(root -> right, k);
+        inorderTranverse(root.right, k);
     }
+    
+    // private void inorderTranverse(TreeNode root, int k){
+    //     if(root.left != null){
+    //         inorderTranverse(root.left, k);
+    //     }
+    //     count ++;
+    //     if(k == count){
+    //         result = root.val;
+    //         return;
+    //     }
+    //     if(root.right != null){
+    //         inorderTranverse(root.right, k);
+    //     }
+    // }
 };
+
 
 /*
   This the second method, do the first method in a iterative way
-  line 53 的条件需要注意还有cur != NULL
+  line 67 的条件需要注意还有cur != NULL!!
   注意count++的位置，在else里边，不在if里边
   Similar to Problem #94!!
 */
@@ -66,6 +80,31 @@ public:
         }
     }
 };
+
+//Java version
+public class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        TreeNode cur = root;
+        int count = 0;
+        
+        while(!stack.isEmpty() || cur != null){
+            if(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                TreeNode top = stack.pop();
+                if(++count == k){
+                    return top.val;
+                } 
+                cur = top.right;
+            }
+        }
+        return -1;
+    }
+}
+
 
 /*
   Method Three, 本质上应该还是DFS，然而不需要额外的空间（即不需要stack）
