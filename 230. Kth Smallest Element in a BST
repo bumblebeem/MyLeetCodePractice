@@ -135,7 +135,7 @@ public class Solution {
 }
 
 
-//Here is a excellent link! MUST SEE!主要是第一种解法，没理解但很重要！！
+//Here is a excellent link! MUST SEE（其实就是囊括了前边的三种解法）!主要是第一种解法需要特别理解（和method three一样。。）！！
 //https://discuss.leetcode.com/topic/17810/3-ways-implemented-in-java-binary-search-in-order-iterative-recursive
 
 
