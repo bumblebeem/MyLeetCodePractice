@@ -31,7 +31,7 @@ public class Solution {
 //Pay attention to line 18!! "==" has higher priority than "&"!!
 
 
-//We van further trying to optimize it(actually makes it runs slower on OJ...) by sorting the array "words" first,
+//We can further trying to optimize it(actually makes it runs slower on OJ...) by sorting the array "words" first,
 // and then pruning at line 57-59 and 63. Pay attention to line 44-48 on how to write a Comparator!!
 public class Solution {
     public int maxProduct(String[] words) {
