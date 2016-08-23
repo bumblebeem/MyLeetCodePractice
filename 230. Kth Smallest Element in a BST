@@ -110,3 +110,7 @@ public class Solution {
   Method Three, 本质上应该还是DFS，然而不需要额外的空间（即不需要stack）
 */
 //https://leetcode.com/discuss/54316/simple-and-clean-java-solution-with-explanation
+
+
+//Here is a excellent link! MUST SEE!
+//https://discuss.leetcode.com/topic/17810/3-ways-implemented-in-java-binary-search-in-order-iterative-recursive
