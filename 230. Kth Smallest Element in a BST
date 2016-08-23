@@ -137,6 +137,35 @@ public class Solution {
 
 //Here is a excellent link! MUST SEE（其实就是囊括了前边的三种解法）!主要是第一种解法需要特别理解（和method three一样。。）！！
 //https://discuss.leetcode.com/topic/17810/3-ways-implemented-in-java-binary-search-in-order-iterative-recursive
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        int count = countNodes(root.left);
+        if (k < count + 1) {
+            return kthSmallest(root.left, k);
+        } else if (k > count + 1) {
+            return kthSmallest(root.right, k - 1 - count); // 1 is counted as current node
+        }
+        
+        return root.val;    //相当于k == count + 1的情况
+    }
+    
+    public int countNodes(TreeNode n) {
+        if (n == null){
+            return 0;   
+        } 
+        
+        return 1 + countNodes(n.left) + countNodes(n.right);
+    }
+}
 
 
 //Follow-up的解法
