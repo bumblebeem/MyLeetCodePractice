@@ -20,6 +20,8 @@ public class Solution {
     }
 }
 
+//line 15 & 18, temp + '('和temp + ')'不理解啊，蛋疼。。
+
 
 public class Solution {
     public List<String> generateParenthesis(int n) {
@@ -34,16 +36,16 @@ public class Solution {
             return;
         }
         
-        if(close > 0){
-            backTracking(res, temp + ")", open, close - 1);
-        }
         if(open > 0){
             backTracking(res, temp + "(", open - 1, close + 1);
+        }
+        if(close > 0){
+            backTracking(res, temp + ")", open, close - 1);
         }
     }
 }
 
-
 //没太明白上边的两个解法，，，下边还有一个iterative的解法，更是没明白。。。
+
 
 //https://leetcode.com/discuss/11509/an-iterative-method
