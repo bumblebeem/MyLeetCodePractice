@@ -34,5 +34,26 @@ public class Solution {
 //注意理解line 25 & 26
 
 
+//Here is the naive solution though..
+public class Solution {
+    public int rob(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        
+        int val = root.val;
+        
+        if(root.left != null){
+            val += rob(root.left.left) + rob(root.left.right);
+        }
+        if(root.right != null){
+            val += rob(root.right.left) + rob(root.right.right);
+        }
+        
+        return Math.max(val, rob(root.left) + rob(root.right));
+    }
+}
+
+
 //Here is a very good explanation link:
 //https://leetcode.com/discuss/91899/step-by-step-tackling-of-the-problem
