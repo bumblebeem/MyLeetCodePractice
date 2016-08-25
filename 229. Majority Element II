@@ -46,3 +46,6 @@ public class Solution {
 
 //Very similar to Majority Element...
 //Notice that there could be at most two such element in the problem.
+
+//如果line 31不用else if而用if，line 39就需要同时满足majority2 != majority1才加入res
+//注意line 8, 9处count1, count2, i的初值，二刷的时候三个值都设置成1，就Wrong Answer了。。
