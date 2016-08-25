@@ -29,7 +29,7 @@ public class Solution {
 //line 5, there must be i < len - 2, because there must be at least two
 //valid position for j and k, seperately. Same for j < len - 1 in line 6
 //line 22's if statement, not easy to find out all these conditions at once...(Especially how it deal with cases like "01")
-//三重for循环其实的&&后边的终止条件，其实应该从k考虑到j再考虑到i
+//三重for循环的终止条件，其实应该从k考虑到j再考虑到i；以及由此所对应的最里层循环substring下标的问题。。
 
 
 //Another solution, using another method to deal with cases like "01"
