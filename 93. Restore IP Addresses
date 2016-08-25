@@ -60,5 +60,32 @@ public class Solution {
 }
 
 
-//Here is a DFS solution:
+//Here is a DFS solution: 理解的不好！
 //https://leetcode.com/discuss/15098/very-simple-dfs-solution
+public class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        List<String> res = new ArrayList<String>();
+        restoreIp(s, res, 0, "", 0);
+        return res;
+    }
+
+    private void restoreIp(String s, List<String> res, int idx, String restored, int count) {
+        if (count > 4){
+            return;
+        }
+        if (count == 4 && idx == s.length()){
+            res.add(restored);
+        } 
+    
+        for (int i = 1; i < 4; i++) {
+            if (idx + i > s.length()){
+                break;
+            }
+            String address = s.substring(idx, idx + i);
+            if ((address.charAt(0) == '0' && address.length() > 1) || (i == 3 && Integer.parseInt(address) >= 256)){
+                continue;    
+            } 
+            restoreIp(s, res, idx + i, restored + address + (count == 3 ? "" : "."), count + 1);
+        }
+    }
+}
