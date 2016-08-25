@@ -4,7 +4,7 @@ public class Solution {
         int len = s.length();
         for(int i = 1; i < 4 && i < len - 2; i ++) {  
             for(int j = i + 1; j < i + 4 && j < len - 1; j ++) {
-                for(int k = j + 1; k < j + 4 && k < len; k ++) {
+                for(int k = j + 1; k < j + 4 && k < len; k ++) {    
                     String address1 = s.substring(0, i);
                     String address2 = s.substring(i, j);
                     String address3 = s.substring(j, k);
@@ -26,10 +26,10 @@ public class Solution {
     }
 }
 
-
 //line 5, there must be i < len - 2, because there must be at least two
 //valid position for j and k, seperately. Same for j < len - 1 in line 6
 //line 22's if statement, not easy to find out all these conditions at once...(Especially how it deal with cases like "01")
+//三重for循环其实的&&后边的终止条件，其实应该从k考虑到j再考虑到i
 
 
 //Another solution, using another method to deal with cases like "01"
