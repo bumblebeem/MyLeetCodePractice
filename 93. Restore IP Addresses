@@ -19,18 +19,18 @@ public class Solution {
     }
     
     public boolean isValid(String s) {
-        if(s.length() > 3 || Integer.parseInt(s) > 255 || (s.charAt(0) == '0' && s.length() > 1) || s.length() == 0){
+        if(s.length() == 0 || s.length() > 3 || Integer.parseInt(s) > 255 || (s.charAt(0) == '0' && s.length() > 1)){
             return false;
         }
         return true;
     }
 }
 
-//line 5, there must be i < len - 2, because there must be at least two
+//1.line 5, there must be i < len - 2, because there must be at least two
 //valid position for j and k, seperately. Same for j < len - 1 in line 6
-//line 22's if statement, not easy to find out all these conditions at once...(Especially how it deal with cases like "01")
-//三重for循环的起止条件是难点！终止条件应该从k考虑到j再考虑到i，以及注意所对应的最里层循环substring下标的问题。。
-//Integer.parseInt的使用
+//2.line 22's if statement（后两个要注意，Integer.parseInt的使用以及最后一个条件。。）, not easy to find out all these conditions at once...
+//(Especially how it deal with cases like "01")
+//3.三重for循环的起止条件是难点！终止条件应该从k考虑到j再考虑到i，以及注意所对应的最里层循环substring下标的问题。。
 
 
 //Another solution, using another method to deal with cases like "01"
