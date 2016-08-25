@@ -1,23 +1,21 @@
 public class Solution {
     public List<String> summaryRanges(int[] nums) {
         List<String> res = new ArrayList<String>();
-        
         for(int i = 0, j = 0; j < nums.length; j ++){
-            if(j < nums.length - 1 && nums[j] + 1 == nums[j + 1]){
+            if(j + 1 < nums.length && nums[j] + 1 == nums[j + 1]){
                 continue;
             }
             if(i == j){
-                res.add(nums[i] + "");
+                res.add(nums[j] + "");
             }else{
                 res.add(nums[i] + "->" + nums[j]);
             }
             i = j + 1;
         }
-        
         return res;
     }
 }
 
 
-//Pay attention to line 6, must have condition "j < nums.length - 1"
-//line 10, must use additional "", otherwise the type is wrong
+//Pay attention to line 5, must have condition "j + 1 < nums.length"
+//line 9, must use additional "", otherwise the type for add funtion is wrong
