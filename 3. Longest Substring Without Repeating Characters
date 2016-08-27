@@ -1,21 +1,23 @@
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
-        HashMap<Character, Integer> hashmap = new HashMap<Character, Integer>();
-        int res = 0;
-        for(int end = 0, start = 0; end < s.length(); end ++) {
-            if(hashmap.containsKey(s.charAt(end))) {
-                start = Math.max(start, hashmap.get(s.charAt(end)) + 1);
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int start = 0;
+        int maxLen = 0;
+        for(int end = 0; end < s.length(); end ++){
+            char c = s.charAt(end);
+            if(map.containsKey(c)){
+                start = Math.max(start, map.get(c) + 1);
             }
-            res = Math.max(res, end - start + 1);
-            hashmap.put(s.charAt(end), end);
+            maxLen = Math.max(maxLen, end - start + 1);
+            map.put(c, end);
         }
-        return res;
+        return maxLen;
     }
 }
 
 
 //This is actually a DP problem, the key is the recursive formula,
-//related to the recursive formula in order to understand line 7(most important line)
+//related to the recursive formula in order to understand line 9(most important line)
 
 /**
  * Solution (DP, O(n)):
