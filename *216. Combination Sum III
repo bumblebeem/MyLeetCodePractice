@@ -1,28 +1,31 @@
 public class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
-        List<List<Integer>> res = new LinkedList<List<Integer>>();
-        List<Integer> sol = new LinkedList<Integer>();
-        backtrackingCom(res, sol, k, n, 1);
-        return res;
+       List<List<Integer>> res = new ArrayList<List<Integer>>();
+       List<Integer> sol = new ArrayList<Integer>();
+       helper(res, sol, k, n, 1);
+       return res;
     }
     
-    private void backtrackingCom(List<List<Integer>> res, List<Integer> sol, int k, int target, int begin){
-        if(k == 0 && target == 0){
-            res.add(new LinkedList<Integer>(sol));
+    private void helper(List<List<Integer>> res, List<Integer> sol, int k, int n, int begin){
+        if(k == 0 && n == 0){
+            res.add(new ArrayList<Integer>(sol));
             return;
         }
-        else{
-            for(int i = begin; i <= 9; i ++){
-                if(target - i < 0){
-                    break;
-                }
+        for(int i = begin; i <= 9; i ++){
+            if(n - i < 0){
+                break;
+            } else {
                 sol.add(i);
-                backtrackingCom(res, sol, k - 1, target - i, i + 1);
+                helper(res, sol, k - 1, n - i, i + 1);
                 sol.remove(sol.size() - 1);
             }
         }
     }
 }
+
+
+//backtracking理解得进步了很多！
+
 
 
 //line 14的else十分重要
