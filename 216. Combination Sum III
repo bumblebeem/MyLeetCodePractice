@@ -7,7 +7,7 @@ public class Solution {
     }
     
     private void helper(List<List<Integer>> res, List<Integer> sol, int k, int n, int begin){
-        if(k == 0 && n == 0){
+        if(k == 0 && n == 0){    //n is the our target value
             res.add(new ArrayList<Integer>(sol));
             return;
         }
@@ -26,7 +26,3 @@ public class Solution {
 
 //backtracking理解得进步了很多！
 
-
-
-//line 14的else十分重要
-//backtracking理解的不好！
