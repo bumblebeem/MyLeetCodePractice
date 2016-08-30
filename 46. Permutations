@@ -25,6 +25,36 @@ public class Solution {
 //https://leetcode.com/discuss/19510/my-ac-simple-iterative-java-python-solution
 
 
+//Here is myself's Java version, easy-understanding!!!
+//注意46-48行，二刷自己写的时候没写出来，导致错误！
+public class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        if(nums == null || nums.length == 0){
+            return ans;
+        }
+        helper(ans, new ArrayList<Integer>(), 0, nums);
+        return ans;
+    }
+    
+    private void helper(List<List<Integer>> ans, List<Integer> cur, int size, int[] nums){
+        if(size == nums.length){
+            ans.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        for(int i = 0; i < nums.length; i ++){
+            if(cur.contains(nums[i])){
+                continue;
+            }
+            cur.add(nums[i]);
+            helper(ans, cur, size + 1, nums);
+            cur.remove(cur.size() - 1);
+        }
+    }
+}
+
+
+//I don't care the following solution,见鬼去吧
 //https://leetcode.com/discuss/18212/my-elegant-recursive-c-solution-with-inline-explanation
 //Following is another solution based on the link above, I think the basic idea is to let every element to 
 //be the first element in the process.
