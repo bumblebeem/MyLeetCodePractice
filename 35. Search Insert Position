@@ -29,6 +29,8 @@ public class Solution {
     }
 }
 
+//28行和18行不好理解，18行为何是<=，28行为何return的是low
+
 
 //Here is a link to my own conclusion:
 //https://leetcode.com/discuss/85327/o-n-solution-%26-o-logn-solution-w-explanation
