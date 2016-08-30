@@ -29,10 +29,47 @@ public:
 //line 15 should be root->left, not root. Otherwise, line 18's cur->left might overflow
 //line 19 should be cur->next, not cur. Otherwise line 20's cur->next might overflow
 
-//line 19-21 missed for the first time, draw the picture more carefully on scratch paper next time,
+//一刷：line 19-21 missed for the first time, draw the picture more carefully on scratch paper next time,
 //in order to understand the problems themselves better
+//二刷：其实就是分为root.left.next和root.right.next两部分考虑而已！
 
 //A more intuitive way might be: (1) Loop through level 0 to level n - 2; (2) Traverse this level and connect children.
+//注意line63 - 67，对于每行的最后一个节点的处理
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if(root == null){
+            return;
+        }
+        Queue<TreeLinkNode> queue = new LinkedList<TreeLinkNode>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size; i ++){
+                TreeLinkNode cur = queue.poll();
+                if(cur.left != null){
+                    queue.add(cur.left);
+                }
+                if(cur.right != null){
+                    queue.add(cur.right);
+                }
+                if(i != size - 1){
+                    cur.next = queue.peek();
+                }else{
+                    cur.next = null;
+                }
+            }
+        }
+    }
+}
+
 
 //Following is my java solution...
 /**
