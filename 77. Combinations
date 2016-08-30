@@ -20,8 +20,8 @@ public class Solution {
 
 
 //这道题目一上来就想到了backtracking的思路，然而还是参考了discussion
-//严重发现所有backtracking类型的题目都异常的类似，需要再多做一些之后回头总结一番！
-//Get a better understanding of line 10! Need to create an new object here.
+//严重发现所有backtracking类型的题目都异常的类似，需要再多做一些之后回头总结一番！(二刷基本掌握了)
+//Get a better understanding of line 10! Need to create an new object here.（二刷：这是deep copy啊，骚年）
 
 
 //https://leetcode.com/discuss/32955/a-short-recursive-java-solution-based-on-c-n-k-c-n-1-k-1-c-n-1-k
