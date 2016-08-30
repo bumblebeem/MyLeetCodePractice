@@ -45,12 +45,52 @@ public:
     }
 };
 
+
+//Java version, nice and easy
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> ans = new ArrayList<Integer>();
+        if(root == null){
+            return ans;
+        }
+        
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size; i ++){
+                TreeNode cur = queue.poll();
+                if(cur.left != null){
+                    queue.add(cur.left);
+                }
+                if(cur.right != null){
+                    queue.add(cur.right);
+                }
+                if(i == size - 1){
+                    ans.add(cur.val);
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+
 /*
   Here is another solution, the two key points are as follows:(a modified preorder traversal)
   1. Each depth of the tree only select one node.
-  2. View depth is current size of result list. (Most Imortant! line 68 - 70)
+  2. View depth is current size of result list. (Most Imortant! line 108 - 110)
   
-  should also notice line 72 & 73, must call root -> right before root -> left,
+  should also notice line 112 & 113, must call root -> right before root -> left,
   because we are looking for the "right" side view, not "left" side view
 */
 class Solution {
@@ -73,3 +113,38 @@ public:
         rightRecursive(res, root -> left, level + 1);
     }
 };
+
+
+//Java version
+//The core idea of this algorithm:
+//1.Each depth of the tree only select one node.
+//2.View depth is current size of result list.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        rightView(root, res, 0);
+        return res;
+    }
+    
+    private void rightView(TreeNode cur, List<Integer> res, int curDepth){
+        if(cur == null){
+            return;
+        }
+        if(curDepth == res.size()){
+            res.add(cur.val);
+        }
+        
+        rightView(cur.right, res, curDepth + 1);
+        rightView(cur.left, res, curDepth + 1);
+    }
+}
+
