@@ -15,4 +15,5 @@ public class Solution {
 }
 
 
+//注意第5，7行必须是小于等于，而不是小于；否则像[1,1,1],[1,2,2]这样的case都会返回true!
 //https://leetcode.com/discuss/86593/clean-and-short-with-comments-c
