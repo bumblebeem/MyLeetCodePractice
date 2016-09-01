@@ -1,10 +1,10 @@
-//It's not easy to code (details need to be taken care of)...
-//For instance, line 9 must be n + 1, not n; line 13 - 15 is the key!
-//line 10, Integer.MAX_VALUE的用法
+//It's not easy to code (details need to be taken care of)...(二刷如果能想到dp就没什么难的了。。)
+//（For instance, line 9 must be n + 1, not n; line 13 - 15 is the key!）
+//line 10, Integer.MAX_VALUE的用法（这点还是需要注意，二刷还是忽略了这一句！）
 public class Solution {
     public int numSquares(int n) {
-        if(n <= 0){
-            return 0;
+        if(n < 0){
+            return -1;
         }
         int[] dp = new int[n + 1];
         Arrays.fill(dp, Integer.MAX_VALUE);
