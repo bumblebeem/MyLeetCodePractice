@@ -98,18 +98,15 @@ public class Solution {
 //Method 3: Built-in priority queue
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
-        PriorityQueue<Integer> myqueue = new PriorityQueue<Integer>(k);
-        for(int i : nums){
-            if(myqueue.size() < k){
-                myqueue.add(i);
-            }
-            else{
-                if(i > myqueue.peek()){
-                    myqueue.poll();
-                    myqueue.add(i);
-                }
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>(k);
+        for(int e : nums){
+            if(queue.size() < k){
+                queue.add(e);
+            } else if(e > queue.peek()){
+                queue.poll();
+                queue.add(e);
             }
         }
-        return myqueue.peek();
+        return queue.peek();
     }
 }
