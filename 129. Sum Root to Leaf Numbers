@@ -17,7 +17,7 @@ public:
         if(root == NULL){
             return 0;
         }
-        if(root -> left == NULL && root -> right == NULL){
+        if(root -> left == NULL && root -> right == NULL){  //if the node is a leaf
             return sum * 10 + root -> val;
         }
         return helper(root -> left, sum * 10 + root -> val) 
