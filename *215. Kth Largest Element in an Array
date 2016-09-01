@@ -95,7 +95,7 @@ public class Solution {
 }
 
 
-//Method 3: Built-in priority queue
+//Method 3: Built-in priority queue(min heap solution & max heap solution)
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> queue = new PriorityQueue<Integer>(k);
@@ -106,6 +106,23 @@ public class Solution {
                 queue.poll();
                 queue.add(e);
             }
+        }
+        return queue.peek();
+    }
+}
+
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>(nums.length, new Comparator<Integer>(){
+            public int compare(Integer a, Integer b){
+                return b - a;    //max heap, PriorityQueue in Java is min heap by default
+            }
+        });
+        for(int e : nums){
+            queue.add(e);
+        }
+        for(int i = 0; i < k - 1; i ++){
+            queue.poll();
         }
         return queue.peek();
     }
