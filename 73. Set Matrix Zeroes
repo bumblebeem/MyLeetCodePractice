@@ -71,5 +71,5 @@ public class Solution {
 }
 
 
-//Here is a very good explanation:
+//Here is a very good explanation:(*Notice why we need variable col0!)
 //https://leetcode.com/discuss/15997/any-shortest-o-1-space-solution
