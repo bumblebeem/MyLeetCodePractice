@@ -1,0 +1,36 @@
+public class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        if(nums == null){
+            return -1;
+        }
+        if(nums.length < 2){
+            return nums.length;
+        }
+        
+        //Skips all the same numbers from beginning e.g. [5, 5, 5, 1]
+        int i = 0;
+        while(i + 1 < nums.length && nums[i + 1] == nums[i]){
+            i ++;
+        }
+        if(i + 1 == nums.length){
+            return 1;
+        }
+        
+        int res = 2;
+        boolean increasing = nums[i + 1] > nums[i];
+        for(; i + 1 < nums.length; i ++){
+            if(increasing && nums[i] > nums[i + 1]){
+                res ++;
+                increasing = !increasing;
+            }
+            if(!increasing && nums[i] < nums[i + 1]){
+                res ++;
+                increasing = !increasing;
+            }
+        }
+        return res;
+    }
+}
+
+
+//line 11 - 17容易被忽略啊！
