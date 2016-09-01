@@ -24,7 +24,7 @@ public class Solution {
 
 //Treat it as a sorted array, so we could use binary search!
 //***The key is line 10, how to use mid to get the index of the element, i.e. mid/col and mid%col
-//Also pay attention to line 3 & 4, about how to get col and row of a 2-D matrix
+//Also pay attention to line 3 & 4, about how to get col and row of a 2-D matrix（这点没啥用了啊，当时too young too simple啊）
 
 
 //Another solution, easy-to-understand, the key is to start search from upper-right position!
