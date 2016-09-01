@@ -12,7 +12,7 @@ class PeekingIterator implements Iterator<Integer> {
 	    }
 	}
 
-    // Returns the next element in the iteration without advancing the iterator.
+        // Returns the next element in the iteration without advancing the iterator.
 	public Integer peek() {
             return peek;
 	}
