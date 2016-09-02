@@ -26,3 +26,33 @@ public:
 };
 
 //I think I still need a better understanding of recursive functions...
+
+
+//下边这个解法是直接复制粘贴过来的，二刷的时候用Java写了同样的代码
+//后来才想起来Java基本类型是传值不能传引用，所以sum总是0.。。尴尬
+class Solution {
+private:
+	void traverseAndSum(TreeNode *root, int &sum, int parSum);
+public:
+	int sumNumbers(TreeNode *root) {		
+		int sum = 0;
+		traverseAndSum(root, sum, 0);
+		return sum;
+	}
+};
+
+void Solution::traverseAndSum(TreeNode *root, int &sum, int parSum)
+{
+	if (root == NULL)
+		return;
+
+	parSum = parSum * 10 + root->val;
+	if (root->left == NULL && root->right == NULL)
+	{
+		// Encountered a leaf node. Evaluate the sum
+		sum += parSum;
+		return;
+	}
+	traverseAndSum(root->left, sum, parSum);
+	traverseAndSum(root->right, sum, parSum);
+}
