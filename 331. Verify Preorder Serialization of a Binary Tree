@@ -18,3 +18,9 @@ public class Solution {
         return degree == 0;
     }
 }
+
+
+//Explanation for line 10 - 12
+//Since this is a preorder serialization, degrees are calculated in a top-down fashion, 
+//and, tree is a structure that each node has only one indegree and at most two outdegree. 
+//Positive degree means there are more indegree than outdegree, which violates the definition.
