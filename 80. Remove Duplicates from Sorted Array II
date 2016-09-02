@@ -24,5 +24,5 @@ public class Solution {
 }
 
 
-//A little bit tricky... See the following link for the expansion of this problem
+//See the following link for the expansion of this problem
 //http://www.sigmainfy.com/blog/leetcode-remove-duplicates-from-sorted-array-i-and-ii.html
