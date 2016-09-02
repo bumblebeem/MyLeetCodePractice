@@ -24,3 +24,32 @@ public class Solution {
 //line 11可以写成：res.add(new ArrayList<Integer>(cur));
 //line 15同时改写成：getCombination(i, res, cur, candidates, target - candidates[i]);
 //总之，这两个地方至少有一个地方需要new一个ArrayList，否则就会出错。。。
+//二刷：就是一个deep copy的问题
+
+
+//Java version
+public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(candidates == null || candidates.length == 0){
+            return res;
+        }
+        // Arrays.sort(candidates);
+        helper(res, new ArrayList<Integer>(), target, candidates, 0);
+        return res;
+    }
+    
+    private void helper(List<List<Integer>> res, List<Integer> cur, int target, int[] candidates, int begin){
+        if(target == 0){
+            res.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        for(int i = begin; i < candidates.length; i ++){
+            if(target - candidates[i] >= 0){
+                cur.add(candidates[i]);
+                helper(res, cur, target - candidates[i], candidates, i);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }
+}
