@@ -1,0 +1,34 @@
+//Recursive solution
+//https://discuss.leetcode.com/topic/22638/very-simple-and-fast-java-solution
+//如果想按照Subset I的思路用递归来做，就得把数组先排序！
+//对line 22 - 24这个if的理解不够啊(因为事先已经把数组排序，这个if帮助跳过duplicate)
+public class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(nums == null){
+            return res;
+        }
+        Arrays.sort(nums);
+        helper(res, new ArrayList<Integer>(), nums, 0);
+        return res;
+    }
+    
+    private void helper(List<List<Integer>> res, List<Integer> sub, int[] nums, int begin){
+        res.add(new ArrayList<Integer>(sub));
+        // if(begin == nums.length){
+        //     return;
+        // }
+        for(int i = begin; i < nums.length; i ++){
+            if(i > begin && nums[i] == nums[i - 1]){
+                continue;
+            }
+            sub.add(nums[i]);
+            helper(res, sub, nums, i + 1);
+            sub.remove(sub.size() - 1);
+        }
+    }
+}
+
+
+//Iterative solution
+//https://discuss.leetcode.com/topic/4661/c-solution-and-explanation
