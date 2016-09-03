@@ -5,6 +5,13 @@
  *     ListNode next;
  *     ListNode(int x) { val = x; }
  * }
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
  */
 /**
  * Definition for a binary tree node.
@@ -23,40 +30,41 @@ public class Solution {
             return null;
         }
         cur = head;
-        return inorderTraverseHelper(0, countList(head) - 1);
+        return inorderTraversalHelper(0, countNodes(head) - 1);
     }
     
-    private int countList(ListNode head){
-        ListNode tra = head;
-        int size = 1;
-        while(tra.next != null){
-            tra = tra.next;
-            size ++;
+    //count nodes in a linked list is easy
+    private int countNodes(ListNode head){
+        int count = 0;
+        if(head == null){
+            return count;
         }
-        return size;
+        ListNode temp = head;
+        while(temp != null){
+            count ++;
+            temp = temp.next;
+        }
+        return count;
     }
     
-    private TreeNode inorderTraverseHelper(int start, int end){
-        if(end < start){
+    private TreeNode inorderTraversalHelper(int start, int end){
+        if(start > end){
             return null;
         }
+        
         int mid = start + (end - start) / 2;
         
-        TreeNode treenode = new TreeNode(0);
+        TreeNode node = new TreeNode(0);
         
-        TreeNode left = inorderTraverseHelper(start, mid - 1);
-        treenode.left = left;
-        
-        treenode.val = cur.val;
+        node.left = inorderTraversalHelper(start, mid - 1);
+        node.val = cur.val;
         cur = cur.next;
+        node.right = inorderTraversalHelper(mid + 1, end);
         
-        TreeNode right = inorderTraverseHelper(mid + 1, end);
-        treenode.right = right;
-        
-        return treenode;
+        return node;
     }
 }
 
 
-//Lots of details need to be paid attention to... e.g. line 19, 41, 45 - 54
-//The basic idea is not that hard, though. Use inorder traverse.
+//The basic idea is to use inorder traverse.
+//https://discuss.leetcode.com/topic/8141/share-my-o-1-space-and-o-n-time-java-code
