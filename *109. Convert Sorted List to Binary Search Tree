@@ -67,4 +67,7 @@ public class Solution {
 
 
 //The basic idea is to use inorder traverse.
+
+//two solutions 这道题理解的不好
 //https://discuss.leetcode.com/topic/8141/share-my-o-1-space-and-o-n-time-java-code
+//https://discuss.leetcode.com/topic/35997/share-my-java-solution-1ms-very-short-and-concise
