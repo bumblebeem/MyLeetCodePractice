@@ -39,19 +39,20 @@ public class Solution {
 
 
 //Optimized from O(n) space into O(1) space
-class Solution {
-public:
-    int rob(vector<int>& nums) {
-        if(nums.size() <= 0){
+public class Solution {
+    public int rob(int[] nums) {
+        if(nums == null || nums.length == 0){
             return 0;
         }
-        int prev = 0;
-        int cur = 0;
-        for(int i = 0; i < nums.size(); i ++){
-            int temp = cur;
-            cur = max(prev + nums[i], cur);
-            prev = temp;
+        int includeFirst = 0, excludeFirst = 0;
+        for(int i = 0; i < nums.length; i ++){
+            int temp = includeFirst;
+            includeFirst = Math.max(includeFirst, excludeFirst + nums[i]);
+            excludeFirst = temp;
         }
-        return cur;
+        return Math.max(includeFirst, excludeFirst);
     }
-};
+}
+
+
+//注意53行的return语句啊，好像之前一直都写错了。。
