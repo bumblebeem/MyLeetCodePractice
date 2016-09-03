@@ -16,11 +16,10 @@ public class Solution {
         TreeNode leftChild = root.left;
         TreeNode rightChild = root.right;
         
-        root.left = null;  //modify the left child of the root
-        
         flatten(leftChild);  //the left subtree of root is flattened
         flatten(rightChild);  //the right subtree of root is flattened
         
+        root.left = null;  //modify the left child of the root
         root.right = leftChild; //modify the right child of the root 
         TreeNode cur = root;
         while(cur.right != null){
@@ -29,3 +28,11 @@ public class Solution {
         cur.right = rightChild;  //line 25 - 28 find the end of falttened left subtree
     }
 }
+
+
+//The idea is very simple:
+//1.flatten left subtree
+//2.flatten right subtree
+//3.concatenate root -> left flatten subtree -> right flatten subtree
+
+//https://discuss.leetcode.com/topic/19087/my-recursive-solution-is-easy-and-clean
