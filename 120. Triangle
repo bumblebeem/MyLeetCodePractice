@@ -1,24 +1,22 @@
 public class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
-        if(triangle.size() == 0 || triangle == null){
+        if(triangle == null || triangle.size() == 0){
             return 0;
         }
-        
         int[] dp = new int[triangle.size()];
         for(int i = 0; i < triangle.size(); i ++){
-            dp[i] = triangle.get(triangle.size() - 1).get(i);
+            List<Integer> lastRow = new ArrayList<Integer>(triangle.get(triangle.size() - 1));
+            dp[i] = lastRow.get(i);
         }
-        
         for(int i = triangle.size() - 2; i >= 0; i --){
             for(int j = 0; j <= i; j ++){
                 dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
             }
         }
-        
         return dp[0];
     }
 }
 
 
-//line 12, 从triangle.size() - 2，开始就好，
-//因为最后一行的最小值就是他们本身（已经在line 8 - 10初始化了）
+//根据题意，这题整个二维List的行和列是相等的。。
+//从最后一行到第一行，以此构建最短路径
