@@ -41,9 +41,12 @@ public class Solution {
 //We might need to delete even the head node, so we need a dummy head!
 public class Solution {
     public ListNode removeElements(ListNode head, int val) {
-        ListNode start = new ListNode(0);
-        start.next = head;
-        ListNode cur = start;
+        if(head == null){
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode cur = dummy;
         while(cur.next != null){
             if(cur.next.val == val){
                 cur.next = cur.next.next;
@@ -51,6 +54,6 @@ public class Solution {
                 cur = cur.next;
             }
         }
-        return start.next;
+        return dummy.next;
     }
 }
