@@ -1,0 +1,57 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode sortList(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        
+        //step1: cut the linked list into two sublist
+        ListNode slow = head, fast = head;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode secondHalf = slow.next;
+        slow.next = null;
+        
+        //step2: sort these two sublists
+        ListNode l1 = sortList(head);
+        ListNode l2 = sortList(secondHalf);
+        
+        //step3: merge them together
+        return merge(l1, l2);
+    }
+    
+    private ListNode merge(ListNode l1, ListNode l2){
+        ListNode cur = new ListNode(0);
+        cur.next = null;
+        ListNode dummy = cur;
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                cur.next = l1;
+                l1 = l1.next;
+            }else{
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        if(l1 != null){
+            cur.next = l1;
+        }
+        if(l2 != null){
+            cur.next = l2;
+        }
+        return dummy.next;
+    }
+}
+
+
+//http://www.geeksforgeeks.org/merge-sort-for-linked-list/
