@@ -1,0 +1,61 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null){
+            return true;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        
+        while(fast.next != null && fast.next.next != null){  
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        //*odd number of nodes, need to move slow one step further!!
+        if(fast != null){ 
+            slow = slow.next;
+        }
+        
+        slow = reverseLinkedList(slow);
+        while(slow != null){
+            if(head.val == slow.val){
+                head = head.next;
+                slow = slow.next;
+            } else{
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //从斯坦福那个文档中学到的，稳健！
+    private ListNode reverseLinkedList(ListNode node){
+        if(node == null || node.next == null){
+            return node;
+        }
+        ListNode end = null;
+        ListNode middle = node;
+        ListNode front = node.next;
+        while(true){
+            middle.next = end;
+            if(front == null){
+                break;
+            }
+            end = middle;
+            middle = front;
+            front = front.next;
+        }
+        return middle;
+    }
+}
+
+
+//22-24行的if十分重要，注意理解！
+//思路就是把后一半的list进行reverse，之后和前一半进行比较
