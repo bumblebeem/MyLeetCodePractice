@@ -59,3 +59,46 @@ public class Solution {
         return cur1;
     }
 }
+
+
+//二刷Java solution
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null){
+            return null;
+        }
+        int lenA = getLength(headA);
+        int lenB = getLength(headB);
+        ListNode i = headA;
+        ListNode j = headB;
+        while(lenA > lenB){
+            lenA --;
+            i = i.next;
+        }
+        while(lenA < lenB){
+            lenB --;
+            j = j.next;
+        }
+        while(i != null && j != null){
+            if(i.val == j.val){
+                return i;
+            } else {
+                i = i.next;
+                j = j.next;
+            }
+        }
+        return null;
+    }
+    
+    private int getLength(ListNode node){
+        int len = 0;
+        if(node == null){
+            return 0;
+        }
+        while(node != null){
+            len ++;
+            node = node.next;
+        }
+        return len;
+    }
+}
