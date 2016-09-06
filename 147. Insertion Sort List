@@ -1,26 +1,30 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
 public class Solution {
     public ListNode insertionSortList(ListNode head) {
-        if(head == null || head.next == null) {
+        if(head == null || head.next == null){
             return head;
         }
-        ListNode sortedHead = new ListNode(0);
+        ListNode sorted = new ListNode(0);
         ListNode cur = head;
-        while(cur != null) {
-            ListNode pre = sortedHead;
-            ListNode next = cur.next;
-            while(pre.next != null && cur.val > pre.next.val){
-                pre = pre.next;
+        while(cur != null){
+            ListNode dummy = sorted;
+            //find the insertion location
+            while(dummy.next != null && cur.val > dummy.next.val){
+                dummy = dummy.next;
             }
-            cur.next = pre.next;
-            pre.next = cur;
-            cur = next;
+            //insert node "cur" between node "dummy" and "dummy.next"
+            ListNode temp = cur.next;
+            cur.next = dummy.next;
+            dummy.next = cur;
+            cur = temp;
         }
-        return sortedHead.next;
+        return sorted.next;
     }
 }
-
-
-//cur presents the current node being sorted
-//In the outer while loop, each time we insert cur between pre and pre.next.
-//At the begining of the outer while loop, we reset pre to the head of the already sorted list,
-//and looping inside the inner loop to find out the correct position for cur in the already sorted list.
