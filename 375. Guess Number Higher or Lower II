@@ -1,0 +1,28 @@
+//https://discuss.leetcode.com/topic/51494/java-commented-dp-solution
+public class Solution {
+    public int getMoneyAmount(int n) {
+        int[][] dp = new int[n + 1][n + 1];  //dp[i][j] means the min cost in the worst case for numbers (i...j)
+        
+        for(int l = 2; l <= n; l ++){  //l means the length of the interval
+            for(int i = 1; i <= n - (l - 1); i ++){
+                dp[i][i + (l - 1)] = Integer.MAX_VALUE;
+                for(int k = i; k <= i + (l - 1); k ++){
+                    int costForThisGuess;
+                    // since if k is the last integer, k + 1 does not exist, we have to separate this case with the following if statement
+                    if(k == n){
+                        costForThisGuess = dp[i][k - 1] + k;
+                    } else {
+                        costForThisGuess = k + Math.max(dp[i][k - 1], dp[k + 1][i + (l - 1)]);
+                    }
+                    dp[i][i + (l - 1)] = Math.min(costForThisGuess, dp[i][i + (l - 1)]);
+                }
+            }
+        }
+        
+        return dp[1][n];
+    }
+}
+
+
+//Good links:
+//https://discuss.leetcode.com/topic/51353/simple-dp-solution-with-explanation
