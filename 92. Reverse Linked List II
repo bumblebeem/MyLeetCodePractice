@@ -1,0 +1,76 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head == null) {
+            return null;
+        }
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre = dummy;
+        
+        for(int i = 0; i < m - 1; i ++) {
+            pre = pre.next;
+        }
+        ListNode start = pre.next;
+        ListNode then = start.next;
+        
+        for(int i = 0; i < n - m; i ++) {
+            start.next = then.next;
+            then.next = pre.next;
+            pre.next = then;
+            then = start.next;
+        }
+        
+        return dummy.next;
+    }
+}
+
+
+//https://leetcode.com/discuss/25580/simple-java-solution-with-clear-explanation
+//使用dummy是因为防止head也在reverse的范围里
+//*line25 - 28
+
+
+//My latest Java version with mistake... Passed 21/44 cases...
+public class Solution {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head == null || head.next == null || m == n){
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode before_reverse = dummy;
+        for(int i = 1; i < m; i ++){
+            before_reverse = before_reverse.next;
+        }
+        ListNode reverse_begin = before_reverse.next;
+        ListNode after_reverse = reverse_begin;
+        for(int i = 0; i < n - m + 1; i ++){
+            after_reverse = after_reverse.next;
+        }
+        
+        ListNode reversed = reverseHelper(reverse_begin, m, n);
+        before_reverse.next.next = after_reverse;
+        before_reverse.next = reversed;
+        
+        return dummy.next;
+    }
+    
+    private ListNode reverseHelper(ListNode node, int m , int n){
+        ListNode back = node;
+        ListNode middle = node.next;
+        for(int i = 0; i < n - m; i ++){
+            middle.next = back;
+            back = middle;
+            middle = middle.next;
+        }
+        return back;
+    }
+}
