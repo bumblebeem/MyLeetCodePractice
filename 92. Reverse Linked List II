@@ -38,7 +38,7 @@ public class Solution {
 //*line25 - 28
 
 
-//My latest Java version with mistake... Passed 21/44 cases...
+//My latest Java version
 public class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
         if(head == null || head.next == null || m == n){
@@ -67,9 +67,10 @@ public class Solution {
         ListNode back = node;
         ListNode middle = node.next;
         for(int i = 0; i < n - m; i ++){
+            ListNode temp = middle.next;      //这里忘记用temp了，失误！
             middle.next = back;
             back = middle;
-            middle = middle.next;
+            middle = temp;
         }
         return back;
     }
