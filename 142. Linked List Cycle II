@@ -34,3 +34,6 @@ public class Solution {
 
 //A very good explanation:
 //https://discuss.leetcode.com/topic/19367/java-o-1-space-solution-with-detailed-explanation/2
+
+//Wiki:
+//https://en.wikipedia.org/wiki/Cycle_detection
