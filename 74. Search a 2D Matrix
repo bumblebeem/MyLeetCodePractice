@@ -1,21 +1,30 @@
 public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        int row = matrix.length;
-        int col = matrix[0].length;
-
-        int low = 0, high = row * col - 1;
-
-        while(low <= high){
-        	int mid = low + (high - low) / 2;
-        	if(matrix[mid / col][mid % col] == target){
-        		return true;
-        	}
-        	else if(matrix[mid / col][mid % col] < target){
-        		low = mid + 1;
-        	}
-        	else{
-        		high = mid - 1;
-        	}
+        if(matrix == null || matrix.length == 0){
+            return false;
+        }
+        if(matrix[0] == null || matrix[0].length == 0){
+            return false;
+        }
+        int row = matrix.length, col = matrix[0].length;
+        int n = row * col - 1;
+        int start = 0, end = n;
+        while(start + 1 < end){
+            int middle = start + (end - start) / 2;
+            int temp = matrix[middle / col][middle % col];
+            if(temp > target){
+                end = middle;
+            }else if(temp < target){
+                start = middle;
+            }else{
+                return true;
+            }
+        }
+        if(matrix[start / col][start % col] == target){
+            return true;
+        }
+        if(matrix[end / col][end % col] == target){
+            return true;
         }
         return false;
     }
@@ -23,15 +32,19 @@ public class Solution {
 
 
 //Treat it as a sorted array, so we could use binary search!
-//***The key is line 10, how to use mid to get the index of the element, i.e. mid/col and mid%col
-//Also pay attention to line 3 & 4, about how to get col and row of a 2-D matrix（这点没啥用了啊，当时too young too simple啊）
+//*The key is line 14, how to use mid to get the index of the element, i.e. mid/col and mid%col
+//Also pay attention to line 9, about how to get col and row of a 2-D matrix（这点没啥用了啊，当时too young too simple啊）
 
 
 //Another solution, easy-to-understand, the key is to start search from upper-right position!
 //这个方法可以和240. Search a 2D Matrix II共用！
+//要特别注意34 - 39行啊！Sep.8刷的时候就跪在这里了啊。。
 public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        if(matrix == null || matrix[0].length == 0){
+        if(matrix == null || matrix.length == 0){
+            return false;
+        }
+        if(matrix[0] == null || matrix[0].length == 0){
             return false;
         }
         int i = 0, j = matrix[0].length - 1;
