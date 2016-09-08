@@ -11,12 +11,12 @@ public class Solution {
         if(head == null || head.next == null){
             return head;
         }
-        ListNode start = new ListNode(0);
-        start.next = head;
-        for(ListNode cur = start; cur.next != null && cur.next.next != null; cur = cur.next.next){
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        for(ListNode cur = dummy; cur.next != null && cur.next.next != null; cur = cur.next.next){
             cur.next = swap(cur.next, cur.next.next);
         }
-        return start.next;
+        return dummy.next;
     }
     
     private ListNode swap(ListNode next1, ListNode next2){
@@ -26,8 +26,7 @@ public class Solution {
     }
 }
 
-//line 14的语法
-//很多细节问题出错，值得再做。。
+//这并不是easy难度啊。。
 
 //below is a link to a recursive solution, didn't understand
 //https://leetcode.com/discuss/14045/my-accepted-java-code-used-recursion
