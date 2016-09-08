@@ -8,11 +8,12 @@
  */
 public class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode start = new ListNode(0);
-        ListNode fast = start;
-        ListNode slow = start;
-        start.next = head;
-        
+        if(head == null){
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = dummy, slow = dummy;
         for(int i = 0; i < n; i ++){
             fast = fast.next;
         }
@@ -21,11 +22,11 @@ public class Solution {
             slow = slow.next;
         }
         slow.next = slow.next.next;
-        return start.next;
+        return dummy.next;
     }
 }
 
 //1. Use two pointers in order to solve it in one pass!
-//2. Need to pay attention to line 11 - 14, which tells me that:
+//2. Need to pay attention to line 14 - 16, which tells me that:
 //在Java中传递参数时，原始类型是传值，对象是传引用
-//*3. 运用一个额外的start，注意理解！因为head有可能需要被remove！
+//3. 运用一个额外的dummy，注意理解！因为head有可能需要被remove！Sep.8刷的时候已经无压力注意到这点了。。
