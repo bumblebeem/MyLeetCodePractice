@@ -50,8 +50,7 @@ public class Solution {
             return l1;
         }
         ListNode dummy = new ListNode(0);
-        ListNode cur = new ListNode(0);
-        cur = dummy;
+        ListNode cur = dummy;
         while(l1 != null && l2 != null){
             if(l1.val < l2.val){
                 cur.next = l1;
@@ -62,15 +61,16 @@ public class Solution {
             }
             cur = cur.next;
         }
-        if(l1 == null && l2 != null){
+        if(l2 != null){
             cur.next = l2;
         }
-        if(l1 != null && l2 == null){
+        if(l1 != null){
             cur.next = l1;
         }
         return dummy.next;
     }
 }
+
 
 //C++，用指向指针的指针，思路更清晰; iterative
 //https://discuss.leetcode.com/topic/6187/14-line-clean-c-solution
