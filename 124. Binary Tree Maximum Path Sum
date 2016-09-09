@@ -33,9 +33,9 @@ public class Solution {
         
         //Conquer
         int singlePath = Math.max(0, Math.max(left.singlePath, right.singlePath)) + root.val;
-        int temp = Math.max(left.maxPath, right.maxPath);
-        int maxPath = Math.max(temp, 
-            Math.max(left.singlePath, 0) + Math.max(right.singlePath, 0)+ root.val);
+        int maxPathSoFar = Math.max(left.maxPath, right.maxPath);
+        int singlePathSoFar = Math.max(left.singlePath, 0) + Math.max(right.singlePath, 0)+ root.val;
+        int maxPath = Math.max(maxPathSoFar, singlePathSoFar);
         
         return new ResultType(singlePath, maxPath);
     }
