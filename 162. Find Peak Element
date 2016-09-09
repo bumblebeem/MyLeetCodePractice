@@ -48,3 +48,37 @@ public class Solution {
 //Yet another two links
 //https://leetcode.com/discuss/17793/find-the-maximum-by-binary-search-recursion-and-iteration
 //https://leetcode.com/discuss/68999/java-solution-and-explanation-using-invariants
+
+
+//九章模板
+class Solution {
+    /**
+     * @param A: An integers array.
+     * @return: return any of peek positions.
+     */
+    public int findPeak(int[] A) {
+        // write your code here
+        if(A == null || A.length == 0){
+            return -1;
+        }
+        int start = 1, end = A.length - 2;
+        while(start + 1 < end){
+            int middle = (end - start) / 2 + start;
+            if(A[middle] < A[middle + 1]){
+                start = middle;
+            } else if(A[middle] > A[middle + 1]){
+                end = middle;
+            } else{
+                start = middle;
+                //end = middle; 也可以
+            }
+        }
+        if(A[start] < A[end]){
+            return end;
+        }else{
+            return start;
+        }
+    }
+}
+
+//line 67,69用middle和middle-1比较也是可以的，这道题while中的写法很灵活啊
