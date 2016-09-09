@@ -41,5 +41,8 @@ public class Solution {
     }
 }
 
+// singlePath: 从root往下走到任意点的最大路径，这条路径至少包含一个点
+// maxPath: 从树中任意到任意点的最大路径，这条路径至少包含一个点
+
 
 //http://www.jiuzhang.com/solutions/binary-tree-maximum-path-sum/
