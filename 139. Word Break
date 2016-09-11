@@ -15,3 +15,6 @@ public class Solution {
         return opt[s.length()];
     }
 }
+
+
+//这道题目本质是DP啊。。
