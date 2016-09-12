@@ -31,3 +31,7 @@ public class Solution {
 //The minimum and maximum values come from the parent node 
 //and if the value of current node is between minimum and maximum value, 
 //then visit left and right subtree for inorder traverse.
+
+
+//*Iterative solution:
+//http://www.jiuzhang.com/solutions/validate-binary-search-tree/
