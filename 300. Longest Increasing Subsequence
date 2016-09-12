@@ -6,15 +6,15 @@ public class Solution {
             return 0;
         }
         int[] dp = new int[nums.length];
-        int max = 1;
         Arrays.fill(dp, 1);
+        int max = 1;
         for(int i = 1; i < nums.length; i ++){
             for(int j = 0; j < i; j ++){
                 if(nums[i] > nums[j]){
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                     //dp[i] = dp[j] + 1; 这是二刷时候的错误，不应该啊！
                 }
-                max = Math.max(dp[i], max);
+                max = Math.max(dp[i], max);  //这条语句可以放到上边的if循环里
             }
         }
         return max;
