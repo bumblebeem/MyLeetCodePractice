@@ -46,3 +46,22 @@ public:
         return true;
     }
 };
+
+
+//DP solution,比Greedy的时间复杂度高，TLE！！！
+public class Solution {
+    public boolean canJump(int[] A) {
+        boolean[] dp = new boolean[A.length];
+        Arrays.fill(dp, false);
+        dp[0] = true;
+        for(int i = 1; i < A.length; i ++){
+            for(int j = 0; j < i; j ++){
+                if(j + A[j] >= i && dp[j] == true){
+                    dp[i] = true;
+                }
+            }
+        }
+        
+        return dp[A.length - 1];
+    }
+}
