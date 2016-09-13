@@ -36,7 +36,9 @@ public class Solution {
                 last_jump_max = cur_jump_max;
             }
         }
-        return steps;
+        //return steps;
+        //用下边的语句就可以判断跳不到最后的情况了
+        return last_jump_max >= nums.length - 1 ? steps : -1;
     }
 }
 
@@ -53,6 +55,6 @@ public class Solution {
             }
             cur_jump_max = Math.max(cur_jump_max, i + nums[i]);
         }
-        return steps;
+        return last_jump_max >= nums.length - 1 ? steps : -1;
     }
 }
