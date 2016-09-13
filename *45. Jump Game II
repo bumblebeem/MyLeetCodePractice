@@ -1,0 +1,58 @@
+//Like "Jump Game", use DP, you get TLE!!!
+//But here is my DP solution anyway...
+//14行忘记写了后边半个条件，不应该啊！！
+public class Solution {
+    public int jump(int[] nums) {
+        if(nums == null || nums.length == 0){
+            return -1;
+        }
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;  
+        for(int i = 0; i < nums.length; i ++){
+            for(int j = 0; j < i; j ++){
+                if(j + nums[j] >= i && nums[j] != Integer.MAX_VALUE){
+                    dp[i] = Math.min(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return dp[nums.length - 1];
+    }
+}
+
+
+//http://www.cnblogs.com/lichen782/p/leetcode_Jump_Game_II.html
+//We need to use Greedy for this problem
+//Not-easy-to-understand though...
+public class Solution {
+    public int jump(int[] nums) {
+        int steps = 0;
+        int last_jump_max = 0;
+        int cur_jump_max = 0;
+        for(int i = 0; i < nums.length - 1; i ++){
+            cur_jump_max = Math.max(cur_jump_max, i + nums[i]);
+            if(i == last_jump_max){
+                steps ++;
+                last_jump_max = cur_jump_max;
+            }
+        }
+        return steps;
+    }
+}
+
+//注意下边这种写法和上边的区别，理解不能啊。。
+public class Solution {
+    public int jump(int[] nums) {
+        int steps = 0;
+        int last_jump_max = 0;
+        int cur_jump_max = 0;
+        for(int i = 0; i < nums.length; i ++){
+            if(i > last_jump_max){
+                steps ++;
+                last_jump_max = cur_jump_max;
+            }
+            cur_jump_max = Math.max(cur_jump_max, i + nums[i]);
+        }
+        return steps;
+    }
+}
