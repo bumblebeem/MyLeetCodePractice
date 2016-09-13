@@ -30,3 +30,38 @@ public class Solution {
 
 //if we are allowed to manipulate the original matrix, we have the following solution(didn't fully understand)
 //https://leetcode.com/discuss/15756/java-solution-using-dynamic-programming-o-1-space
+
+
+//二刷AC 代码
+//想到44和51行的break就好说了
+public class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int rows = obstacleGrid.length;
+        int cols = obstacleGrid[0].length;
+        int[][] dp = new int[rows][cols];
+        for(int i = 0; i < rows; i ++){
+            if(obstacleGrid[i][0] == 1){
+                break;
+            } else {
+                dp[i][0] = 1;
+            }
+        }
+        for(int j = 0; j < cols; j ++){
+            if(obstacleGrid[0][j] == 1){
+                break;
+            } else {
+                dp[0][j] = 1;
+            }
+        }
+        for(int i = 1; i < rows; i ++){
+            for(int j = 1; j < cols; j ++){
+                if(obstacleGrid[i][j] == 1){
+                    dp[i][j] = 0;
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                }
+            }
+        }
+        return dp[rows - 1][cols - 1];
+    }
+}
