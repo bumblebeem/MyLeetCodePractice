@@ -1,0 +1,45 @@
+public class Solution {
+    public int minCut(String s) {
+        if(s == null || s.length() == 0){
+            return 0;
+        }
+        boolean[][] palindrome = getIsPalindrome(s);
+        int[] dp = new int[s.length() + 1];     
+        dp[0] = 0;
+        for(int i = 1; i <= s.length(); i ++){
+            dp[i] = i;
+            for(int j = 0; j < i; j ++){
+                if(palindrome[j][i - 1]){
+                    dp[i] = Math.min(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return dp[s.length()] - 1;
+    }
+    
+    private boolean[][] getIsPalindrome(String s) {
+        boolean[][] isPalindrome = new boolean[s.length()][s.length()];
+
+        for (int i = 0; i < s.length(); i++) {
+            isPalindrome[i][i] = true;
+        }
+        for (int i = 0; i + 1 < s.length(); i++) {
+            isPalindrome[i][i + 1] = s.charAt(i) == s.charAt(i + 1) ? true : false;
+        }
+
+        for (int length = 2; length < s.length(); length++) {
+            for (int start = 0; start + length < s.length(); start++) {
+                isPalindrome[start][start + length]
+                    = isPalindrome[start + 1][start + length - 1] && s.charAt(start) == s.charAt(start + length);
+            }
+        }
+
+        return isPalindrome;
+    }
+}
+
+
+//此题需要注意两点：
+//1. palindrome的判断方法，如果直接写一个函数，在line 12每次进行调用，会超时；需要进行预处理（getIsPalindrome函数）
+//2. line 9, 11的for循环的下标容易混乱
+//3. dp[i]的含义：前i个字母，最多可以被分成几个回文串（所以line 17需要减一，因为求得是cut的次数）
