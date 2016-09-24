@@ -43,3 +43,5 @@ public class Solution {
 //1. palindrome的判断方法，如果直接写一个函数，在line 12每次进行调用，会超时；需要进行预处理（getIsPalindrome函数）
 //2. line 9, 11的for循环的下标容易混乱
 //3. dp[i]的含义：前i个字母，最多可以被分成几个回文串（所以line 17需要减一，因为求得是cut的次数）
+
+//http://www.jiuzhang.com/solutions/palindrome-partitioning-ii/
