@@ -66,3 +66,49 @@ class MinStack {
         return min;
     }
 }
+
+
+//三刷：开头第一种方法比较笨拙啊，需要很多判断，不如先在存储最小值的
+//栈里边加入一个Integer.MAX_VALUE就省很多事了
+public class MinStack {
+    private Stack<Integer> stack;
+    private Stack<Integer> minStack;
+
+    /** initialize your data structure here. */
+    public MinStack() {
+        stack = new Stack<Integer>();
+        minStack = new Stack<Integer>();
+        minStack.push(Integer.MAX_VALUE);       //神之一手啊
+    }
+    
+    public void push(int x) {
+        stack.push(x);
+        if(x <= minStack.peek()){
+            minStack.push(x);
+        }
+    }
+    
+    public void pop() {
+        int cur = stack.pop();
+        if(cur == minStack.peek()){
+            minStack.pop();
+        }
+    }
+    
+    public int top() {
+        return stack.peek();
+    }
+    
+    public int getMin() {
+        return minStack.peek();
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
