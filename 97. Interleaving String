@@ -28,3 +28,6 @@ public class Solution {
         return dp[len1][len2];
     }
 }
+
+
+//dp[i][j]的含义是s1的前i个字符和s2的前j个字符，能否交替组成s3的前i + j个字符
