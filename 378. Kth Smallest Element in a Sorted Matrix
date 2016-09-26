@@ -1,0 +1,64 @@
+class Num{
+    public int x, y, val;
+    Num(int x, int y, int val){
+        this.x = x;
+        this.y = y;
+        this.val = val;
+    }
+}
+// class minComparator implements Comparator<Num>{
+//     public int compare(Num a, Num b){
+//         return a.val - b.val;
+//     }
+// }
+
+public class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        if(matrix == null || matrix[0].length == 0){
+            return -1;
+        }
+        // the question assumes k is valid, so this is not necessary
+        // if(matrix[0].length * matrix.length < k){
+        //     return -1;
+        // }
+        int[] dx = new int[]{1, 0};
+        int[] dy = new int[]{0, 1};
+        
+        Comparator<Num> minComparator = new Comparator<Num>(){
+            public int compare(Num a, Num b){
+                return a.val - b.val;
+            }  
+        };
+        PriorityQueue<Num> minHeap = new PriorityQueue<Num>(k, minComparator);
+        // PriorityQueue<Num> minHeap = new PriorityQueue<Num>(k, new minComparator());
+        boolean[][] traversed = new boolean[matrix.length][matrix[0].length];
+        minHeap.add(new Num(0, 0, matrix[0][0]));
+        traversed[0][0] = true;
+        
+        for(int i = 0; i < k - 1; i ++){
+            Num cur = minHeap.poll();
+            for(int j = 0; j < 2; j ++){
+                int next_x = cur.x + dx[j];
+                int next_y = cur.y + dy[j];
+                if(isValid(next_x, next_y, traversed, matrix)){
+                    minHeap.add(new Num(next_x, next_y, matrix[next_x][next_y]));
+                    traversed[next_x][next_y] = true;
+                }
+            }
+        }
+        
+        return minHeap.peek().val;
+    }
+    
+    public boolean isValid(int x, int y, boolean[][] traversed, int[][] matrix){
+        if(x < matrix.length && y < matrix[0].length && traversed[x][y] == false){
+            return true;
+        }
+        return false;
+    }
+}
+
+
+//line 27 - 32也可以使用line 9 - 13 & line33代替；Comparator的写法，终于记住了。。
+//用一个minHeap的思路有了，但是没想到可以通过traversed这样一个数组减少需要遍历的元素，不需要把所有n^2个元素都入堆一遍。。
+//Num的使用和isValid函数等，是一些面向对象编程思想的体现。。
