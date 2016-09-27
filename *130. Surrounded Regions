@@ -113,7 +113,7 @@ public class Solution {
         }
     }
 }
-//*line 47, 50, 53, 56's condition!!! Read the first anwser of the following post carefully!!! Don't understand...
+//*line 101, 104, 107, 110's condition!!! Read the first anwser of the following post carefully!!! Don't understand...
 //Anyway, DFS could be overflow, we'd better use BFS
 //https://leetcode.com/discuss/42445/a-really-simple-and-readable-c-solution%EF%BC%8Conly-cost-12ms
 
