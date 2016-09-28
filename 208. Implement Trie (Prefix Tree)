@@ -8,15 +8,19 @@
 class TrieNode {
     // Initialize your data structure here.
     char c;
-    HashMap<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+    HashMap<Character, TrieNode> children;
     boolean wordEnd;
     
     public TrieNode() {
-
+        c = '\0';
+        children = new HashMap<Character, TrieNode>();
+        wordEnd = false;
     }
     
     public TrieNode(char c){
         this.c = c;
+        children = new HashMap<Character, TrieNode>();
+        wordEnd = false;
     }
 }
 
@@ -31,9 +35,9 @@ public class Trie {
     public void insert(String word) {
         TrieNode cur = root;
         HashMap<Character, TrieNode> curChildren = root.children;
-        char[] wordArray = word.toCharArray();
-        for(int i = 0; i < wordArray.length; i ++){
-            char curChar = wordArray[i];
+        
+        for(int i = 0; i < word.length(); i ++){
+            char curChar = word.charAt(i);
             
             if(curChildren.containsKey(curChar)){
                 cur = curChildren.get(curChar);
@@ -44,7 +48,7 @@ public class Trie {
             }
             curChildren = cur.children;
             
-            if(i == wordArray.length - 1){
+            if(i == word.length() - 1){
                 cur.wordEnd = true;
             }
         }
@@ -72,9 +76,8 @@ public class Trie {
     public TrieNode searchWordNodePos(String s){
         HashMap<Character, TrieNode> children = root.children;
         TrieNode res = null;
-        char[] sArray = s.toCharArray();
-        for(int i = 0; i < sArray.length; i ++){
-            char curChar = sArray[i];
+        for(int i = 0; i < s.length(); i ++){
+            char curChar = s.charAt(i);
             if(children.containsKey(curChar)){
                 res = children.get(curChar);
                 children = res.children;
