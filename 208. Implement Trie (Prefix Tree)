@@ -1,0 +1,87 @@
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie trie = new Trie();
+ * trie.insert("lintcode");
+ * trie.search("lint"); will return false
+ * trie.startsWith("lint"); will return true
+ */
+class TrieNode {
+    // Initialize your data structure here.
+    char c;
+    HashMap<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+    boolean wordEnd;
+    
+    public TrieNode() {
+
+    }
+    
+    public TrieNode(char c){
+        this.c = c;
+    }
+}
+
+public class Trie {
+    private TrieNode root;
+
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    // Inserts a word into the trie.
+    public void insert(String word) {
+        TrieNode cur = root;
+        HashMap<Character, TrieNode> curChildren = root.children;
+        char[] wordArray = word.toCharArray();
+        for(int i = 0; i < wordArray.length; i ++){
+            char curChar = wordArray[i];
+            
+            if(curChildren.containsKey(curChar)){
+                cur = curChildren.get(curChar);
+            } else {
+                TrieNode newNode = new TrieNode(curChar);
+                curChildren.put(curChar, newNode);
+                cur = newNode;
+            }
+            curChildren = cur.children;
+            
+            if(i == wordArray.length - 1){
+                cur.wordEnd = true;
+            }
+        }
+    }
+
+    // Returns if the word is in the trie.
+    public boolean search(String word) {
+        TrieNode searchRes = searchWordNodePos(word);
+        if(searchRes == null){
+            return false;
+        } else {
+            return searchRes.wordEnd;
+        }
+    }
+
+    // Returns if there is any word in the trie
+    // that starts with the given prefix.
+    public boolean startsWith(String prefix) {
+        if(searchWordNodePos(prefix) == null){
+            return false;
+        }
+        return true;
+    }
+    
+    public TrieNode searchWordNodePos(String s){
+        HashMap<Character, TrieNode> children = root.children;
+        TrieNode res = null;
+        char[] sArray = s.toCharArray();
+        for(int i = 0; i < sArray.length; i ++){
+            char curChar = sArray[i];
+            if(children.containsKey(curChar)){
+                res = children.get(curChar);
+                children = res.children;
+            } else {
+                return null;
+            }
+        }
+        return res;
+    }
+}
