@@ -36,3 +36,5 @@ public class Solution {
 
 //*line 25 & 31 instead of line 23, 24, 30
 //using bit manipulation, hard to understand
+
+//14行这个if必须放在最前边（不能放在其他if之后），再刷的时候这里错了。。
