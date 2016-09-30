@@ -22,7 +22,6 @@ public class Solution {
 }
 
 
-
 //The idea is: I calculated the stored water at each index a and b in my code. 
 //At the start of every loop, I update the current maximum height from left side (that is from A[0,1...a]) 
 //and the maximum height from right side(from A[b,b+1...n-1]). if(leftmax<rightmax) then, 
@@ -37,3 +36,34 @@ public class Solution {
 
 //Yet another solution:
 //https://leetcode.com/discuss/45812/7-lines-c-c
+
+
+//二刷版本，easy-to-understand
+public class Solution {
+    public int trap(int[] height) {
+        if(height.length == 0 || height == null){
+            return 0;
+        }
+        int left = 0, right = height.length - 1;
+        int leftHeight = height[0], rightHeight = height[height.length - 1];
+        int water = 0;
+        while(left < right){
+            if(height[left] < height[right]){
+                left ++;
+                if(height[left] < leftHeight){
+                    water += (leftHeight - height[left]);
+                } else {
+                    leftHeight = height[left];
+                }
+            } else{
+                right --;
+                if(height[right] < rightHeight){
+                    water += (rightHeight - height[right]);
+                } else {
+                    rightHeight = height[right];
+                }
+            }
+        }
+        return water;
+    }
+}
