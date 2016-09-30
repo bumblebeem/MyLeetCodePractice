@@ -1,0 +1,71 @@
+class Unit{
+    int x;
+    int y;
+    int height;
+    
+    Unit(int x, int y, int height){
+        this.x = x;
+        this.y = y;
+        this.height = height;
+    }
+}
+
+class UnitComparator implements Comparator<Unit> {
+    public int compare(Unit a, Unit b){
+        return a.height - b.height;
+    }
+}
+
+public class Solution {
+    public int trapRainWater(int[][] heightMap) {
+        if(heightMap == null || heightMap.length == 0 || heightMap[0].length == 0){
+            return 0;
+        }
+        
+        int row = heightMap.length;
+        int col = heightMap[0].length;
+        int[] dx = new int[]{0, 0, 1, -1};
+        int[] dy = new int[]{1, -1, 0, 0};
+        
+        PriorityQueue<Unit> minHeap = new PriorityQueue<Unit>(1, new UnitComparator());
+        boolean[][] visited = new boolean[row][col];
+        
+        for(int i = 0; i < row; i ++){
+            minHeap.add(new Unit(i, 0, heightMap[i][0]));
+            minHeap.add(new Unit(i, col - 1, heightMap[i][col - 1]));
+            visited[i][0] = true;
+            visited[i][col - 1] = true;
+        }
+        for(int i = 1; i < col - 1; i ++){
+            minHeap.add(new Unit(0, i, heightMap[0][i]));
+            minHeap.add(new Unit(row - 1, i, heightMap[row - 1][i]));
+            visited[0][i] = true;
+            visited[row - 1][i] = true;
+        }
+        
+        int water = 0;
+        while(!minHeap.isEmpty()){
+            Unit cur = minHeap.poll();
+            for(int i = 0; i < 4; i ++){
+                int nx = cur.x + dx[i];
+                int ny = cur.y + dy[i];
+                if(nx >= 0 && nx < row && ny >= 0 && ny < col && !visited[nx][ny]){
+                    visited[nx][ny] = true;
+                    if(heightMap[nx][ny] < cur.height){
+                        water += (cur.height - heightMap[nx][ny]);
+                        minHeap.add(new Unit(nx, ny, cur.height));
+                    } else {
+                        minHeap.add(new Unit(nx, ny, heightMap[nx][ny]));
+                    }
+                }
+            }
+        }
+        
+        return water;
+    }
+}
+
+
+//1. 33 - 44行把最外侧一圈的Unit放入到minHeap中
+//*2. 13 - 17行implements这个Comparator的写法！
+//3. 自己第一次写的时候，只是没写56行！不过很容易忘记这一行啊。。
