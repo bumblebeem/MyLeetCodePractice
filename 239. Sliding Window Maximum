@@ -1,0 +1,63 @@
+// Heap solution:
+public class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(Collections.reverseOrder());
+        
+        for(int i = 0; i < nums.length; i ++){
+            maxHeap.add(nums[i]);
+            
+            if(i - k >= 0){
+                maxHeap.remove(nums[i - k]);
+            }
+            
+            if(i >= k - 1){
+                temp.add(maxHeap.peek());
+            }
+        }
+        
+        int[] res = new int[temp.size()];
+        for(int i = 0; i < temp.size(); i ++){
+            res[i] = temp.get(i);
+        }
+        return res;
+    }
+}
+
+//注意10和14行的if不能颠倒！！
+
+
+// Deque solution:
+public class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums == null || nums.length == 0){
+            return new int[0];
+        }
+        
+        int[] res = new int[nums.length - k + 1];
+        Deque<Integer> deque = new LinkedList<Integer>();
+        
+        for(int i = 0; i < nums.length; i ++){
+            //把队列尾部所有比新数小的都扔掉，保证队列是降序
+            while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]){
+                deque.pollLast();
+            }
+            //加入新数
+            deque.addLast(i);
+            
+            //每当新数进来时，如果发现队列头部的数的下标，是窗口最左边数的下标，则扔掉
+            if(!deque.isEmpty() && i - k == deque.peekFirst()){
+                deque.pollFirst();
+            }
+            
+            //队列头部就是该窗口内第一大的
+            if(i - k + 1 >= 0){
+                res[i - k + 1] = nums[deque.peekFirst()];
+            }
+        }
+    
+        return res;
+    }
+}
+
+//https://segmentfault.com/a/1190000003903509
