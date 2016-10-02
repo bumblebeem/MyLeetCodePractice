@@ -1,3 +1,20 @@
+//看完九章，觉得还是这个最简单：
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode cur = head;
+        
+        while(cur != null){
+            ListNode temp = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = temp;
+        }
+        
+        return prev;
+    }
+}
+
 //I found this easy-to-understand solution on Stanford CS library's document
 /**
  * Definition for singly-linked list.
