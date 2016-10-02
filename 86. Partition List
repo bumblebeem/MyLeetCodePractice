@@ -34,29 +34,32 @@ public class Solution {
 //Then concat these two queues. Remember to set the tail of second queue a null next, or u will get TLE.
 
 
-//二刷代码
+//再刷代码，一次AC
 public class Solution {
     public ListNode partition(ListNode head, int x) {
         if(head == null || head.next == null){
             return head;
         }
+        
         ListNode less = new ListNode(0);
         ListNode greater = new ListNode(0);
-        ListNode dummy1 = less;
-        ListNode dummy2 = greater;
+        ListNode cur_l = less;
+        ListNode cur_g = greater;
+        
         ListNode cur = head;
         while(cur != null){
             if(cur.val < x){
-                less.next = cur;
-                less = less.next;
-            }else{
-                greater.next = cur;
-                greater = greater.next;
+                cur_l.next = cur;
+                cur_l = cur_l.next;
+            } else {
+                cur_g.next = cur;
+                cur_g = cur_g.next;
             }
             cur = cur.next;
         }
-        greater.next = null;    //这句没写，和上边代码错误一模一样啊，见鬼
-        less.next = dummy2.next;
-        return dummy1.next;
+        
+        cur_l.next = greater.next;
+        cur_g.next = null;
+        return less.next;
     }
 }
