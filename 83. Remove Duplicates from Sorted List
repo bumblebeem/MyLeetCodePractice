@@ -8,18 +8,19 @@
  */
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        if(head == null || head.next == null){
-            return head;
-        }
-        ListNode cur = head;
-        while(cur != null && cur.next != null){
-            if(cur.val == cur.next.val){
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        
+        ListNode cur = dummy;
+        while(cur.next != null && cur.next.next != null){
+            if(cur.next.val == cur.next.next.val){
                 cur.next = cur.next.next;
-            }else{
+            } else {    //这个else必须要写，如果if的条件成立，就不需要执行cur = cur.next了
                 cur = cur.next;
             }
         }
-        return head;
+        
+        return dummy.next;
     }
 }
 
