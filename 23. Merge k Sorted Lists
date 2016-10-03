@@ -1,0 +1,163 @@
+// 1. Heap 
+// lintcode能过，leetcode超时。。
+/**
+ * Definition for ListNode.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int val) {
+ *         this.val = val;
+ *         this.next = null;
+ *     }
+ * }
+ */ 
+public class Solution {
+    /**
+     * @param lists: a list of ListNode
+     * @return: The head of one sorted list.
+     */
+    public ListNode mergeKLists(List<ListNode> lists) {  
+        if(lists == null || lists.size() == 0){
+            return null;
+        }
+        
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>(lists.size(), 
+            new Comparator<ListNode>(){
+                public int compare(ListNode a, ListNode b){
+                    return a.val - b.val;
+                }
+        });
+        
+        //put the head of each linked list into minHeap
+        for(int i = 0; i < lists.size(); i ++){
+            if(lists.get(i) != null){
+                minHeap.add(lists.get(i));
+            }
+        }
+        
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        while(!minHeap.isEmpty()){
+            ListNode min = minHeap.poll();
+            cur.next = min;
+            cur = cur.next;
+            if(min.next != null){
+                minHeap.add(min.next);
+            }
+        }
+        
+        return dummy.next;
+    }
+}
+
+
+// 2. Divide & Conquer
+// lintcode & leetcode都能过
+public class Solution {
+    public ListNode mergeKLists(List<ListNode> lists) {  
+        if(lists == null || lists.size() == 0){
+            return null;
+        }
+        return mergeHelper(lists, 0, lists.size() - 1);
+    }
+    
+    public ListNode mergeHelper(List<ListNode> lists, int start, int end){
+        if(start == end){
+            return lists.get(start);
+        }
+        
+        int mid = (end - start) / 2 + start;
+        ListNode left = mergeHelper(lists, start, mid);
+        ListNode right = mergeHelper(lists, mid + 1, end);
+        return mergeTwoLists(left, right);
+    }
+    
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null){
+            return l2;
+        }
+        if(l2 == null){
+            return l1;
+        }
+        
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        ListNode cur1 = l1;
+        ListNode cur2 = l2;
+        while(cur1 != null && cur2 != null){
+            if(cur1.val < cur2.val){
+                cur.next = cur1;
+                cur1 = cur1.next;
+            } else {
+                cur.next = cur2;
+                cur2 = cur2.next;
+            }
+            cur = cur.next;
+        }
+        if(cur1 != null){
+            cur.next = cur1;
+        }
+        if(cur2 != null){
+            cur.next = cur2;
+        }
+        
+        return dummy.next;
+    }
+}
+
+
+// 3. merge two by two
+// lintcode能过，leetcode超时。。
+public class Solution {
+    public ListNode mergeKLists(List<ListNode> lists) {  
+        if(lists == null || lists.size() == 0){
+            return null;
+        }
+        
+        while(lists.size() > 1){
+            List<ListNode> temp = new ArrayList<ListNode>();
+            for(int i = 0; i + 1 < lists.size(); i += 2){
+                ListNode merged_list = mergeTwoLists(lists.get(i), lists.get(i + 1));
+                temp.add(merged_list);
+            }
+            if(lists.size() % 2 != 0){
+                temp.add(lists.get(lists.size() - 1));
+            }
+            lists = temp;
+        }
+        
+        return lists.get(0);
+    }
+    
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null){
+            return l2;
+        }
+        if(l2 == null){
+            return l1;
+        }
+        
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        ListNode cur1 = l1;
+        ListNode cur2 = l2;
+        while(cur1 != null && cur2 != null){
+            if(cur1.val < cur2.val){
+                cur.next = cur1;
+                cur1 = cur1.next;
+            } else {
+                cur.next = cur2;
+                cur2 = cur2.next;
+            }
+            cur = cur.next;
+        }
+        if(cur1 != null){
+            cur.next = cur1;
+        }
+        if(cur2 != null){
+            cur.next = cur2;
+        }
+        
+        return dummy.next;
+    }
+}
