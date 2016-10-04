@@ -41,3 +41,51 @@ public class Solution {
 
 //It's fairly easy to come up with the two-pointer solution first though...
 //https://leetcode.com/discuss/9533/share-my-java-solution-with-explanation
+
+
+//再刷AC版本   64-66行忘记了，看了错误的case才加上。。
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        
+        int len = getLength(head);
+        k = k % len;
+        
+        if(k == 0){
+            return head;
+        }
+        
+        ListNode before_rotate = head;
+        for(int i = 0; i < len - k - 1; i ++){
+            before_rotate = before_rotate.next;
+        }
+        ListNode start_rotate = before_rotate.next;
+        ListNode last = head;
+        for(int i = 0; i < len - 1; i ++){
+            last = last.next;
+        }
+        before_rotate.next = null;
+        last.next = head;
+        return start_rotate;
+    }
+    
+    public int getLength(ListNode head){
+        int count = 0;
+        ListNode cur = head;
+        while(cur != null){
+            count ++;
+            cur = cur.next;
+        }
+        return count;
+    }
+}
