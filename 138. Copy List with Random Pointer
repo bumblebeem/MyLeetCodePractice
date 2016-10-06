@@ -1,0 +1,92 @@
+// 1. O(n) space HashMap solution
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if(head == null){
+            return head;
+        }
+        
+        HashMap<RandomListNode, RandomListNode> lookup = new HashMap<RandomListNode, RandomListNode>();
+        
+        RandomListNode dummy = new RandomListNode(0);
+        RandomListNode curNew = dummy;
+        RandomListNode cur = head;
+        while(cur != null){
+            RandomListNode temp = new RandomListNode(cur.label);
+            lookup.put(cur, temp);
+            curNew.next = temp;
+            curNew = curNew.next;
+            cur = cur.next;
+        }
+        
+        cur = head;
+        curNew = dummy.next;
+        while(cur != null){
+            if(cur.random != null){
+                curNew.random = lookup.get(cur.random);
+            }
+            cur = cur.next;
+            curNew = curNew.next;
+        }
+        
+        return dummy.next;
+    }
+}
+
+
+// 2. O(1) space solution
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if(head == null){
+            return head;
+        }
+        
+        RandomListNode cur = head;
+        while(cur != null){
+            RandomListNode copy = new RandomListNode(cur.label);
+            copy.next = cur.next;
+            cur.next = copy;
+            cur = copy.next;
+        }
+        
+        cur = head;
+        while(cur != null){
+            if(cur.random != null){
+                cur.next.random = cur.random.next;
+            }
+            cur = cur.next.next;
+        }
+        
+        RandomListNode newHead = head.next;
+        cur = head;
+        while(cur != null){
+            RandomListNode newNode = cur.next;
+            cur.next = cur.next.next;
+            cur = cur.next;
+            if(newNode.next != null){
+                newNode.next = newNode.next.next;
+            }
+        }
+        
+        return newHead;
+    }
+}
+
+
+//https://www.kancloud.cn/kancloud/data-structure-and-algorithm-notes/73016
+//http://www.jiuzhang.com/solutions/copy-list-with-random-pointer/
