@@ -121,3 +121,7 @@ public class Solution {
         return slow;
     }
 }
+
+
+// A conclusion of the two methods:
+//http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/
