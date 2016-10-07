@@ -65,9 +65,59 @@ public class Solution {
     }
 }
 
-
 //The basic idea is to use inorder traverse.
-
-//two solutions 这道题理解的不好
 //https://discuss.leetcode.com/topic/8141/share-my-o-1-space-and-o-n-time-java-code
-//https://discuss.leetcode.com/topic/35997/share-my-java-solution-1ms-very-short-and-concise
+
+
+// https://discuss.leetcode.com/topic/35997/share-my-java-solution-1ms-very-short-and-concise
+// A more easy-understanding solution:
+// 和108的思路一模一样
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        return helper(head, null);
+    }
+    
+    private TreeNode helper(ListNode start, ListNode end){
+        if(start == end){
+            return null;
+        }
+        ListNode mid = findMiddle(start, end);
+        TreeNode root = new TreeNode(mid.val);
+        root.left = helper(start, mid);
+        root.right = helper(mid.next, end);
+        return root;
+    }
+    
+    private ListNode findMiddle(ListNode start, ListNode end){
+        if(start == null || start.next == null){
+            return start;
+        }
+        ListNode slow = start;
+        ListNode fast = start;
+        while(fast.next != end && fast.next.next != end){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+}
