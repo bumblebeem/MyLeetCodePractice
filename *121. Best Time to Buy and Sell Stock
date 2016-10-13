@@ -29,3 +29,22 @@ public class Solution {
     }
 }
 
+
+// 以下方法用了prefix sum，类似53题的解法解决了这一问题，不过理解的不好
+public class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices == null || prices.length < 2){
+            return 0;
+        }
+        int prefixSum = 0;
+        int max = 0;
+        int min = 0;
+        for(int i = 1; i < prices.length; i ++){
+            prefixSum += prices[i] - prices[i - 1];
+            max = Math.max(prefixSum - min, max);
+            min = Math.min(prefixSum, min);
+        }
+        return max;
+    }
+}
+
