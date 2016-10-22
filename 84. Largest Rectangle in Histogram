@@ -31,3 +31,7 @@ public class Solution {
 // 1.注意15行是pop，16行是peek，第一遍读代码的时候没注意，导致久久不能理解
 // 2.20行的while的使用（自己想到的），防止还有递增序列在stack里，需要全部pop出来并求值
 // 3.11行的stack判空，如果是自己写的话不一定能写出来。。
+
+
+// * A divide&conquer solution
+// https://discuss.leetcode.com/topic/7491/simple-divide-and-conquer-ac-solution-without-segment-tree
