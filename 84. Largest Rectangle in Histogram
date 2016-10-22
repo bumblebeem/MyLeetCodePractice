@@ -1,0 +1,33 @@
+// http://www.geeksforgeeks.org/largest-rectangle-under-histogram/
+// https://siddontang.gitbooks.io/leetcode-solution/content/array/largest_rectangle_in_histogram.html
+
+public class Solution {
+    public int largestRectangleArea(int[] heights) {
+        Stack<Integer> stack = new Stack<Integer>();
+        int i = 0;
+        int maxArea = 0;
+        
+        while(i < heights.length){
+            if(stack.isEmpty() || heights[i] >= heights[stack.peek()]){
+                stack.push(i);
+                i ++;
+            } else {
+                int height = heights[stack.pop()];
+                int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+                maxArea = Math.max(maxArea, width * height);
+            }
+        }
+        while(!stack.isEmpty()){
+            int height = heights[stack.pop()];
+            int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+            maxArea = Math.max(maxArea, width * height);
+        }
+        
+        return maxArea;
+    }
+}
+
+
+// 1.注意15行是pop，16行是peek，第一遍读代码的时候没注意，导致久久不能理解
+// 2.20行的while的使用（自己想到的），防止还有递增序列在stack里，需要全部pop出来并求值
+// 3.11行的stack判空，如果是自己写的话不一定能写出来。。
