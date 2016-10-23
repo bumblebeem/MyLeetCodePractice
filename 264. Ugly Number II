@@ -1,6 +1,6 @@
-//https://leetcode.com/discuss/58186/elegant-c-solution-o-n-space-time-with-detailed-explanation
-//The idea is not very hard to come up with, however, there are details need to be taken care of
-//when try to implement it.
+// https://leetcode.com/discuss/58186/elegant-c-solution-o-n-space-time-with-detailed-explanation
+// The idea is not very hard to come up with, however, there are details need to be taken care of
+// when try to implement it.
 public class Solution {
     public int nthUglyNumber(int n) {
         if(n <= 0){
@@ -31,7 +31,7 @@ public class Solution {
 }
 
 
-//Here is a Java version
+// Here is a Java version
 public class Solution {
     public int nthUglyNumber(int n) {
         ArrayList<Integer> q = new ArrayList<Integer>();
@@ -50,5 +50,37 @@ public class Solution {
             }
         }
         return q.get(q.size() - 1);
+    }
+}
+
+
+// Easy-understanding version, using heap and hashset
+// * Need to use Long to avoid overflow, and pay attention to grammar in line 67 & 84
+public class Solution {
+    public int nthUglyNumber(int n) {
+        if(n < 1){
+            return -1;
+        }
+        PriorityQueue<Long> minHeap = new PriorityQueue<Long>();
+        HashSet<Long> set = new HashSet<Long>();
+        
+        minHeap.add(Long.valueOf(1));
+        set.add(Long.valueOf(1));
+        while(--n > 0){
+            long min = minHeap.poll();
+            if(!set.contains(min * 2)){
+                set.add(min * 2);
+                minHeap.add(min * 2);
+            }
+            if(!set.contains(min * 3)){
+                set.add(min * 3);
+                minHeap.add(min * 3);
+            }
+            if(!set.contains(min * 5)){
+                set.add(min * 5);
+                minHeap.add(min * 5);
+            }
+        }
+        return minHeap.peek().intValue();
     }
 }
