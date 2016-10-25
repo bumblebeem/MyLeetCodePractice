@@ -20,45 +20,44 @@ public class Solution {
 }
 
 
-//Because of line 9, so we need the temp_res in line 7; because of line 8's iteration need to use line 9's l for 
-//multiple times, so we need line 10's newl.
-//https://leetcode.com/discuss/19510/my-ac-simple-iterative-java-python-solution
+// Because of line 9, so we need the temp_res in line 7; because of line 8's iteration need to use line 9's l for 
+// multiple times, so we need line 10's newl.
+// https://leetcode.com/discuss/19510/my-ac-simple-iterative-java-python-solution
 
 
-//Here is myself's Java version, easy-understanding!!!
-//注意46-48行，二刷自己写的时候没写出来，导致错误！
+// Here is myself's Java version, easy-understanding!!!
+// 注意45-47行，二刷自己写的时候没写出来，导致错误！
 public class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
         if(nums == null || nums.length == 0){
-            return ans;
+            return res;
         }
-        helper(ans, new ArrayList<Integer>(), 0, nums);
-        return ans;
+        getPermutations(res, new ArrayList<Integer>(), nums);
+        return res;
     }
     
-    private void helper(List<List<Integer>> ans, List<Integer> cur, int size, int[] nums){
-        if(size == nums.length){
-            ans.add(new ArrayList<Integer>(cur));
-            return;
+    private void getPermutations(List<List<Integer>> res, ArrayList<Integer> cur, int[] nums){
+        if(cur.size() == nums.length){
+            res.add(new ArrayList<Integer>(cur));
         }
         for(int i = 0; i < nums.length; i ++){
             if(cur.contains(nums[i])){
                 continue;
             }
             cur.add(nums[i]);
-            helper(ans, cur, size + 1, nums);
+            getPermutations(res, cur, nums);
             cur.remove(cur.size() - 1);
         }
     }
 }
 
 
-//I don't care the following solution,见鬼去吧
-//https://leetcode.com/discuss/18212/my-elegant-recursive-c-solution-with-inline-explanation
-//Following is another solution based on the link above, I think the basic idea is to let every element to 
-//be the first element in the process.
-//Because of the swap, I wrote it in C++...
+// I don't care the following solution,见鬼去吧
+// https://leetcode.com/discuss/18212/my-elegant-recursive-c-solution-with-inline-explanation
+// Following is another solution based on the link above, I think the basic idea is to let every element to 
+// be the first element in the process.
+// Because of the swap, I wrote it in C++...
 class Solution {
 public:
     vector<vector<int>> permute(vector<int>& nums) {
