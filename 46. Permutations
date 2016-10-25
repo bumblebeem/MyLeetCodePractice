@@ -19,7 +19,6 @@ public class Solution {
     }
 }
 
-
 // Because of line 9, so we need the temp_res in line 7; because of line 8's iteration need to use line 9's l for 
 // multiple times, so we need line 10's newl.
 // https://leetcode.com/discuss/19510/my-ac-simple-iterative-java-python-solution
