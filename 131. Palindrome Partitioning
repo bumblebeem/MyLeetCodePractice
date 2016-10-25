@@ -78,11 +78,12 @@ public class Solution {
             return;
         }
         for(int i = start; i < s.length(); i ++){
-            if(isPalindrome(s, start, i)){
-                cur.add(s.substring(start, i + 1));
-                getPalindromePartition(res, cur, s, i + 1);
-                cur.remove(cur.size() - 1);
+            if(!isPalindrome(s, start, i)){
+                continue;
             }
+            cur.add(s.substring(start, i + 1));
+            getPalindromePartition(res, cur, s, i + 1);
+            cur.remove(cur.size() - 1);
         }
     }
     
