@@ -24,7 +24,34 @@ public class Solution {
 }
 
 
-//line 11,只需要判断到h - n + 1就可以了，而不需要到h全部结束！
+// line 11,只需要判断到h - n + 1就可以了，而不需要到h全部结束！
 
-//Here is a good link:
-//https://leetcode.com/discuss/38998/explained-4ms-easy-c-solution
+// Here is a good link:
+// https://leetcode.com/discuss/38998/explained-4ms-easy-c-solution
+
+
+// 另一种写法，这里需要注意的是切记39-41行，所有target为空的情况都应该返回0（否则就各种WA啊。。）
+class Solution {
+    public int strStr(String source, String target) {
+        if(target == null || source == null || target.length() > source.length()){
+            return -1;
+        }
+        if(target == ""){
+            return 0;
+        }
+        int t_len = target.length();
+        int s_len = source.length();
+        for(int i = 0; i < s_len - t_len + 1; i ++){
+            for(int j = 0; j < t_len; j ++){
+                if(target.charAt(j) == source.charAt(i + j)){
+                    if(j == t_len - 1){
+                        return i;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+        return -1;
+    }
+}
