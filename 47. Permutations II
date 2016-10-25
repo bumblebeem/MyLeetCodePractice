@@ -1,0 +1,37 @@
+public class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(nums == null || nums.length == 0){
+            return res;
+        }
+        Arrays.sort(nums);
+        boolean[] used = new boolean[nums.length];
+        getPermutations(res, new ArrayList<Integer>(), used, nums);
+        return res;
+    }
+    
+    private void getPermutations(List<List<Integer>> res, List<Integer> cur, boolean[] used, int[] nums){
+        if(cur.size() == nums.length){
+            res.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        for(int i = 0; i < nums.length; i ++){
+            if( used[i] == true || (i != 0 && nums[i] == nums[i - 1] && used[i - 1] == false) ){
+                continue;
+            }
+            used[i] = true;
+            cur.add(nums[i]);
+            getPermutations(res, cur, used, nums);
+            cur.remove(cur.size() - 1);
+            used[i] = false;
+        }
+    }
+}
+
+
+// line 19 - 21的if是重点,作用解释如下：
+// 为了去除重复元素影响。比如，给出一个排好序的数组，[1,2,2]，那么第一个2和第二2如果在结果中互换位置，
+// 我们也认为是同一种方案，所以我们强制要求相同的数字，原来排在前面的，在结果当中也应该排在前面，
+// 这样就保证了唯一性。所以当前面的2还没有使用的时候，就不应该让后面的2使用。
+// 
+// 另外注意使用这种方法就需要先对输入数组进行排序
