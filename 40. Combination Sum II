@@ -1,0 +1,31 @@
+public class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(candidates == null || candidates.length == 0){
+            return res;
+        }
+        Arrays.sort(candidates);
+        getCombinationSum(res, new ArrayList<Integer>(), target, candidates, 0);
+        return res;
+    }
+    
+    private void getCombinationSum(List<List<Integer>> res, List<Integer> cur, int target, int[] candidates, int start){
+        if(target == 0){
+            res.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        for(int i = start; i < candidates.length; i ++){
+            if(target - candidates[i] >= 0){
+                if(i != start && candidates[i] == candidates[i - 1]){
+                    continue;
+                }
+                cur.add(candidates[i]);
+                getCombinationSum(res, cur, target - candidates[i], candidates, i + 1);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }
+}
+
+
+// 与Subsets II极其相似！
