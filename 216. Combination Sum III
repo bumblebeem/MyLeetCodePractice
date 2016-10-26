@@ -24,5 +24,28 @@ public class Solution {
 }
 
 
-//backtracking理解得进步了很多！
+// backtracking理解得进步了很多！
 
+
+// 再刷一次AC，可以说是无压力。。（不过刚做完Subsets和Permuataions...）
+public class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        getCombinationSum3(res, new ArrayList<Integer>(), k, n, 1);
+        return res;
+    }
+    
+    private void getCombinationSum3(List<List<Integer>> res, List<Integer> cur, int num, int target, int start){
+        if(num == 0 && target == 0){
+            res.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        for(int i = start; i <= 9; i ++){
+            if(num > 0 && target - i >= 0){
+                cur.add(i);
+                getCombinationSum3(res, cur, num - 1, target - i, i + 1);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }
+}
