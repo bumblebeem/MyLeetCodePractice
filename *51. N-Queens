@@ -43,11 +43,11 @@ private:
 };
 
 
-//https://leetcode.com/discuss/35128/accepted-solution-use-backtracking-bitmask-easy-understand
-//Mimic the above solution in the discussion... And this solution could be further optimized according 
-//to the link above. 
-//Understand the function isValid, need a better understanding of the rest part of line 18 - 20.
+// https://leetcode.com/discuss/35128/accepted-solution-use-backtracking-bitmask-easy-understand
+// Mimic the above solution in the discussion... And this solution could be further optimized according 
+// to the link above. 
+// Understand the function isValid, need a better understanding of the rest part of line 18 - 20.
 
-//*Except line 19 &res, other parameters in the signature of the solveNQueens and isValid function could
-//use themselves rather than their references(e.g. use n instead of &n), however, use refereces to these 
-//parameters dramatically increase the efficiency of the program!
+// *Except line 19 &res, other parameters in the signature of the solveNQueens and isValid function could
+// use themselves rather than their references(e.g. use n instead of &n), however, use refereces to these 
+// parameters dramatically increase the efficiency of the program!
