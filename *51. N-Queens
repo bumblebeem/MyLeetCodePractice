@@ -43,7 +43,7 @@ private:
 };
 
 
-// https://leetcode.com/discuss/35128/accepted-solution-use-backtracking-bitmask-easy-understand
+// https://discuss.leetcode.com/topic/13617/accepted-4ms-c-solution-use-backtracking-and-bitmask-easy-understand
 // Mimic the above solution in the discussion... And this solution could be further optimized according 
 // to the link above. 
 // Understand the function isValid, need a better understanding of the rest part of line 18 - 20.
