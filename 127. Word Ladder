@@ -46,7 +46,6 @@ public class Solution {
     public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
         HashSet<String> beginSet = new HashSet<String>();
         HashSet<String> endSet = new HashSet<String>();
-        HashSet<String> visited = new HashSet<String>();
         int distance = 1;
         
         beginSet.add(beginWord);
@@ -62,23 +61,23 @@ public class Solution {
             for(String curWord : beginSet) {
                 for(int i = 0; i < curWord.length(); i ++) {
                     char[] curWordChar = curWord.toCharArray();
-                    for(char c = 'a'; c < 'z'; c ++) {
+                    for(char c = 'a'; c <= 'z'; c ++) {
                         curWordChar[i] = c;
-                        String transformedWord = new String(curWordChar);
+                        String intermediateWord = new String(curWordChar);
                         
-                        if(endSet.contains(transformedWord)) {
+                        if(endSet.contains(intermediateWord)) {
                             return distance + 1;
                         }
                         
-                        if(!visited.contains(transformedWord) && wordList.contains(transformedWord)) {
-                            visited.add(transformedWord);
-                            wordList.remove(transformedWord);
-                            next.add(transformedWord);
+                        if(wordList.contains(intermediateWord)) {
+                            wordList.remove(intermediateWord);
+                            next.add(intermediateWord);
                         }
                     }
                 }
             }
             beginSet = next;
+            
             distance ++;
         }
         
