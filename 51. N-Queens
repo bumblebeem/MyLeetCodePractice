@@ -110,3 +110,5 @@ public class Solution {
         return cur;
     }
 }
+
+// http://www.jiuzhang.com/solutions/n-queens/
