@@ -1,4 +1,4 @@
-//Solution 1: one-way BFS
+// Solution 1: one-way BFS
 public class Solution {
     public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
         wordList.add(endWord);
@@ -29,11 +29,11 @@ public class Solution {
         return wordList.contains(endWord) ? 0 : distance;
     }
 }
-//line 16如果放在line 15的for循环的外边，在line 17的for循环里就要储存改变前的curWordChar[i]的值，
-//之后在line 17的for循环结束之后再还原回去
+// line 16如果放在line 15的for循环的外边，在line 17的for循环里就要储存改变前的curWordChar[i]的值，
+// 之后在line 17的for循环结束之后再还原回去
 
 
-//Solution 2: two-way BFS!!
+// Solution 2: two-way BFS!!
 public class Solution {
     public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
         HashSet<String> beginSet = new HashSet<String>();
