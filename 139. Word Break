@@ -39,7 +39,7 @@ public class Solution {
 
 //上边的代码还有漏洞，遇到很大的case就要超时
 //优化的话，可以先算出dict里边最长的单词的长度，之后对内层的for循环进行修改，
-//如line 58 - 64. 同时也不要忘记line 62的break。
+//如line 57 - 63. 同时也不要忘记line 61的break。
 public class Solution {
     /**
      * @param s: A string s
