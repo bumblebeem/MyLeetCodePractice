@@ -21,16 +21,16 @@ public class Solution {
 public class Solution {
     public boolean wordBreak(String s, Set<String> wordDict) {
         boolean[] dp = new boolean[s.length() + 1];
-        Arrays.fill(dp, false);
+        //Arrays.fill(dp, false);       boolean的默认初始化值就是false
         dp[0] = true;
         for(int i = 1; i <= s.length(); i ++){
-            for(int j = 1; j <= i; j ++){
-                String word = s.substring(j - 1, i);
-                if(dp[j - 1] == true && wordDict.contains(word)){
+            for(int j = 0; j < i; j ++){
+                String cur = s.substring(j, i);
+                if(wordDict.contains(cur) && dp[j] == true){
                     dp[i] = true;
                     break;
                 }
-            } 
+            }
         }
         return dp[s.length()];
     }
