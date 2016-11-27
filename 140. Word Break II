@@ -1,0 +1,131 @@
+// 1. Naive DFS solution, got TLE; BUT at least it helped me review DFS 
+// 第一次写的时候是WA，因为忘记了30行的remove。。。
+public class Solution {
+    public List<String> wordBreak(String s, Set<String> wordDict) {
+		List<String> res = new ArrayList<String>();
+        HashSet<Integer> visited = new HashSet<Integer>();
+        visited.add(0);
+        getAllSentences(res, new ArrayList<String>(), s, wordDict, 0, visited);
+        return res;
+    }
+    
+    private void getAllSentences(List<String> res, List<String> cur, String s, Set<String> wordDict, int index, HashSet<Integer> visited){
+        if(!visited.contains(index)){
+            return;
+        }
+        if(index == s.length()){
+        	StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < cur.size() - 1; i ++){
+                sb.append(cur.get(i) + " ");
+            }
+            sb.append(cur.get(cur.size() - 1));
+            res.add(sb.toString());
+        }
+        for(int i = index + 1; i <= s.length(); i ++){
+            String curWord = s.substring(index, i);
+            if(wordDict.contains(curWord) && visited.contains(index)){
+                visited.add(i);
+                cur.add(curWord);
+                getAllSentences(res, cur, s, wordDict, i, visited);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }  
+}
+
+
+// 2. 加入了一些预处理，方便在dfs中进行剪枝，这样就不会超时了。。但是有些下标需要注意
+public class Solution {
+    public List<String> wordBreak(String s, Set<String> wordDict) {
+        List<String> res = new ArrayList<String>();
+        if(s == null || s.length() == 0 || wordDict == null){
+            return res;
+        }
+        
+        // isWord[a][b],表示s.substring(a, b + 1)是不是一个字典中的单词
+        boolean[][] isWord = new boolean[s.length()][s.length()];
+        for(int i = 0; i < s.length(); i ++){
+            for(int j = i; j < s.length(); j ++){
+                String word = s.substring(i, j + 1);
+                if(wordDict.contains(word)){
+                    isWord[i][j] = true;
+                }
+            }
+        }
+        
+        // possible[a]表示从字符串s的开始到下标a为止，是不是可以组成word break
+        boolean[] possible = new boolean[s.length() + 1];
+        possible[s.length()] = true;
+        for(int i = s.length() - 1; i >= 0; i --){
+            for(int j = i; j < s.length(); j ++){
+                if(isWord[i][j] && possible[j + 1]){
+                    possible[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        List<Integer> path = new ArrayList<Integer>();
+        dfs(0, s, path, isWord, possible, res);
+        return res;
+    }
+    
+    private void dfs(int index, String s, List<Integer> path, 
+                        boolean[][] isWord, boolean[] possible, 
+                        List<String> res){
+        if(!possible[index]){
+            return;
+        }
+        if(index == s.length()){
+            StringBuilder sb = new StringBuilder();
+            int lastIndex = 0;
+            for(int i = 0; i < path.size() - 1; i ++){
+                String word = s.substring(lastIndex, path.get(i));
+                lastIndex = path.get(i);
+                sb.append(word + " ");
+            }
+            sb.append(s.substring(lastIndex, path.get(path.size() - 1)));
+            res.add(sb.toString());
+            return;
+        }
+        for(int i = index; i < s.length(); i ++){
+            if(!isWord[index][i]){
+                continue;
+            }
+            path.add(i + 1);
+            dfs(i + 1, s, path, isWord, possible, res);
+            path.remove(path.size() - 1);
+        }
+    }
+}
+
+
+// 3. 这种方法最精髓，然而理解得并不是很好。。。
+// 
+public class Solution {
+    HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+    
+    public List<String> wordBreak(String s, Set<String> wordDict) {
+        List<String> res = new ArrayList<String>();
+        if(s == null && s.length() == 0){
+            return res;
+        }
+        if(map.containsKey(s)){
+            return map.get(s);
+        }
+        if(wordDict.contains(s)){
+            res.add(s);
+        }
+        for(int i = 1; i < s.length(); i ++){
+            String word = s.substring(i);
+            if(wordDict.contains(word)){
+                List<String> temp = wordBreak(s.substring(0, i), wordDict);
+                for(int j = 0; j < temp.size(); j ++){
+                    res.add(temp.get(j) + " " + word);
+                }
+            }
+        }
+        map.put(s, res);
+        return res;
+    }
+}
