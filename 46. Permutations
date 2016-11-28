@@ -25,7 +25,7 @@ public class Solution {
 
 
 // Here is myself's Java version, easy-understanding!!!
-// 注意45-47行，二刷自己写的时候没写出来，导致错误！
+// 注意44-46行，二刷自己写的时候没写出来，导致错误！
 public class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
