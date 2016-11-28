@@ -2,7 +2,81 @@
 //https://leetcode.com/discuss/38336/solutions-partition-priority_queue-multiset-respectively
 
 //QuickSelect: https://en.wikipedia.org/wiki/Quickselect
+//THIS IS A VERY HELPFUL VIDEO: https://www.youtube.com/watch?v=SXXpkdruLfc
 //Method 1: Use method similar to quiksort, with a pivot!
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        // the original quickSelect finds the kth smallest, so we use "nums.length + 1 - k" to 
+        // convert it into kth largest as desired in this question
+        return quickSelect(nums, 0, nums.length - 1, nums.length + 1 - k);
+    }
+    
+    public int quickSelect(int[] nums, int left, int right, int k){
+        if(left == right){
+            return nums[left];
+        }
+        int pivotIndex = partition(nums, left, right);
+        if(pivotIndex + 1 == k){
+            return nums[pivotIndex];
+        } else if(pivotIndex + 1 > k){
+            return quickSelect(nums, left, pivotIndex - 1, k);
+        } else {
+            return quickSelect(nums, pivotIndex + 1, right, k);
+        }
+    }
+    // quickSelect也可以写成下边注释掉的这个样子！
+    // public int quickSelect(int[] nums, int left, int right, int k){
+    //     while(true){
+    //         if(left == right){
+    //             return nums[left];
+    //         }
+    //         int pivotIndex = partition(nums, left, right);
+    //         if(pivotIndex + 1 == k){
+    //             return nums[pivotIndex];
+    //         } else if(pivotIndex + 1 > k){
+    //             right = pivotIndex - 1;
+    //         } else{
+    //             left = pivotIndex + 1;
+    //         }
+    //     }
+    // }
+    
+    public int partition(int[] nums, int left, int right){
+        int pivotValue = nums[left];
+        int leftMark = left + 1;
+        int rightMark = right;
+        
+        // the element in nums might not be distinct, so we use <=, >= instead of <, > in line 35 and 38
+        while(true){
+            while(leftMark < right && nums[leftMark] <= pivotValue){
+                leftMark ++;
+            }
+            while(rightMark > left && nums[rightMark] >= pivotValue){
+                rightMark --;
+            }
+            
+            if(leftMark >= rightMark){
+                break;
+            } else {
+                int temp = nums[leftMark];
+                nums[leftMark] = nums[rightMark];
+                nums[rightMark] = temp;
+            }
+        }
+        
+        int temp = nums[left];
+        nums[left] = nums[rightMark];
+        nums[rightMark] = temp;
+        
+        return rightMark;
+    }
+}
+
+
+// ****************************以上是这道题需要重点掌握的方法**********************************
+
+
+//The following implementation is not easy-understanding at all!
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
         int left = 0, right = nums.length - 1;
