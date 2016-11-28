@@ -1,6 +1,7 @@
 //Below link is a great explanation of this problem!
 //https://leetcode.com/discuss/38336/solutions-partition-priority_queue-multiset-respectively
 
+//QuickSelect: https://en.wikipedia.org/wiki/Quickselect
 //Method 1: Use method similar to quiksort, with a pivot!
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
