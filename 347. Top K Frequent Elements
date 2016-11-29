@@ -110,7 +110,7 @@ public class Solution {
 
 
 // 法三：TreeMap
-// *注意line136 pollLastEntry的用法！！
+// *注意line136 pollLastEntry/pollFirstEntry的用法！！
 public class Solution {
     public List<Integer> topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
