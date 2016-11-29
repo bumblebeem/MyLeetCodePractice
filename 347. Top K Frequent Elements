@@ -1,0 +1,141 @@
+// 法一：max heap,容易想到，一次AC！
+// 复习了定义一个class的方法
+// *需要注意的是此方法中Map.Entry的用法！！！(line 33,34)
+class Element{
+    int key;
+    int frequency;
+    
+    Element(int key, int frequency){
+        this.key = key;
+        this.frequency = frequency;
+    }
+}
+
+public class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        List<Integer> res = new ArrayList<Integer>();
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for(int e : nums){
+            if(map.containsKey(e)){
+                map.put(e, map.get(e) + 1);
+            } else {
+                map.put(e, 1);
+            }
+        }
+        
+        PriorityQueue<Element> maxHeap = new PriorityQueue<Element>(nums.length, new Comparator<Element>(){
+            public int compare(Element a, Element b){
+                return b.frequency - a.frequency;
+            } 
+        });
+        
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            maxHeap.add(new Element(entry.getKey(), entry.getValue()));
+        }
+        
+        for(int i = 0; i < k; i ++){
+            res.add(maxHeap.poll().key);
+        }
+        return res;
+    }
+}
+
+
+// 稍微简化了一下上边的方法，直接把PriorityQueue的元素变成Map.Entry
+// *注意line60 - 64以Map.Entry作为元素的Comparator的写法！！！
+public class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        List<Integer> res = new ArrayList<Integer>();
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for(int e : nums){
+            if(map.containsKey(e)){
+                map.put(e, map.get(e) + 1);
+            } else {
+                map.put(e, 1);
+            }
+        }
+        
+        PriorityQueue<Map.Entry<Integer, Integer>> maxHeap = new PriorityQueue<Map.Entry<Integer, Integer>>(nums.length, new Comparator<Map.Entry<Integer, Integer>>(){
+            public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b){
+                return b.getValue() - a.getValue();
+            } 
+        });
+        
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            maxHeap.add(entry);
+        }
+        
+        for(int i = 0; i < k; i ++){
+            res.add(maxHeap.poll().getKey());
+        }
+        return res;
+    }
+}
+
+
+// 法二：Bucket Sort,思路依旧不难
+// *注意line83(类型为List<Integer>的数组的声明与定义！！line96说明默认每个元素的初始化值是null); line104的addAll的用法！！
+public class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        List<Integer> res = new ArrayList<Integer>();
+        List<Integer>[] bucket = new List[nums.length + 1];
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for(int e : nums){
+            if(map.containsKey(e)){
+                map.put(e, map.get(e) + 1);
+            } else {
+                map.put(e, 1);
+            }
+        }
+        
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            int frequency = entry.getValue();
+            if(bucket[frequency] == null){
+                bucket[frequency] = new ArrayList<Integer>();
+            }
+            bucket[frequency].add(entry.getKey());
+        }
+        
+        for(int i = bucket.length - 1; i >= 0 && res.size() < k; i --){
+            if(bucket[i] != null){
+                res.addAll(bucket[i]);
+            }
+        }
+        return res;
+    }
+}
+
+
+// 法三：TreeMap
+// *注意line136 pollLastEntry的用法！！
+public class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int e : nums){
+            if(map.containsKey(e)){
+                map.put(e, map.get(e) + 1);
+            } else {
+                map.put(e, 1);
+            }
+        }
+        
+        TreeMap<Integer, List<Integer>> freqMap = new TreeMap<Integer, List<Integer>>();
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            int freq = entry.getValue();
+            if(!freqMap.containsKey(freq)){
+                freqMap.put(freq, new LinkedList<Integer>());
+            }
+            freqMap.get(freq).add(entry.getKey());
+        }
+        
+        List<Integer> res = new ArrayList<Integer>();
+        while(res.size() < k){
+            Map.Entry<Integer, List<Integer>> entry = freqMap.pollLastEntry();
+            res.addAll(entry.getValue());
+        }
+        return res;
+    }
+}
