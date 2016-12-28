@@ -23,9 +23,9 @@ public class Solution {
     }
 }
 
-
 // The val of the TreeNode is int, 
 // that's why we can use Long.MIN_VALUE and Long.MAX_VALUE and still pass the boundary cases.
+// Cracking the Coding Interview P248的解法似乎更优一点点
 
 // Main idea is just inorder traverse. 
 // The minimum and maximum values come from the parent node 
