@@ -58,8 +58,7 @@ public class Solution {
     }
 }
 
-//有同样的思路（找到数组的中间元素作为根节点，之后再递归），但是没有实现出来。。。
-//helper的编写出现了错误，看了答案才改正过来
+//思路没问题了（找到数组的中间元素作为根节点，之后再递归）；50-52行没有写导致错误。。
 
 //https://leetcode.com/discuss/36616/java-iterative-solution
 //above is a link with iterative solutions, interesting to read...
