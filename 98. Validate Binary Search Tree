@@ -24,14 +24,39 @@ public class Solution {
 }
 
 
-//The val of the TreeNode is int, 
-//that's why we can use Long.MIN_VALUE and Long.MAX_VALUE and still pass the boundary cases.
+// The val of the TreeNode is int, 
+// that's why we can use Long.MIN_VALUE and Long.MAX_VALUE and still pass the boundary cases.
 
-//Main idea is just inorder traverse. 
-//The minimum and maximum values come from the parent node 
-//and if the value of current node is between minimum and maximum value, 
-//then visit left and right subtree for inorder traverse.
+// Main idea is just inorder traverse. 
+// The minimum and maximum values come from the parent node 
+// and if the value of current node is between minimum and maximum value, 
+// then visit left and right subtree for inorder traverse.
 
 
-//*Iterative solution:
-//http://www.jiuzhang.com/solutions/validate-binary-search-tree/
+// A more easy-understanding recursive solution(Cracking the Coding Interview P246)
+public class Solution {
+    Integer last = null;
+    
+    public boolean isValidBST(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        
+        if(!isValidBST(root.left)){
+            return false;
+        }
+        if(last != null && last >= root.val){
+            return false;
+        }
+        last = root.val;
+        if(!isValidBST(root.right)){
+            return false;
+        }
+        
+        return true;
+    }
+}
+
+
+// *Iterative solution:
+// http://www.jiuzhang.com/solutions/validate-binary-search-tree/
