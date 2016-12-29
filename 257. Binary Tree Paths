@@ -12,13 +12,14 @@
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<String>();
-        if(root != null){
-            printPath(root, res, "");
-        }
+        printPath(root, res, "");
         return res;
     }
     
     private void printPath(TreeNode node, List<String> res, String temp){
+        if(node == null){
+            return;
+        }
         if(node.left == null && node.right == null){
             res.add(temp + node.val);
             return;
