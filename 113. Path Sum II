@@ -30,4 +30,6 @@ public class Solution {
 }
 
 
-//Finally! Backtracking基本找到感觉了！
+// Finally! Backtracking基本找到感觉了！
+
+// 与lintcode的376是同一道题
