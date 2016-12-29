@@ -1,0 +1,57 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int pathSum(TreeNode root, int sum) {
+        HashMap<Integer, Integer> preSum = new HashMap<Integer, Integer>();
+        preSum.put(0, 1);
+        return dfs(root, 0, sum, preSum);
+    }
+    
+    private int dfs(TreeNode node, int sum, int target, HashMap<Integer, Integer> preSum){
+        if(node == null){
+            return 0;
+        }
+        sum += node.val;
+        int res = preSum.getOrDefault(sum - target, 0);
+        preSum.put(sum, preSum.getOrDefault(sum, 0) + 1);
+        
+        res += dfs(node.left, sum, target, preSum) + dfs(node.right, sum, target, preSum);
+        preSum.put(sum, preSum.get(sum) - 1);
+        return res;
+    }
+}
+
+// 注意第22行是sum - target而不是target - sum;因为sum是从根节点到当前节点A的和，
+// res是从根节点到这条路径上（root到点A这条路径）的某节点的和，他们的差才是target。
+// 即题目描述中说的必须要go downwards
+
+
+// 另一种解法：
+public class Solution {
+    public int pathSum(TreeNode root, int sum) {
+        if(root == null){
+            return 0;
+        }
+        return dfs(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+    }
+    
+    private int dfs(TreeNode node, int sum){
+        int res = 0;
+        if(node == null){
+            return res;
+        }
+        if(sum == node.val){
+            res ++;
+        }
+        res += dfs(node.left, sum - node.val);
+        res += dfs(node.right, sum - node.val);
+        return res;
+    }
+}
