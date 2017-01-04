@@ -26,7 +26,7 @@ public class Solution {
     }
 }
 
-//1. Use two pointers in order to solve it in one pass!
-//2. Need to pay attention to line 14 - 16, which tells me that:
-//在Java中传递参数时，原始类型是传值，对象是传引用
-//3. 运用一个额外的dummy，注意理解！因为head有可能需要被remove！Sep.8刷的时候已经无压力注意到这点了。。
+// 1. Use two pointers in order to solve it in one pass!
+// 2. Need to pay attention to line 14 - 16, which tells me that:
+// 在Java中传递参数时，原始类型是传值，对象是传引用
+// 3. 运用一个额外的dummy，注意理解！因为head有可能需要被remove！Sep.8刷的时候已经无压力注意到这点了。。
