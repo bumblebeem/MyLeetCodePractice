@@ -17,7 +17,7 @@ public:
             return false;
         }
         else{
-            //此处注意先要判断val是否相等，之后再调用两个isSameTree
+            // 此处注意先要判断val是否相等，之后再调用两个isSameTree
             if(p -> val == q -> val){
                 return isSameTree(p -> left, q -> left) && isSameTree(p -> right, q -> right);
             }
@@ -27,18 +27,22 @@ public:
     }
 };
 
-//注意对p，q是否为NULL的几种情况的讨论（树的问题，一定要记得讨论根节点是否为NULL！！）
+// 注意对p，q是否为NULL的几种情况的讨论（树的问题，一定要记得讨论根节点是否为NULL！！）
 
 
-//my newset Java version
+// my newset Java version
 public class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
+        if((p == null && q != null) || p != null && q == null){
+            return false;
+        }
         if(p == null && q == null){
             return true;
         }
-        if(p == null || q == null){
+        if(p.val != q.val){
             return false;
+        } else {
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
         }
-        return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 }
