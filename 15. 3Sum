@@ -1,45 +1,36 @@
 public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result = new LinkedList<>();
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
         Arrays.sort(nums);
-        for(int i = 0; i < nums.length - 2; i ++){
-            int a = nums[i];
-            int start = i + 1;
-            int end = nums.length - 1;
-            while(start < end){
-                int b = nums[start];
-                int c = nums[end];
-                if(a + b + c == 0){
-                    List<Integer> temp = new LinkedList<>();
-                    temp.add(a);
-                    temp.add(b);
-                    temp.add(c);
-                    result.add(temp);
-                    while(start < end && nums[start] == nums[start + 1]){
-                        start ++;
-                    }
-                    while(start < end && nums[end] == nums[end - 1]){
-                        end --;
-                    }
-                    start ++;
-                    end --;
-                }else if(a + b + c > 0){
-                    end --;
-                }else{
-                    start ++;
+        for(int k = 0; k <= nums.length - 3; k ++){
+            int low = k + 1, high = nums.length - 1;
+            if(k == 0 || nums[k] != nums[k - 1]){
+                while(low < high){
+                    if(nums[k] + nums[low] + nums[high] > 0){
+                        high --;
+                    } else if(nums[k] + nums[low] + nums[high] < 0){
+                        low ++;
+                    } else {
+                        res.add(Arrays.asList(nums[k], nums[low], nums[high]));
+                        while(low < high && nums[low] == nums[low + 1]){
+                            low ++;
+                        }
+                        while(low < high && nums[high] == nums[high - 1]){
+                            high --;
+                        }
+                        low ++;
+                        high --;
+                    } 
                 }
             }
-            while(i < nums.length - 2 && nums[i] == nums[i + 1]){
-                i ++;
-            }
         }
-        return result;
+        return res;
     }
 }
 
+// 本质是two pointers
 
-//line 13, 初始化的语法
-//line 4, Arrays.sort用的是dual-pivot quicksort
-//line 18, 21, 32的三个while很重要，否则就要超时
+// 注意line 7, 15, 18的跳过重复元素的操作，这个操作既可以让最后res中的解没有重复，又可以避免很多重复计算，提升效率！！
+// (就是这个优化没想到导致超时）
 
-//https://en.wikipedia.org/wiki/3SUM
+// 注意line 14的Arrays.asList的语法~
