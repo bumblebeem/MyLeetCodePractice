@@ -34,7 +34,47 @@ public class Solution {
 }
 
 
-//line 29,注意处理可能发生的最高位的进位
-//line 26,new一个新的next
+// line 29,注意处理可能发生的最高位的进位
+// line 26,new一个新的next
 
-//*while循环里经常忘记让循环的变量自增或自减，实在不该！！
+// *while循环里经常忘记让循环的变量自增或自减，实在不该！！
+
+
+// 再刷代码
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if(l1 == null){
+            return l2;
+        }
+        if(l2 == null){
+            return l1;
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        int carry = 0;
+        while(l1 != null && l2 != null){
+            int sum = l1.val + l2.val;
+            cur.next = new ListNode((sum + carry) % 10);
+            carry = (sum + carry) / 10;
+            cur = cur.next;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        while(l1 != null){
+            cur.next = new ListNode((l1.val + carry) % 10);
+            carry = (l1.val + carry) / 10;
+            cur = cur.next;
+            l1 = l1.next;
+        }
+        while(l2 != null){
+            cur.next = new ListNode((l2.val + carry) % 10);
+            carry = (l2.val + carry) / 10;
+            cur = cur.next;
+            l2 = l2.next;
+        }
+        if(carry != 0){
+            cur.next = new ListNode(1);
+        }
+        return dummy.next;
+    }
+}
