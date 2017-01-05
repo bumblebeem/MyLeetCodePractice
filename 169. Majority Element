@@ -20,8 +20,29 @@ public class Solution {
     }
 }
 
-//line 14是“小于”不是“小于等于”，line 15记得把count清零
+// line 14是“小于”不是“小于等于”，line 15记得把count清零
 
 
-//Following link describes all the possible solutions... Cool
-//https://leetcode.com/discuss/42929/6-suggested-solutions-in-c-with-explanations
+// Following link describes all the possible solutions... Cool
+// https://leetcode.com/discuss/42929/6-suggested-solutions-in-c-with-explanations
+
+
+// 再刷一次AC版本
+public class Solution {
+    public int majorityElement(int[] nums) {
+        int majority = nums[0];
+        int count = 1;
+        for(int i = 1; i < nums.length; i ++){
+            if(nums[i] == majority){
+                count ++;
+            } else {
+                count --;
+                if(count == 0){
+                    majority = nums[i];
+                    count = 1;
+                }
+            }
+        }
+        return majority;
+    }
+}
