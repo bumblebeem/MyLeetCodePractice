@@ -1,3 +1,4 @@
+// Iterative
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -33,9 +34,28 @@ public class Solution {
     }
 }
 
-
 //https://leetcode.com/discuss/9736/accepted-code-with-explaination-does-anyone-have-better-idea
 //Read this link along with my note in Evernote!
 
+
 //Yet another solution, recursive or morris traversal
 //https://leetcode.com/discuss/36711/solutions-iterative-recursive-traversal-different-solutions
+
+
+// Recursive
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        helper(res, root);
+        return res;
+    }
+    
+    private void helper(List<Integer> res, TreeNode root){
+        if(root == null){
+            return;
+        }
+        helper(res, root.left);
+        helper(res, root.right);
+        res.add(root.val);
+    }
+}
