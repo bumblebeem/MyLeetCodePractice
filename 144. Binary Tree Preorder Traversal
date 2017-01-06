@@ -1,34 +1,50 @@
+// Recursive
 /**
  * Definition for a binary tree node.
- * struct TreeNode {
+ * public class TreeNode {
  *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
  */
-class Solution {
-public:
-    vector<int> preorderTraversal(TreeNode* root) {
-        vector<int> result;
-        if(root == NULL){
-            return result;
-        }
-        stack<TreeNode*> preorder_stack;
-        preorder_stack.push(root);
-        while(! preorder_stack.empty()){
-            TreeNode* cur = preorder_stack.top();
-            result.push_back(cur -> val);
-            preorder_stack.pop();
-            if(cur -> right){
-                preorder_stack.push(cur -> right);
-            }
-            if(cur -> left){
-                preorder_stack.push(cur -> left);
-            }
-        }
-        return result;
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        helper(res, root);
+        return res;
     }
-};
+    
+    private void helper(List<Integer> res, TreeNode node){
+        if(node == null){
+            return;
+        }
+        res.add(node.val);
+        helper(res, node.left);
+        helper(res, node.right);
+    }
+}
 
-//简单的DFS遍历问题，注意这里使用的是stack，而不同于BFS遍历中使用的queue，其他没什么区别
+
+// Iterative
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        if(root == null){
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode top = stack.pop();
+            res.add(top.val);
+            if(top.right != null){
+                stack.push(top.right);
+            }
+            if(top.left != null){
+                stack.push(top.left);
+            }
+        }
+        return res;
+    }
+}
