@@ -1,0 +1,97 @@
+// Solution 1: Similar to "Add Two Numbers", just need to write the reverseList function
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode r1 = reverseList(l1);
+        ListNode r2 = reverseList(l2);
+        
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        int carry = 0;
+        while(r1 != null || r2 != null){
+            int sum = carry;
+            if(r1 != null){
+                sum += r1.val;
+                r1 = r1.next;
+            }
+            if(r2 != null){
+                sum += r2.val;
+                r2 = r2.next;
+            }
+            cur.next = new ListNode(sum % 10);
+            carry = sum / 10;
+            cur = cur.next;
+        }
+        if(carry == 1){
+            cur.next = new ListNode(1);
+        }
+        
+        return reverseList(dummy.next);
+    }
+    
+    private ListNode reverseList(ListNode l){
+        ListNode pre = null;
+        ListNode cur = l;
+        
+        while(cur != null){
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        
+        return pre;
+    }
+}
+
+
+// Follow-up solution: reversing lists is not allowed
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> s1 = new Stack<Integer>();
+        Stack<Integer> s2 = new Stack<Integer>();
+        while(l1 != null){
+            s1.push(l1.val);
+            l1 = l1.next;
+        }
+        while(l2 != null){
+            s2.push(l2.val);
+            l2 = l2.next;
+        }
+        
+        Stack<Integer> res = new Stack<Integer>();
+        int carry = 0;
+        while(!s1.isEmpty() || !s2.isEmpty()){
+            int sum = carry;
+            if(!s1.isEmpty()){
+                sum += s1.pop();
+            }
+            if(!s2.isEmpty()){
+                sum += s2.pop();
+            }
+            res.push(sum % 10);
+            carry = sum / 10;
+        }
+        if(carry == 1){
+            res.push(1);
+        }
+        
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        while(!res.isEmpty()){
+            cur.next = new ListNode(res.pop());
+            cur = cur.next;
+        }
+        return dummy.next;
+    }
+}
+
+// I used 3 stacks, which is easy-understanding, here is a link using 2 stacks, harder to implement
+// https://discuss.leetcode.com/topic/65279/easy-o-n-java-solution-using-stack
