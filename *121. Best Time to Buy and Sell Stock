@@ -1,21 +1,6 @@
-//This question could be transformed into question 53
-//https://en.wikipedia.org/wiki/Maximum_subarray_problem
-//https://leetcode.com/discuss/48378/kadanes-algorithm-since-mentioned-about-interviewer-twists
-
-int maxProfit(int* prices, int pricesSize) {
-    int max = 0, curMax = 0;
-    for(int i = 1; i < pricesSize; i ++){
-        curMax += prices[i] - prices[i - 1];
-        if(curMax > max){
-            max = curMax;
-        }
-        if(curMax < 0){
-            curMax = 0;
-        }
-    }
-    return max;
-}
-
+// This question could be transformed into question 53
+// https://en.wikipedia.org/wiki/Maximum_subarray_problem
+// https://leetcode.com/discuss/48378/kadanes-algorithm-since-mentioned-about-interviewer-twists
 
 public class Solution {
     public int maxProfit(int[] prices) {
@@ -48,3 +33,19 @@ public class Solution {
     }
 }
 
+
+// A very easy-to-understand version
+// minPrice is the minimum price from day 0 to day i
+// maxPro is the maximum profit we can get from day 0 to day i
+// To get maxPro, just get the larger one between current maxPro and prices[i] - minPrice
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int maxPro = 0;
+        int minPrice = Integer.MAX_VALUE;
+        for(int i = 0; i < prices.length; i ++){
+            minPrice = Math.min(prices[i], minPrice);
+            maxPro = Math.max(maxPro, prices[i] - minPrice);
+        }
+        return maxPro;
+    }
+}
