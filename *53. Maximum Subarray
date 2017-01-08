@@ -13,6 +13,8 @@ public class Solution {
     }
 }
 
+// https://en.wikipedia.org/wiki/Maximum_subarray_problem
+
 /*
   https://discuss.leetcode.com/topic/5000/accepted-o-n-solution-in-java
   This problem was discussed by Jon Bentley (Sep. 1984 Vol. 27 No. 9 Communications of the ACM P885),
