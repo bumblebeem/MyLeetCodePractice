@@ -1,7 +1,7 @@
-//https://discuss.leetcode.com/topic/55377/simple-java-dfs-solution
-//Great dfs solution, TRULLY easy-to-understand! 
-//After read the solution, I implemented it entirely by myself...
-//想要自己想到这种dfs，主要是要想到preorder才行。。
+// https://discuss.leetcode.com/topic/55377/simple-java-dfs-solution
+// Great dfs solution, TRULLY easy-to-understand! 
+// After read the solution, I implemented it entirely by myself...
+// 想要自己想到这种dfs，主要是要想到preorder才行。。
 public class Solution {
     public List<Integer> lexicalOrder(int n) {
         List<Integer> res = new ArrayList<Integer>();
@@ -26,5 +26,5 @@ public class Solution {
 }
 
 
-//Here is a iterative solution, hard-to-understand..
-//https://discuss.leetcode.com/topic/55184/java-o-n-time-o-1-space-iterative-solution-130ms
+// Here is a iterative solution, hard-to-understand..
+// https://discuss.leetcode.com/topic/55184/java-o-n-time-o-1-space-iterative-solution-130ms
