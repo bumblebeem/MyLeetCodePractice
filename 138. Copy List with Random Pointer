@@ -122,8 +122,7 @@ public class Solution {
     }
 }
 
-
-// Great Link with Explanation:
+// Great Link with Explanation:（尤其是第三种解法，结合下边链接里边的图进行理解）
 // https://www.kancloud.cn/kancloud/data-structure-and-algorithm-notes/73016
 
 // http://www.jiuzhang.com/solutions/copy-list-with-random-pointer/
