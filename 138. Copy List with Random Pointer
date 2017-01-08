@@ -9,31 +9,27 @@
  */
 public class Solution {
     public RandomListNode copyRandomList(RandomListNode head) {
-        if(head == null){
-            return head;
-        }
-        
-        HashMap<RandomListNode, RandomListNode> lookup = new HashMap<RandomListNode, RandomListNode>();
-        
+        HashMap<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
         RandomListNode dummy = new RandomListNode(0);
         RandomListNode curNew = dummy;
         RandomListNode cur = head;
+        
         while(cur != null){
-            RandomListNode temp = new RandomListNode(cur.label);
-            lookup.put(cur, temp);
-            curNew.next = temp;
-            curNew = curNew.next;
+            RandomListNode newNode = new RandomListNode(cur.label);
+            map.put(cur, newNode);
+            curNew.next = newNode;
             cur = cur.next;
+            curNew = curNew.next;
         }
         
+        curNew = dummy;
         cur = head;
-        curNew = dummy.next;
         while(cur != null){
             if(cur.random != null){
-                curNew.random = lookup.get(cur.random);
+                curNew.next.random = map.get(cur.random);
             }
-            cur = cur.next;
             curNew = curNew.next;
+            cur = cur.next;
         }
         
         return dummy.next;
