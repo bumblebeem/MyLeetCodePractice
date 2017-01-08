@@ -1,5 +1,3 @@
-import java.util.Hashtable; 
-
 public class LRUCache {
     public class DoubleLinkedNode{
         int key;
@@ -27,19 +25,21 @@ public class LRUCache {
         addNode(node);
     }
 
+    // tail is always there, the node before tail is the real tail of the double linked list
     private DoubleLinkedNode popTail() {
-        DoubleLinkedNode res = tail.pre;
-        removeNode(tail.pre);
-        return res;
+        DoubleLinkedNode removed = tail.pre;
+        removeNode(removed);
+        return removed;
     }
 
     
-    private Hashtable<Integer, DoubleLinkedNode> cache = new Hashtable<Integer, DoubleLinkedNode>();
+    private HashMap<Integer, DoubleLinkedNode> cache = new HashMap<Integer, DoubleLinkedNode>();
     private int count;
     private int capacity;
     private DoubleLinkedNode head;
     private DoubleLinkedNode tail;
     
+    // initialize the LRU cache
     public LRUCache(int capacity) {
         count = 0;
         this.capacity = capacity;
@@ -88,6 +88,5 @@ public class LRUCache {
     }
 }
 
-
-//https://leetcode.com/discuss/20139/java-hashtable-double-linked-list-with-touch-of-pseudo-nodes
-
+// Great Explanation:
+// https://leetcode.com/discuss/20139/java-hashtable-double-linked-list-with-touch-of-pseudo-nodes
