@@ -26,12 +26,12 @@ public:
     }
 };
 
-//line 15 should be root->left, not root. Otherwise, line 18's cur->left might overflow
-//line 19 should be cur->next, not cur. Otherwise line 20's cur->next might overflow
+// line 15 should be root->left, not root. Otherwise, line 18's cur->left might overflow
+// line 19 should be cur->next, not cur. Otherwise line 20's cur->next might overflow
 
-//一刷：line 19-21 missed for the first time, draw the picture more carefully on scratch paper next time,
-//in order to understand the problems themselves better
-//二刷：其实就是分为root.left.next和root.right.next两部分考虑而已！
+// 一刷：line 19-21 missed for the first time, draw the picture more carefully on scratch paper next time,
+// in order to understand the problem better
+// 二刷：其实就是分为root.left.next和root.right.next两部分考虑
 
 //A more intuitive way might be: (1) Loop through level 0 to level n - 2; (2) Traverse this level and connect children.
 //注意line63 - 67，对于每行的最后一个节点的处理
