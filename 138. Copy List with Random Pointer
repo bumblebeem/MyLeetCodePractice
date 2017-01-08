@@ -1,4 +1,4 @@
-// 1. O(n) space HashMap solution
+// 1. O(n) space HashMap solution, 2 passes
 /**
  * Definition for singly-linked list with a random pointer.
  * class RandomListNode {
@@ -41,7 +41,46 @@ public class Solution {
 }
 
 
-// 2. O(1) space solution
+// 2. O(n) space HashMap solution, 1 passes
+public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        // mapping nodes in OLD list to corresponding nodes in NEW list
+        HashMap<RandomListNode, RandomListNode> oldNewMap = new HashMap<RandomListNode, RandomListNode>();
+        RandomListNode dummy = new RandomListNode(0);
+        RandomListNode curNew = dummy;
+        RandomListNode cur = head;
+        
+        while(cur != null){
+            RandomListNode newNode = null;
+            // deal with "label"
+            if(oldNewMap.containsKey(cur)){
+                newNode = oldNewMap.get(cur);
+            } else {
+                newNode = new RandomListNode(cur.label);
+                oldNewMap.put(cur, newNode);
+            }
+            // deal with "random" pointer
+            if(cur.random != null){
+                if(oldNewMap.containsKey(cur.random)){
+                    newNode.random = oldNewMap.get(cur.random);
+                } else {
+                    newNode.random = new RandomListNode(cur.random.label);
+                    oldNewMap.put(cur.random, newNode.random);
+                }
+            }
+            // deal with "next" pointer
+            curNew.next = newNode;
+
+            curNew = curNew.next;
+            cur = cur.next;
+        }
+        
+        return dummy.next;
+    }
+}
+
+
+// 3. O(1) space solution
 /**
  * Definition for singly-linked list with a random pointer.
  * class RandomListNode {
@@ -88,5 +127,7 @@ public class Solution {
 }
 
 
-//https://www.kancloud.cn/kancloud/data-structure-and-algorithm-notes/73016
-//http://www.jiuzhang.com/solutions/copy-list-with-random-pointer/
+// Great Link with Explanation:
+// https://www.kancloud.cn/kancloud/data-structure-and-algorithm-notes/73016
+
+// http://www.jiuzhang.com/solutions/copy-list-with-random-pointer/
