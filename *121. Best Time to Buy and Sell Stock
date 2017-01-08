@@ -14,7 +14,7 @@ public class Solution {
 }
 
 
-// 以下方法用了prefix sum，类似53题的解法解决了这一问题，不过理解的不好
+// *以下方法用了prefix sum，类似53题的解法解决了这一问题，不过理解的不好
 public class Solution {
     public int maxProfit(int[] prices) {
         if(prices == null || prices.length < 2){
