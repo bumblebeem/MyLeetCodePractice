@@ -48,7 +48,7 @@ public class Solution {
 }
 
 
-// Solve it using "Prefix Sum", 相当于在数组最前边加一个值为0的dummy元素，之后通过前缀数组的和来求解
+// *Solve it using "Prefix Sum", 相当于在数组最前边加一个值为0的dummy元素，之后通过前缀数组的和来求解
 public class Solution {
     public int maxSubArray(int[] nums) {
         if(nums == null || nums.length == 0){
