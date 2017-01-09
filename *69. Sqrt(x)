@@ -17,6 +17,8 @@ public class Solution {
 
 // line 6 & 7, to prevent overflow, haha, got it.
 // line 5 & 7, don't understand why use <= and > seperately...
+
+// method in this following link is a little bit easier to understand
 // https://discuss.leetcode.com/topic/8680/a-binary-search-solution
 
 
