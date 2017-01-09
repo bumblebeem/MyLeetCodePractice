@@ -15,7 +15,6 @@ public class Solution {
     }
 }
 
-
 //line 6 & 7, to prevent overflow, haha, got it.
 //line 5 & 7, don't understand why use <= and > seperately...
 
