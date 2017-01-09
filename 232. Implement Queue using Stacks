@@ -1,4 +1,4 @@
-//Naive solution
+// Naive solution
 class Queue {
 public:
     stack<int> sta;
@@ -32,9 +32,9 @@ public:
     }
 };
 
-//The trick here is to use two stacks...
+// The trick here is to use two stacks...
 
-//Java version
+// Java version
 class MyQueue {
     Stack<Integer> stack = new Stack<Integer>();
     Stack<Integer> queue = new Stack<Integer>();
@@ -67,14 +67,14 @@ class MyQueue {
 }
 
 
-//*Advanced solution
-//I have one input stack, onto which I push the incoming elements, and one output stack, 
-//from which I peek/pop. I move elements from input stack to output stack when needed, 
-//i.e., when I need to peek/pop but the output stack is empty. When that happens, 
-//I move all elements from input to output stack, thereby reversing the order so it's the correct order for peek/pop.
-//The loop in peek does the moving from input to output stack. Each element only ever gets moved like that once, 
-//though, and only after we already spent time pushing it, so the overall amortized cost for each operation is O(1).
-//https://discuss.leetcode.com/topic/17974/short-o-1-amortized-c-java-ruby
+// *Advanced solution
+// I have one input stack, onto which I push the incoming elements, and one output stack, 
+// from which I peek/pop. I move elements from input stack to output stack when needed, 
+// i.e., when I need to peek/pop but the output stack is empty. When that happens, 
+// I move all elements from input to output stack, thereby reversing the order so it's the correct order for peek/pop.
+// The loop in peek does the moving from input to output stack. Each element only ever gets moved like that once, 
+// though, and only after we already spent time pushing it, so the overall amortized cost for each operation is O(1).
+// https://discuss.leetcode.com/topic/17974/short-o-1-amortized-c-java-ruby
 class MyQueue {
     Stack<Integer> input = new Stack<Integer>();
     Stack<Integer> output = new Stack<Integer>();
@@ -103,5 +103,40 @@ class MyQueue {
     // Return whether the queue is empty.
     public boolean empty() {
         return input.empty() && output.empty();
+    }
+}
+
+
+// 再刷虽然没有直接想到第二种解法，但是看了一下就理解并且一次AC了
+class MyQueue {
+    Stack<Integer> s1 = new Stack<Integer>();
+    Stack<Integer> s2 = new Stack<Integer>();
+    
+    // Push element x to the back of queue.
+    public void push(int x) {
+        s1.push(x);
+    }
+
+    // Removes the element from in front of queue.
+    public void pop() {
+        this.peek();
+        s2.pop();
+    }
+
+    // Get the front element.
+    public int peek() {
+        if(!s2.isEmpty()){
+            return s2.peek();
+        } else {
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());
+            }
+            return s2.peek();
+        }
+    }
+
+    // Return whether the queue is empty.
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty();
     }
 }
