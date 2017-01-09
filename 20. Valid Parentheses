@@ -20,7 +20,42 @@ public class Solution {
     }
 }
 
-//met this question in the OA of Course Hero...
-//注意line 19
-//注意每个else if里边的!stack.empty()这个条件！
-//注意每个else if里边后两个条件的先后顺序，不能颠倒！
+// met this question in the OA of Course Hero...
+// 注意line 19
+// 注意每个else if里边的!stack.empty()这个条件！
+// 注意每个else if里边后两个条件的先后顺序，不能颠倒！
+
+
+// 再刷版本；不够简洁，但是更好理解
+public class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        
+        for(int i = 0; i < s.length(); i ++){
+            char c = s.charAt(i);
+            if(c == '(' || c == '[' || c=='{'){
+                stack.push(c);
+            } else if(c == ')'){
+                if(!stack.isEmpty() && stack.peek() == '('){
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else if(c == ']'){
+                if(!stack.isEmpty() && stack.peek() == '['){
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else if(c == '}'){
+                if(!stack.isEmpty() && stack.peek() == '{'){
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        
+        return stack.isEmpty();
+    }
+}
