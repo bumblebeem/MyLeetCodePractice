@@ -1,3 +1,4 @@
+// O(n) time complexity
 public class Solution {
     public int findDuplicate(int[] nums) {
         if(nums == null || nums.length == 0){
@@ -19,3 +20,26 @@ public class Solution {
 }
 
 // 和142题很像，理解的很不好。。
+
+
+// O(nlogn) time complexity
+public class Solution {
+    public int findDuplicate(int[] nums) {
+        int low = 1, high = nums.length - 1;
+        while(low < high){
+            int mid = (high - low) / 2 + low;   
+            int count = 0;
+            for(int i : nums){
+                if(i <= mid){
+                    count ++;
+                }
+            }
+            if(count <= mid){
+                low = mid + 1;   
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+}
