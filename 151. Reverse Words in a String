@@ -13,10 +13,11 @@ public class Solution {
 }
 
 
-//line 3, use trim() to eliminate the leading and tailing spaces,
-//and then split them according to one or more white spaces.
-//Must use \\s+, can't use " ", because there might be multiple spaces between
-//words.
+// line 3, use trim() to eliminate the leading and tailing spaces,
+// and then split them according to one or more white spaces.
 
-//There should be no more white spaces after the last word, 
-//so we need line 9
+// *Must use \\s+, can't use " ", because there might be multiple spaces between
+// words.(再刷的时候这里又错了！)
+
+// There should be no more white spaces after the last word, 
+// so we need line 9
