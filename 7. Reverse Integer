@@ -17,5 +17,5 @@ public class Solution {
 }
 
 
-//Must use "x != 0" in line 5, because x could be a negative number.
-//line 8 reverse the process in line 7, in order to check if overflow happens.
+// Must use "x != 0" in line 5, because x could be a negative number.
+// *line 8 reverse the process in line 7, in order to check if overflow happens.
