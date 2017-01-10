@@ -1,3 +1,6 @@
+// Great link, 再刷的时候犯了和其中的第一种解法一样的错。。
+// http://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
