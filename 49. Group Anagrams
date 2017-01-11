@@ -19,4 +19,35 @@ public class Solution {
 }
 
 
-//line 17, .values() functions, returns a collection view of the values contained in this map.
+// line 17, .values() functions, returns a collection view of the values contained in this map.
+
+
+// 再刷版本
+public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> res = new ArrayList<List<String>>();
+        if(strs == null || strs.length == 0){
+            return res;
+        }
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        Arrays.sort(strs);
+        for(String s : strs){
+            char[] cur = s.toCharArray();
+            Arrays.sort(cur);
+            String key = new String(cur);
+            if(map.containsKey(key)){
+                List<String> temp = map.get(key);
+                temp.add(s);
+                map.put(key, temp);
+            } else {
+                List<String> newList = new ArrayList<String>();
+                newList.add(s);
+                map.put(key, newList);
+            }
+        }
+        for(Map.Entry<String, List<String>> entry : map.entrySet()){
+            res.add(entry.getValue());
+        }
+        return res;
+    }
+}
