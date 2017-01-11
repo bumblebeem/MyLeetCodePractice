@@ -39,6 +39,6 @@ public class Solution {
                 p2 ++;
             }
         }
-        return ++ p1;
+        return p1 + 1;
     }
 }
