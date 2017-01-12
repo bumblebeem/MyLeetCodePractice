@@ -1,10 +1,10 @@
 public class Solution {
     public String longestPalindrome(String s) {
-        if(s.length() < 2){
+        if(s == null || s.length() < 2){
             return s;
         }
         
-        int start = 0, max_len = 1;
+        int maxStart = 0, max_len = 1;
         for(int i = 0; i < s.length();) {
             //i is the middle point of the palindrome, so if the following statement is
             //true, we could break because there can't be a palindrome longer than current longest 
@@ -16,20 +16,21 @@ public class Solution {
             while(right + 1 < s.length() && s.charAt(right) == s.charAt(right + 1)) {  //skip duplicate characters
                 right ++;
             }
-            //set i to be "right + 1" instead of using "i ++" in the outer for loop(line 8)
+            //**set i to be "right + 1" instead of using "i ++" in the outer for loop(line 8)
             i = right + 1;
             while(right + 1 < s.length() && left - 1 >= 0 && s.charAt(left - 1) == s.charAt(right + 1)) {  //find new palindrome
                 left --;
                 right ++;
             }
+            //下一行的下标运算画一下图，就显得很简单
             int cur_len = right - left + 1;
             if(cur_len > max_len) {
                 max_len = cur_len;
-                start = left;
+                maxStart = left;
             }
         }
         
-        return s.substring(start, start + max_len);
+        return s.substring(maxStart, maxStart + max_len);
     }
 }
 
