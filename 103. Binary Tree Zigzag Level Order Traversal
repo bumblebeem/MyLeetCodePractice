@@ -1,4 +1,4 @@
-//use two stacks, very straight forward solution
+// use two stacks, very straight forward solution
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -30,7 +30,10 @@ public class Solution {
                     stack2.push(cur.right);
                 }
             }
-            res.add(temp);
+            if(!temp.isEmpty()) {
+                res.add(temp);
+            }
+            
             temp = new ArrayList<Integer>();
             while(!stack2.isEmpty()) {
                 TreeNode cur = stack2.pop();
@@ -52,7 +55,7 @@ public class Solution {
 }
 
 
-//use deque instead of two stacks, notice that flag's initial value! (can't set it to false, otherwise zigzag would be reversed)
+// use deque instead of two stacks, notice that flag's initial value! (can't set it to false, otherwise zigzag would be reversed)
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -110,5 +113,5 @@ public class Solution {
 }
 
 
-//Here is a recursive solution as well:
-//https://leetcode.com/discuss/11328/my-accepted-java-solution
+// Here is a recursive solution as well:
+// https://leetcode.com/discuss/11328/my-accepted-java-solution
