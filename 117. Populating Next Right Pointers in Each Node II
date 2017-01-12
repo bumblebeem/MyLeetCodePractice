@@ -8,7 +8,7 @@
  */
 public class Solution {
     public void connect(TreeLinkNode root) {
-        TreeLinkNode head = null;  // head of the next level
+        TreeLinkNode head = null;  // head of the next level(i.e. leftmost node in each level)
         TreeLinkNode prev = null;  // the leading node on the next level
         TreeLinkNode cur = root;   // current node of current level
 
