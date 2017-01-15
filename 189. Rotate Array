@@ -22,5 +22,19 @@ public class Solution {
 }
 
 
-//画个图就很好理解了
-//注意line 7，k有可能大于nums.length
+// 画个图就很好理解了
+// 注意line 7，k有可能大于nums.length
+
+
+// Easy trivial solution
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        int[] copy = nums.clone();
+        // for(int i = 0; i < nums.length; i ++){
+        //     copy[i] = nums[i];
+        // }
+        for(int i = 0; i < nums.length; i ++){
+            nums[(i + k) % nums.length] = copy[i];
+        }
+    }
+}
