@@ -1,25 +1,5 @@
 public class Solution {
-    public boolean wordBreak(String s, Set<String> wordDict) {
-        boolean[] opt = new boolean[s.length() + 1];
-        opt[0] = true;
-        
-        for(int i = 1; i <= s.length(); i ++){
-            for(int j = 0; j < i; j ++){
-                if(opt[j] == true && wordDict.contains(s.substring(j, i))){
-                    opt[i] = true;
-                    break;
-                }
-            }
-        }
-        
-        return opt[s.length()];
-    }
-}
-
-
-//三刷代码：
-public class Solution {
-    public boolean wordBreak(String s, Set<String> wordDict) {
+    public boolean wordBreak(String s, List<String> wordDict) {
         boolean[] dp = new boolean[s.length() + 1];
         //Arrays.fill(dp, false);       boolean的默认初始化值就是false
         dp[0] = true;
@@ -37,15 +17,29 @@ public class Solution {
 }
 
 
-//上边的代码还有漏洞，遇到很大的case就要超时
-//优化的话，可以先算出dict里边最长的单词的长度，之后对内层的for循环进行修改，
-//如line 57 - 63. 同时也不要忘记line 61的break。
+// 注意和上一种方法的区别（双重for循环的下标）：
 public class Solution {
-    /**
-     * @param s: A string s
-     * @param dict: A dictionary of words dict
-     */
-    public boolean wordBreak(String s, Set<String> dict) {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for(int i = 0; i < s.length(); i ++){
+            for(int j = i + 1; j <= s.length(); j ++){
+                String cur = s.substring(i, j);
+                if(dp[i] && wordDict.contains(cur)){
+                    dp[j] = true;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+}
+
+
+// 上边的代码还有漏洞，遇到很大的case就要超时
+// 优化的话，可以先算出dict里边最长的单词的长度，之后对内层的for循环进行修改，
+// 如line 51 - 57. 同时也不要忘记line 55的break。
+public class Solution {
+    public boolean wordBreak(String s, List<String> dict) {
         if(s == null || s.length() == 0){
             return true;
         }
@@ -65,7 +59,7 @@ public class Solution {
         return dp[s.length()];
     }
     
-    private int getMaxWordLength(Set<String> dict){
+    private int getMaxWordLength(List<String> dict){
         int maxLength = 0;
         for(String word : dict){
             maxLength = Math.max(maxLength, word.length());
