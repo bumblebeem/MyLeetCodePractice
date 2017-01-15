@@ -17,7 +17,7 @@ public class Solution {
 }
 
 
-// 注意和上一种方法的区别（双重for循环的下标）：
+// 注意和上一种方法的区别（双重for循环处；这种做法就不能break）：
 public class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         boolean[] dp = new boolean[s.length() + 1];
