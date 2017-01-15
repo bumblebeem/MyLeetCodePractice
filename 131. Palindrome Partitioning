@@ -32,7 +32,7 @@ public class Solution {
 }
 
 
-// dp solution, don't quite understand... And lots of details needs to be paid attention to...
+// *dp solution, don't quite understand... And lots of details needs to be paid attention to...
 // https://leetcode.com/discuss/9623/my-java-dp-only-solution-without-recursion-o-n-2
 public class Solution {
     public List<List<String>> partition(String s) {
@@ -65,33 +65,29 @@ public class Solution {
 public class Solution {
     public List<List<String>> partition(String s) {
         List<List<String>> res = new ArrayList<List<String>>();
-        if(s == null){
-            return res;
-        }
-        getPalindromePartition(res, new ArrayList<String>(), s, 0);
+        dfs(s, res, 0, new ArrayList<String>());
         return res;
     }
     
-    private void getPalindromePartition(List<List<String>> res, List<String> cur, String s, int start){
+    private void dfs(String s, List<List<String>> res, int start, List<String> cur){
         if(start == s.length()){
             res.add(new ArrayList<String>(cur));
             return;
         }
         for(int i = start; i < s.length(); i ++){
-            if(!isPalindrome(s, start, i)){
-                continue;
+            if(isPanlindrome(s, start, i)){
+                cur.add(s.substring(start, i + 1));
+                dfs(s, res, i + 1, cur);
+                cur.remove(cur.size() - 1);
             }
-            cur.add(s.substring(start, i + 1));
-            getPalindromePartition(res, cur, s, i + 1);
-            cur.remove(cur.size() - 1);
         }
     }
     
-    private boolean isPalindrome(String s, int left, int right){
+    private boolean isPanlindrome(String s, int left, int right){
         while(left < right){
             if(s.charAt(left) != s.charAt(right)){
                 return false;
-            } 
+            }
             left ++;
             right --;
         }
