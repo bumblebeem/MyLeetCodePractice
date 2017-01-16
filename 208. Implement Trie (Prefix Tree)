@@ -1,26 +1,19 @@
-/**
- * Your Trie object will be instantiated and called as such:
- * Trie trie = new Trie();
- * trie.insert("lintcode");
- * trie.search("lint"); will return false
- * trie.startsWith("lint"); will return true
- */
 class TrieNode {
     // Initialize your data structure here.
     char c;
     HashMap<Character, TrieNode> children;
-    boolean wordEnd;
+    boolean isWord;
     
-    public TrieNode() {
+    TrieNode(){
         c = '\0';
         children = new HashMap<Character, TrieNode>();
-        wordEnd = false;
+        isWord = false;
     }
     
-    public TrieNode(char c){
+    TrieNode(char c){
         this.c = c;
         children = new HashMap<Character, TrieNode>();
-        wordEnd = false;
+        isWord = false;
     }
 }
 
@@ -34,7 +27,7 @@ public class Trie {
     // Inserts a word into the trie.
     public void insert(String word) {
         TrieNode cur = root;
-        HashMap<Character, TrieNode> curChildren = root.children;
+        HashMap<Character, TrieNode> curChildren = cur.children;
         
         for(int i = 0; i < word.length(); i ++){
             char curChar = word.charAt(i);
@@ -42,25 +35,25 @@ public class Trie {
             if(curChildren.containsKey(curChar)){
                 cur = curChildren.get(curChar);
             } else {
-                TrieNode newNode = new TrieNode(curChar);
-                curChildren.put(curChar, newNode);
-                cur = newNode;
+                curChildren.put(curChar, new TrieNode(curChar));
+                cur = curChildren.get(curChar);
             }
             curChildren = cur.children;
             
             if(i == word.length() - 1){
-                cur.wordEnd = true;
+                cur.isWord = true;
             }
-        }
+        } 
     }
 
     // Returns if the word is in the trie.
     public boolean search(String word) {
         TrieNode searchRes = searchWordNodePos(word);
+        
         if(searchRes == null){
             return false;
         } else {
-            return searchRes.wordEnd;
+            return searchRes.isWord;
         }
     }
 
@@ -69,22 +62,33 @@ public class Trie {
     public boolean startsWith(String prefix) {
         if(searchWordNodePos(prefix) == null){
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
     
-    public TrieNode searchWordNodePos(String s){
+    private TrieNode searchWordNodePos(String word){
         HashMap<Character, TrieNode> children = root.children;
         TrieNode res = null;
-        for(int i = 0; i < s.length(); i ++){
-            char curChar = s.charAt(i);
+        
+        for(int i = 0; i < word.length(); i ++){
+            char curChar = word.charAt(i);
             if(children.containsKey(curChar)){
                 res = children.get(curChar);
-                children = res.children;
+                children = children.get(curChar).children;
             } else {
                 return null;
             }
         }
+        
         return res;
     }
 }
+
+// Your Trie object will be instantiated and called as such:
+// Trie trie = new Trie();
+// trie.insert("somestring");
+// trie.search("key");
+
+
+// 再刷思路没问题，实现也基本没问题，但是searchWordNodePos这个函数的实现错误了！！
