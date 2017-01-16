@@ -32,4 +32,5 @@ public class Solution extends Reader4 {
 }
 
 
-// 
+// *下边这个链接解释了这道题的本质
+// https://discuss.leetcode.com/topic/36179/what-is-the-difference-between-call-once-and-call-multiple-times/2
