@@ -1,0 +1,35 @@
+/* The read4 API is defined in the parent class Reader4.
+      int read4(char[] buf); */
+
+public class Solution extends Reader4 {
+    /**
+     * @param buf Destination buffer
+     * @param n   Maximum number of characters to read
+     * @return    The number of characters read
+     */
+    private int buffPointer = 0;
+    private int buffCount = 0;
+    private char[] temp = new char[4];
+    
+    public int read(char[] buf, int n) {
+        int pointer = 0;
+        while(pointer < n){
+            if(buffPointer == 0){   // temp里边的字符用完了，需要重新调用read4()函数
+                buffCount = read4(temp);
+            }
+            if(buffCount == 0){     // 文件已经全部读完了
+                break;
+            }
+            while(pointer < n && buffPointer < buffCount){    // 读取temp中的内容，而无需再调用read4()函数
+                buf[pointer ++] = temp[buffPointer ++];    
+            }
+            if(buffPointer == buffCount){    // temp中的内容读完了，重置temp的pointer
+                buffPointer = 0;
+            }
+        }
+        return pointer;
+    }
+}
+
+
+// 
