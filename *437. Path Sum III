@@ -20,10 +20,11 @@ public class Solution {
         }
         sum += node.val;
         int res = preSum.getOrDefault(sum - target, 0);
-        preSum.put(sum, preSum.getOrDefault(sum, 0) + 1);
         
+        preSum.put(sum, preSum.getOrDefault(sum, 0) + 1);
         res += dfs(node.left, sum, target, preSum) + dfs(node.right, sum, target, preSum);
         preSum.put(sum, preSum.get(sum) - 1);
+        
         return res;
     }
 }
