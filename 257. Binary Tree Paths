@@ -8,7 +8,7 @@
  * }
  */
  
- //DFS solution
+// DFS solution
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<String>();
@@ -34,7 +34,7 @@ public class Solution {
 }
 
 
-//BFS solution
+// BFS solution
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<String>();
