@@ -1,0 +1,54 @@
+public class Solution {
+    public boolean wordPatternMatch(String pattern, String str) {
+        Map<Character, String> map = new HashMap<Character, String>();
+        Set<String> set = new HashSet<String>();
+        
+        return isMatched(str, 0, pattern, 0, map, set);
+    }
+    
+    private boolean isMatched(String str, int i, String pattern, int j, Map<Character, String> map, Set<String> set){
+        // base case
+        if(i == str.length() && j == pattern.length()){
+            return true;
+        }
+        if(i == str.length() || j == pattern.length()){
+            return false;
+        }
+        
+        // get current pattern character
+        char cur = pattern.charAt(j);
+        
+        // if the pattern character exists
+        if(map.containsKey(cur)){
+            String word = map.get(cur);
+            
+            // check if we can se it to match str[i...i + word.length()]
+            if(!str.startsWith(word, i)){
+                return false;
+            } else {   // if it can match, great, continue to match the rest
+                return isMatched(str, i + word.length(), pattern, j + 1, map, set);
+            }
+        } else { // pattern character does not exist in the map
+            for(int k = i; k < str.length(); k ++){
+                String newWord = str.substring(i, k + 1);
+                
+                if(set.contains(newWord)){
+                    continue;
+                }
+                
+                map.put(cur, newWord);
+                set.add(newWord);
+                if(isMatched(str, k + 1, pattern, j + 1, map, set)){
+                    return true;
+                }
+                map.remove(cur);    // backtracking here~
+                set.remove(newWord);
+            }
+            
+            return false;
+        }  
+    }
+}
+
+
+// https://discuss.leetcode.com/topic/26750/share-my-java-backtracking-solution
