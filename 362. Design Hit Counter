@@ -1,0 +1,78 @@
+// Easiest solution with a queue, but can't use this solution for follow-up
+public class HitCounter {
+    private Queue<Integer> counter;
+
+    /** Initialize your data structure here. */
+    public HitCounter() {
+        counter = new LinkedList<Integer>();
+    }
+    
+    /** Record a hit.
+        @param timestamp - The current timestamp (in seconds granularity). */
+    public void hit(int timestamp) {
+        counter.offer(timestamp);
+        while(!counter.isEmpty() && counter.peek() + 300 <= timestamp){
+            counter.poll();
+        }
+    }
+    
+    /** Return the number of hits in the past 5 minutes.
+        @param timestamp - The current timestamp (in seconds granularity). */
+    public int getHits(int timestamp) {
+        while(!counter.isEmpty() && counter.peek() + 300 <= timestamp){
+            counter.poll();
+        }
+        return counter.size();
+    }
+}
+
+/**
+ * Your HitCounter object will be instantiated and called as such:
+ * HitCounter obj = new HitCounter();
+ * obj.hit(timestamp);
+ * int param_2 = obj.getHits(timestamp);
+ */
+ 
+ 
+ // A scaled solution for follow-up
+ public class HitCounter {
+    private int[] times;
+    private int[] hits;
+
+    /** Initialize your data structure here. */
+    public HitCounter() {
+        times = new int[300];
+        hits = new int[300];
+    }
+    
+    /** Record a hit.
+        @param timestamp - The current timestamp (in seconds granularity). */
+    public void hit(int timestamp) {
+        int index = timestamp % 300;
+        if(times[index] == timestamp){
+            hits[index] ++;
+        } else {
+            times[index] = timestamp;
+            hits[index] = 1;
+        }
+    }
+    
+    /** Return the number of hits in the past 5 minutes.
+        @param timestamp - The current timestamp (in seconds granularity). */
+    public int getHits(int timestamp) {
+        int numOfHits = 0;
+        for(int i = 0; i < 300; i ++){
+            if(times[i] + 300 > timestamp){
+                numOfHits += hits[i];
+            }
+        }
+        return numOfHits;
+    }
+}
+
+/**
+ * Your HitCounter object will be instantiated and called as such:
+ * HitCounter obj = new HitCounter();
+ * obj.hit(timestamp);
+ * int param_2 = obj.getHits(timestamp);
+ */
