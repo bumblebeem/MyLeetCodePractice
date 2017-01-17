@@ -25,13 +25,12 @@ public class Solution {
 }
 
 
-//*注意String中用 == 往往比较的是String的reference是不是一样，而用.equals比较的才是String的内容一不一样！
-//line 9的for循环里边的部分if else之类的写错了很多，还需要再理解。。。
+// *注意String中用 == 往往比较的是String的reference是不是一样，而用.equals比较的才是String的内容一不一样！
+// line 9的for循环里边的部分if else之类的写错了很多，还需要再理解。。。再刷没问题了
 
 
-//*However the containsValue in line 16 of above solution takes O(n) time, which is not efficient.
-//So we modify the code by using two hashmaps in the following solution.
-
+// *However the containsValue in line 16 of above solution takes O(n) time, which is not efficient.
+// So we modify the code by using two hashmaps in the following solution.
 public class Solution {
     public boolean wordPattern(String pattern, String str) {
         String[] strs = str.split("\\s");
