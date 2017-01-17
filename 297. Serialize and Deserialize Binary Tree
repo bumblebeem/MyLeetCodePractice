@@ -1,0 +1,121 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
+    private static final String splitter = ",";
+    private static final String nullNode = "NN";
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if(root == null){
+            return "";
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            TreeNode curNode = queue.poll();
+            if(curNode == null){
+                sb.append(nullNode);
+            } else {
+                sb.append(curNode.val);
+                queue.offer(curNode.left);
+                queue.offer(curNode.right);
+            }
+            if(!queue.isEmpty()){
+                sb.append(splitter);
+            }
+        } 
+        return sb.toString();
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if(data == null || data.length() == 0){
+            return null;
+        }
+        
+        String[] nodes = data.split(splitter);
+        TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        for(int i = 1; i < nodes.length;){
+            TreeNode curNode = queue.poll();
+            
+            if(nodes[i].equals(nullNode)){
+                curNode.left = null;
+            } else {
+                curNode.left = new TreeNode(Integer.parseInt(nodes[i]));
+                queue.offer(curNode.left);
+            }
+            i ++;
+            
+            if(nodes[i].equals(nullNode)){
+                curNode.right = null;
+            } else {
+                curNode.right = new TreeNode(Integer.parseInt(nodes[i]));
+                queue.offer(curNode.right);
+            }
+            i ++;
+        }
+        return root;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec codec = new Codec();
+// codec.deserialize(codec.serialize(root));
+
+// 这第一种解法很简单，第一次刷一次AC。。
+
+
+// 第二种解法，preorder
+public class Codec {
+    private static final String splitter = ",";
+    private static final String nullNode = "NN";
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        buildString(root, sb);
+        return sb.toString();
+    }
+    
+    private void buildString(TreeNode node, StringBuilder sb){
+        if(node == null){
+            sb.append(nullNode);
+            sb.append(splitter);
+        } else {
+            sb.append(node.val);
+            sb.append(splitter);
+            buildString(node.left, sb);
+            buildString(node.right, sb);
+        }
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Queue<String> nodes = new LinkedList<String>();
+        nodes.addAll(Arrays.asList(data.split(splitter)));
+        return buildTree(nodes);
+    }
+    
+    private TreeNode buildTree(Queue<String> nodes){
+        String val = nodes.poll();
+        if(val.equals(nullNode)){
+            return null;
+        } else {
+            TreeNode node = new TreeNode(Integer.parseInt(val));
+            node.left = buildTree(nodes);
+            node.right = buildTree(nodes);
+            return node;
+        }
+    }
+}
