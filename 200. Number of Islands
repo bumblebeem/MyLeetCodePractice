@@ -1,4 +1,4 @@
-//Once we find an island, we destroy it, recursively.
+// Once we find an island, we destroy it, recursively.
 public class Solution {
     public int numIslands(char[][] grid) {
         int count = 0;
