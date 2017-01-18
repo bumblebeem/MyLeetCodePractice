@@ -1,18 +1,13 @@
 // 1. Naive DFS solution, got TLE; BUT at least it helped me review DFS 
-// 第一次写的时候是WA，因为忘记了30行的remove。。。
+// 第一次写的时候是WA，因为忘记了24行的remove。。。
 public class Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
-	List<String> res = new ArrayList<String>();
-        HashSet<Integer> visited = new HashSet<Integer>();
-        visited.add(0);
-        getAllSentences(res, new ArrayList<String>(), s, wordDict, 0, visited);
+	    List<String> res = new ArrayList<String>();
+        getAllSentences(res, new ArrayList<String>(), s, wordDict, 0);
         return res;
     }
     
-    private void getAllSentences(List<String> res, List<String> cur, String s, List<String> wordDict, int index, HashSet<Integer> visited){
-        if(!visited.contains(index)){
-            return;
-        }
+    private void getAllSentences(List<String> res, List<String> cur, String s, List<String> wordDict, int index){
         if(index == s.length()){
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < cur.size() - 1; i ++){
@@ -23,10 +18,9 @@ public class Solution {
         }
         for(int i = index + 1; i <= s.length(); i ++){
             String curWord = s.substring(index, i);
-            if(wordDict.contains(curWord) && visited.contains(index)){
-                visited.add(i);
+            if(wordDict.contains(curWord)){
                 cur.add(curWord);
-                getAllSentences(res, cur, s, wordDict, i, visited);
+                getAllSentences(res, cur, s, wordDict, i);
                 cur.remove(cur.size() - 1);
             }
         }
