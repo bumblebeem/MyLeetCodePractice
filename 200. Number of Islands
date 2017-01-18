@@ -1,5 +1,4 @@
 //Once we find an island, we destroy it, recursively.
-
 public class Solution {
     public int numIslands(char[][] grid) {
         int count = 0;
@@ -29,4 +28,5 @@ public class Solution {
 }
 
 
-//Don't forget line 23, that's where we destory the island we found.
+// Don't forget line 22, that's where we destory the island we found.
+// 再刷险些忘记了19行grid[i][j] == '0'这个条件
