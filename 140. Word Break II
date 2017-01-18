@@ -1,15 +1,15 @@
 // 1. Naive DFS solution, got TLE; BUT at least it helped me review DFS 
 // 第一次写的时候是WA，因为忘记了30行的remove。。。
 public class Solution {
-    public List<String> wordBreak(String s, Set<String> wordDict) {
-		List<String> res = new ArrayList<String>();
+    public List<String> wordBreak(String s, List<String> wordDict) {
+	List<String> res = new ArrayList<String>();
         HashSet<Integer> visited = new HashSet<Integer>();
         visited.add(0);
         getAllSentences(res, new ArrayList<String>(), s, wordDict, 0, visited);
         return res;
     }
     
-    private void getAllSentences(List<String> res, List<String> cur, String s, Set<String> wordDict, int index, HashSet<Integer> visited){
+    private void getAllSentences(List<String> res, List<String> cur, String s, List<String> wordDict, int index, HashSet<Integer> visited){
         if(!visited.contains(index)){
             return;
         }
@@ -36,7 +36,7 @@ public class Solution {
 
 // 2. 加入了一些预处理，方便在dfs中进行剪枝，这样就不会超时了。。但是有些下标需要注意
 public class Solution {
-    public List<String> wordBreak(String s, Set<String> wordDict) {
+    public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<String>();
         if(s == null || s.length() == 0 || wordDict == null){
             return res;
@@ -101,11 +101,10 @@ public class Solution {
 
 
 // 3. 这种方法最精髓，然而理解得并不是很好。。。
-// 
 public class Solution {
     HashMap<String, List<String>> map = new HashMap<String, List<String>>();
     
-    public List<String> wordBreak(String s, Set<String> wordDict) {
+    public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<String>();
         if(s == null && s.length() == 0){
             return res;
