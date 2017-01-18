@@ -2,7 +2,7 @@
 // 第一次写的时候是WA，因为忘记了24行的remove。。。
 public class Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
-	    List<String> res = new ArrayList<String>();
+	List<String> res = new ArrayList<String>();
         getAllSentences(res, new ArrayList<String>(), s, wordDict, 0);
         return res;
     }
