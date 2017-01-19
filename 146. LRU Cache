@@ -63,7 +63,7 @@ public class LRUCache {
         }
     }
     
-    public void set(int key, int value) {
+    public void put(int key, int value) {
         DoubleLinkedNode node = this.cache.get(key);
         
         if(node != null) {
@@ -90,3 +90,5 @@ public class LRUCache {
 
 // Great Explanation:
 // https://leetcode.com/discuss/20139/java-hashtable-double-linked-list-with-touch-of-pseudo-nodes
+
+// addNode这个函数没有太搞明白啊！
