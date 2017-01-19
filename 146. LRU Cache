@@ -91,4 +91,4 @@ public class LRUCache {
 // Great Explanation:
 // https://leetcode.com/discuss/20139/java-hashtable-double-linked-list-with-touch-of-pseudo-nodes
 
-// 自己照着答案实现的时候，addNode这个函数出了问题！！
+// 自己照着答案实现的时候，addNode这个函数出了问题！！之后画了图认真做了一下就没问题了，看来还是不能浪啊
