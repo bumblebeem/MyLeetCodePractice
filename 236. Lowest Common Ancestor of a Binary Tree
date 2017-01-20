@@ -1,29 +1,3 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root == null || root == p || root == q){
-            return root;
-        }
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if(left != null && right != null){
-            return root;
-        }
-        return left != null ? left : right;
-    }
-}
-
-// http://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/
-
-
 // 九章解法
 // 在root为根的二叉树中找A,B的LCA:
 // 如果找到了就返回这个LCA
@@ -55,9 +29,12 @@ public class Solution {
 }
 
 
-// 其实这里边的三种解法全是一模一样的。。呵呵了
 // 下边这视频真心不错
 // https://www.youtube.com/watch?v=13m9ZCB8gjw
+
+// http://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/
+// 主要是看这个链接里边最后一种情况，即p或者q可能不存在与二叉树中的情况（leetcode上不需要讨论这种情况）
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
