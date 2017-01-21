@@ -11,9 +11,10 @@ public class Solution {
         
         for(int i = 0; i < digits.length(); i ++){
             int curDigit = digits.charAt(i) - '0';
+            String possibleKeys = keyboards[curDigit];
+            
             int size = res.size();
             for(int j = 0; j < size; j ++){
-                String possibleKeys = keyboards[curDigit];
                 String temp = res.remove(0);
                 for(int k = 0; k < possibleKeys.length(); k ++){
                     res.add(temp + possibleKeys.charAt(k));
@@ -26,7 +27,7 @@ public class Solution {
 }
 
 // 就是每次循环取出之前所有可能生成的字符串，加入一个新的可能的字母，直到没有字母可加为止
-// 第3行用LinkedList比ArrayList好，因为第16行要进行多次remove操作
+// 第4行用LinkedList比ArrayList好，因为第18行要进行多次remove操作
 
 
 // DFS solution:
