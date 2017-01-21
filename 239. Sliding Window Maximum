@@ -24,7 +24,30 @@ public class Solution {
     }
 }
 
-//注意10和14行的if不能颠倒！！
+// 注意10和14行的if不能颠倒！！
+
+// 上边这种写法有点丑陋啊。。
+public class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums == null || nums.length == 0){
+            return new int[]{};
+        }
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(Collections.reverseOrder());
+        int[] res = new int[nums.length - k + 1];
+        
+        for(int i = 0; i < nums.length; i ++){
+            if(i - k >= 0){
+                maxHeap.remove(nums[i - k]);
+            }
+            maxHeap.offer(nums[i]);
+            if(i >= k - 1){
+                res[i + 1 - k] = maxHeap.peek();
+            }
+        }
+
+        return res;
+    }
+}
 
 
 // Deque solution:
@@ -60,4 +83,5 @@ public class Solution {
     }
 }
 
-//https://segmentfault.com/a/1190000003903509
+// Good link:
+// https://segmentfault.com/a/1190000003903509
