@@ -61,18 +61,19 @@ public class Solution {
         Deque<Integer> deque = new LinkedList<Integer>();
         
         for(int i = 0; i < nums.length; i ++){
-            //把队列尾部所有比新数小的都扔掉，保证队列是降序
-            while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]){
-                deque.pollLast();
-            }
-            //加入新数
-            deque.addLast(i);
-            
             //每当新数进来时，如果发现队列头部的数的下标，是窗口最左边数的下标，则扔掉
             if(!deque.isEmpty() && i - k == deque.peekFirst()){
                 deque.pollFirst();
             }
             
+            //把队列尾部所有比新数小的都扔掉，保证队列是降序
+            while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]){
+                deque.pollLast();
+            }
+            
+            //加入新数
+            deque.addLast(i);
+ 
             //队列头部就是该窗口内第一大的
             if(i - k + 1 >= 0){
                 res[i - k + 1] = nums[deque.peekFirst()];
