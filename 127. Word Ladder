@@ -3,42 +3,43 @@
 
 // Solution 1: one-way BFS
 public class Solution {
-    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
-        wordList.add(endWord);
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if(!wordList.contains(endWord)){
+            return 0;
+        } 
         Queue<String> queue = new LinkedList<String>();
-        queue.add(beginWord);
-        int distance = 1;
-        while(!queue.isEmpty()) {
-            int curSize = queue.size();
-            for(int j = 0; j < curSize; j ++) {
+        queue.offer(beginWord);
+        int ladder = 1;
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+            for(int i = 0; i < levelSize; i ++){
                 String curWord = queue.poll();
-                if(curWord.equals(endWord)) {
-                    return distance;
+                if(curWord.equals(endWord)){
+                    return ladder;
                 }
-                char[] curWordChar = curWord.toCharArray();
-                for(int i = 0; i < curWord.length(); i ++) {
-                    for(char c = 'a'; c <= 'z'; c ++) {
-                        if(curWordChar[i] == c){
-                            continue;
+                for(int k = 0; k < curWord.length(); k ++){
+                    for(char j = 'a'; j < 'z'; j ++){
+                        char[] curWordArray = curWord.toCharArray();
+                        if(curWordArray[k] != j){
+                            curWordArray[k] = j;
                         }
-                        char temp = curWordChar[i];
-                        curWordChar[i] = c;
-                        String intermediateWord = new String(curWordChar);
-                        if(wordList.contains(intermediateWord)) {
-                            queue.add(intermediateWord);
-                            wordList.remove(intermediateWord);
+                        String nextWord = new String(curWordArray);
+                        if(wordList.contains(nextWord)){
+                            queue.offer(nextWord);
+                            wordList.remove(nextWord);
                         }
-                        curWordChar[i] = temp;
                     }
                 }
             }
-            distance ++;
+            ladder ++;
         }
-        return wordList.contains(endWord) ? 0 : distance;
+        return 0;
     }
 }
 
-// 这应该是做过的比较难的BFS了吧，，再刷的时候有个BUG一直也没调试出来，郁闷。。
+// 这应该是做过的比较难的BFS了吧。。
+// 再刷的时候18行误写成break了，不应该。。而且29行也没有想起来写，这相当于图的遍历里的HashSet（防止重复遍历），这个地方要牢记！
+// 不过现在OJ这个解法过不了了，会超时。。
 
 
 // Solution 2: two-way BFS!!
