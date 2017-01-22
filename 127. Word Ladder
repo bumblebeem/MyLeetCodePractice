@@ -39,7 +39,6 @@ public class Solution {
 
 // 这应该是做过的比较难的BFS了吧。。
 // 再刷的时候18行误写成break了，不应该。。而且29行也没有想起来写，这相当于图的遍历里的HashSet（防止重复遍历），这个地方要牢记！
-// 不过现在OJ这个解法过不了了，会超时。。
 
 
 // Solution 2: two-way BFS!!
@@ -91,4 +90,6 @@ public class Solution {
     }
 }
 
-// 这种解法也超时？原因还在调查中。。
+
+// 本身wordList是set，SB的OJ把它改成List了，所以众多的contains操作导致两种解法都超时，
+// 我目前的解决办法是先建一个set，把wordList还原成set，就不会超时了。。
