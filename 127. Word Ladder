@@ -44,7 +44,10 @@ public class Solution {
 
 // Solution 2: two-way BFS!!
 public class Solution {
-    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if(!wordList.contains(endWord)){
+            return 0;
+        }
         HashSet<String> beginSet = new HashSet<String>();
         HashSet<String> endSet = new HashSet<String>();
         int distance = 1;
@@ -63,6 +66,9 @@ public class Solution {
                 for(int i = 0; i < curWord.length(); i ++) {
                     char[] curWordChar = curWord.toCharArray();
                     for(char c = 'a'; c <= 'z'; c ++) {
+                        if(curWordChar[i] == c){
+                            continue;
+                        }
                         curWordChar[i] = c;
                         String intermediateWord = new String(curWordChar);
                         
@@ -78,10 +84,11 @@ public class Solution {
                 }
             }
             beginSet = next;
-            
             distance ++;
         }
         
         return 0;
     }
 }
+
+// 这种解法也超时？原因还在调查中。。
