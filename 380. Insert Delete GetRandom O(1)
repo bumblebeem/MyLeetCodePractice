@@ -1,0 +1,60 @@
+public class RandomizedSet {
+    Map<Integer, Integer> map;      // map a certain element's VALUE to its LOCATION in arraylist
+    List<Integer> nums;         // contains elements
+    Random random;
+
+    /** Initialize your data structure here. */
+    public RandomizedSet() {
+        map = new HashMap<Integer, Integer>();
+        nums = new ArrayList<Integer>();
+        random = new Random();
+    }
+    
+    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+    public boolean insert(int val) {
+        if(map.containsKey(val)){
+            return false;
+        }
+        map.put(val, nums.size());
+        nums.add(val);
+        return true;
+    }
+    
+    /** Removes a value from the set. Returns true if the set contained the specified element. */
+    public boolean remove(int val) {
+        if(!map.containsKey(val)){
+            return false;
+        }
+        int location = map.get(val);
+        if(location != nums.size() - 1){
+            int lastElement = nums.get(nums.size() - 1);
+            map.put(lastElement, location);
+            nums.set(location, lastElement);
+        }
+        nums.remove(nums.size() - 1);
+        map.remove(val);
+        return true;
+    }
+    
+    /** Get a random element from the set. */
+    public int getRandom() {
+        return nums.get(random.nextInt(nums.size()));
+    }
+}
+
+/**
+ * Your RandomizedSet object will be instantiated and called as such:
+ * RandomizedSet obj = new RandomizedSet();
+ * boolean param_1 = obj.insert(val);
+ * boolean param_2 = obj.remove(val);
+ * int param_3 = obj.getRandom();
+ */
+ 
+ 
+// 第一次做的时候，自己大概想了一下就放弃了，其实已经想到了用HashMap和ArrayList。。。
+// 1. 注意18，19行的顺序不能颠倒
+// 2. 28-33行是精髓（自己没有想到的地方），每次remove操作nums的元素前，先把需要remove
+// 的元素移动到nums的最后边，这样ArrayList nums的remove操作也会变成O(1)而不是O(n)了
+// 3. 注意一下41行random类的用法
+ 
+// https://discuss.leetcode.com/topic/53216/java-solution-using-a-hashmap-and-an-arraylist-along-with-a-follow-up-131-ms
