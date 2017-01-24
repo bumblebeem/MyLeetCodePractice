@@ -97,7 +97,7 @@ public class Solution {
         for(int i = 0; i < nums.length; i ++){
             if(!cur.contains(nums[i])){
                 cur.add(nums[i]);
-                getPermutations(res, cur, i + 1, nums);
+                getPermutations(res, cur, nums);
                 cur.remove(cur.size() - 1);
             }
         }
