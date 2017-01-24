@@ -1,0 +1,49 @@
+public class Solution {
+    public void rotate(int[][] matrix) {
+        if(matrix == null || matrix.length == 0 || matrix[0].length == 0){
+            return;
+        }
+        int n = matrix.length;
+        int[][] rotated = new int[n][n];
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < n; j ++){
+                rotated[i][j] = matrix[n - 1 - j][i];
+            }
+        }
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < n; j ++){
+                matrix[i][j] = rotated[i][j];
+            }
+        }
+    }
+}
+
+// 画个图，一次AC
+
+
+// follow-up, do it in-place;方法知道的话，画个图下标什么的就没问题了！
+public class Solution {
+    public void rotate(int[][] matrix) {
+        if(matrix == null || matrix.length == 0 || matrix[0].length == 0){
+            return;
+        }
+        int n = matrix.length;
+        for(int i = 0; i < n / 2; i ++){
+            for(int j = 0; j < n; j ++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - 1 - i][j];
+                matrix[n - 1 - i][j] = temp;
+            }
+        }
+        for(int i = 0; i < n - 1; i ++){
+            for(int j = i + 1; j < n; j ++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+}
+
+// MUST SEE THIS LINK:
+// https://discuss.leetcode.com/topic/6796/a-common-method-to-rotate-the-image
