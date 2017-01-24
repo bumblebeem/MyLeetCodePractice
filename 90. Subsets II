@@ -34,3 +34,28 @@ public class Solution {
 
 // Iterative solution
 // https://discuss.leetcode.com/topic/4661/c-solution-and-explanation
+
+
+// 另一种可能的recursive写法
+public class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        getSubsets(res, new ArrayList<Integer>(), 0, nums);
+        return res;
+    }
+    
+    private void getSubsets(List<List<Integer>> res, List<Integer> cur, int offset, int[] nums){
+        if(!res.contains(cur)){
+            res.add(new ArrayList<Integer>(cur));
+        }
+        if(cur.size() == nums.length){
+            return;
+        }
+        for(int i = offset; i < nums.length; i ++){
+            cur.add(nums[i]);
+            getSubsets(res, cur, i + 1, nums);
+            cur.remove(cur.size() - 1);
+        }
+    }
+}
