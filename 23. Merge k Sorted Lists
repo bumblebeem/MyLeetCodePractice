@@ -161,3 +161,18 @@ public class Solution {
         return dummy.next;
     }
 }
+
+// 上边这个方法里的第一个函数用如下的方法写简洁一些：
+public ListNode mergeKLists(ListNode[] l) {  
+    if(l == null || l.length == 0){
+        return null;
+    }
+    if(l.length == 1){
+        return l[0];
+    }
+    ListNode res = l[0];
+    for(int i = 1; i < l.length; i ++){
+        res = mergeTwoLists(l[i], res);
+    }
+    return res;
+}
