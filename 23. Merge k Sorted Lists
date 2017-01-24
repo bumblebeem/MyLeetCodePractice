@@ -1,5 +1,5 @@
 // 1. Heap 
-// lintcode能过，leetcode超时。。
+// lintcode能过，leetcode超时。。leetcode的接口从List改成数组了，这个方法就能过了
 /**
  * Definition for ListNode.
  * public class ListNode {
