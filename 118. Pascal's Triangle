@@ -22,5 +22,7 @@ public class Solution {
 }
 
 
-//line 15 remind me of the question "120. Triangle"
-//注意line 10循环的条件
+// line 15 remind me of the question "120. Triangle"
+// 注意line 10循环的条件
+
+// 不要慌，重点是想到把三角形的每行左对齐，再去看特点。。
