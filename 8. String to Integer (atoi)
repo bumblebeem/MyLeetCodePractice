@@ -34,6 +34,9 @@ public class Solution {
 }
 
 
-//line 11, 要先用trim()去掉空格
-//line 15必须是else if,否则line 12，15的charAt(i)需改成charAt(0)
-//result先用double,防止溢出line 26 - 31,最后return之前再进行强制类型转换
+// line 11, 要先用trim()去掉空格
+// line 15必须是else if,否则line 12，15的charAt(i)需改成charAt(0)
+// result先用double,防止溢出line 26 - 31,最后return之前再进行强制类型转换;这里既是用long也是不行的。。
+
+// 这题不可能直接AC的，否则太假了，比如如下的case
+// "  -0012a42"应该返回-12，我还以为是不合法所以返回0呢
