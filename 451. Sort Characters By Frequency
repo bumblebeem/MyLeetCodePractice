@@ -1,0 +1,66 @@
+// Priority Queue
+public class Solution {
+    public String frequencySort(String s) {
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        for(char c : s.toCharArray()){
+            if(map.containsKey(c)){
+                map.put(c, map.get(c) + 1);
+            } else {
+                map.put(c, 1);
+            }
+        }
+        PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<Map.Entry<Character, Integer>>(
+            new Comparator<Map.Entry<Character, Integer>>(){
+                public int compare(Map.Entry<Character, Integer> a, Map.Entry<Character, Integer> b){
+                    return b.getValue() - a.getValue();   
+                }
+        });
+        maxHeap.addAll(map.entrySet());
+        StringBuilder sb = new StringBuilder();
+        while(!maxHeap.isEmpty()){
+            Map.Entry<Character, Integer> cur = maxHeap.poll();
+            for(int i = 0; i < cur.getValue(); i ++){
+                sb.append(cur.getKey());
+            }
+        }
+        return sb.toString();
+    }
+}
+
+// 注意一下18行的语法，剩下没什么
+
+
+// Bucket Sort
+public class Solution {
+    public String frequencySort(String s) {
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        for(char c : s.toCharArray()){
+            if(map.containsKey(c)){
+                map.put(c, map.get(c) + 1);
+            } else {
+                map.put(c, 1);
+            }
+        }
+        List<Character>[] bucket = new List[s.length() + 1];
+        for(char key : map.keySet()){
+            int frequency = map.get(key);
+            if(bucket[frequency] == null) {
+                bucket[frequency] = new ArrayList<Character>();
+            }
+            bucket[frequency].add(key);
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = bucket.length - 1; i > 0; i --){
+            if(bucket[i] != null){
+                for(char c : bucket[i]){
+                    for(int j = 0; j < map.get(c); j ++){
+                        sb.append(c);
+                    }
+                }
+            }
+        }
+        return sb.toString();
+    }
+}
+
+// *注意44行的语法！！
