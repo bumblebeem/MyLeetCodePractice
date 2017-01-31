@@ -24,51 +24,23 @@ public:
 // Below is a Java solution
 public class Solution {
     public void sortColors(int[] nums) {
-        int index_zero = 0;
-        int index_two = nums.length - 1;
-        for(int i = 0; i <= index_two; i ++){
+        int zero = 0;
+        int two = nums.length - 1;
+        for(int i = 0; i <= two; i ++){
             if(nums[i] == 0){
-                nums[i] = nums[index_zero];
-                nums[index_zero] = 0;
-                index_zero ++;
-            }
-            else if(nums[i] == 2){
-                nums[i] = nums[index_two];
-                nums[index_two] = 2;
-                index_two --;
+                swap(nums, zero, i);
+                zero ++;
+            } else if(nums[i] == 2){
+                swap(nums, two, i);
+                two --;
                 i --;
             }
         }
     }
-}
-
-
-// 再刷版本
-class Solution {
-    public void sortColors(int[] nums) {
-        if(nums == null || nums.length == 0){
-            return;
-        }
-        int index_of_zero = 0;
-        int index_of_two = nums.length - 1;
-        int index_of_one = 0;
-        while(index_of_one <= index_of_two){
-            if(nums[index_of_one] == 0){
-                swap(nums, index_of_zero, index_of_one);
-                index_of_zero ++;
-                index_of_one ++;
-            } else if(nums[index_of_one] == 1){
-                index_of_one ++;
-            } else {
-                swap(nums, index_of_one, index_of_two);
-                index_of_two --;
-            }
-        }
-    }
     
-    private void swap(int[] n, int i, int j){
-        int temp = n[i];
-        n[i] = n[j];
-        n[j] = temp;
+    private void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
