@@ -43,7 +43,8 @@ public class Solution {
 
 
 // 稍微简化了一下上边的方法，直接把PriorityQueue的元素变成Map.Entry
-// *注意line60 - 64以Map.Entry作为元素的Comparator的写法！！！
+// *注意line61 - 65以Map.Entry作为元素的Comparator的写法！！！
+// *line67-69可简化为 maxHeap.addAll(map.entrySet());
 public class Solution {
     public List<Integer> topKFrequent(int[] nums, int k) {
         List<Integer> res = new ArrayList<Integer>();
@@ -76,7 +77,7 @@ public class Solution {
 
 
 // 法二：Bucket Sort,思路依旧不难
-// *注意line83(类型为List<Integer>的数组的声明与定义！！line96说明默认每个元素的初始化值是null); line104的addAll的用法！！
+// *注意line84(类型为List<Integer>的数组的声明与定义！！line97说明默认每个元素的初始化值是null); line105的addAll的用法！！
 public class Solution {
     public List<Integer> topKFrequent(int[] nums, int k) {
         List<Integer> res = new ArrayList<Integer>();
@@ -110,7 +111,7 @@ public class Solution {
 
 
 // 法三：TreeMap
-// *注意line136 pollLastEntry/pollFirstEntry的用法！！
+// *注意line137 pollLastEntry/pollFirstEntry的用法！！
 public class Solution {
     public List<Integer> topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
