@@ -30,25 +30,22 @@ public class Solution {
 // https://leetcode.com/discuss/38998/explained-4ms-easy-c-solution
 
 
-// 另一种写法，这里需要注意的是切记39-41行，所有target为空的情况都应该返回0（否则就各种WA啊。。）
-class Solution {
-    public int strStr(String source, String target) {
-        if(target == null || source == null || target.length() > source.length()){
+// 另一种写法，与上一个解法的不同之处是，这个解法需要39-41行的判断，否则要WA。。
+public class Solution {
+    public int strStr(String haystack, String needle) {
+        if(needle == null || haystack == null || needle.length() > haystack.length()){
             return -1;
         }
-        if(target == ""){
+        if(needle.length() == 0){
             return 0;
         }
-        int t_len = target.length();
-        int s_len = source.length();
-        for(int i = 0; i < s_len - t_len + 1; i ++){
-            for(int j = 0; j < t_len; j ++){
-                if(target.charAt(j) == source.charAt(i + j)){
-                    if(j == t_len - 1){
-                        return i;
-                    }
-                } else {
+        for(int i = 0; i < haystack.length() - needle.length() + 1; i ++){
+            for(int j = 0; j < needle.length(); j ++){
+                if(needle.charAt(j) != haystack.charAt(i + j)){
                     break;
+                }
+                if(j == needle.length() - 1){
+                    return i;
                 }
             }
         }
