@@ -1,0 +1,75 @@
+public class Solution {
+    public String alienOrder(String[] words) {
+        if(words == null || words.length == 0){
+            return "";
+        }
+        
+        Map<Character, Integer> inDegree = new HashMap<Character, Integer>();
+        Map<Character, Set<Character>> edges = new HashMap<Character, Set<Character>>();
+        
+        // initialize inDegree map
+        for(String word : words){
+            for(char c : word.toCharArray()){
+                inDegree.put(c, 0);
+            }
+        }
+        
+        // form the graph
+        for(int i = 1; i < words.length; i ++){
+            String prev = words[i - 1];
+            String cur = words[i];
+            if(prev.length() > cur.length() && cur.equals(prev.substring(0, cur.length()))){
+                return "";
+            }
+            int length = Math.min(prev.length(), cur.length());
+            for(int j = 0; j < length; j ++){
+                char p = prev.charAt(j);
+                char c = cur.charAt(j);
+                if(p != c){
+                    Set<Character> set = new HashSet<Character>();
+                    if(edges.containsKey(p)){
+                        set = edges.get(p);
+                    }
+                    if(!set.contains(c)){
+                        set.add(c);
+                        edges.put(p, set);
+                        inDegree.put(c, inDegree.get(c) + 1);
+                    }
+                    break;
+                } 
+            }
+        }
+        
+        // topological sorting
+        Queue<Character> queue = new LinkedList<Character>();
+        for(char edge : inDegree.keySet()){
+            if(inDegree.get(edge) == 0){
+                queue.add(edge);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!queue.isEmpty()){
+            char cur = queue.poll();
+            sb.append(cur);
+            if(edges.containsKey(cur)){
+                for(char neighbor : edges.get(cur)){
+                    inDegree.put(neighbor, inDegree.get(neighbor) - 1);
+                    if(inDegree.get(neighbor) == 0){
+                        queue.add(neighbor);
+                    }
+                }
+            }
+        }
+        if(inDegree.size() == sb.length()){
+            return sb.toString();
+        } else {
+            return "";
+        }
+    }
+}
+
+
+// 此题的本质是topological sorting，但是难点并不在于topological sorting本身
+// 难点在于：
+// **1.如何根据字典建立对应的图
+// *2.line 21-23 对于如下corner case的处理：["wrtkj","wrt"]
