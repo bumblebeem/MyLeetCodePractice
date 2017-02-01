@@ -73,3 +73,5 @@ public class Solution {
 // 难点在于：
 // **1.如何根据字典建立对应的图
 // *2.line 21-23 对于如下corner case的处理：["wrtkj","wrt"]
+
+// https://segmentfault.com/a/1190000003795463
