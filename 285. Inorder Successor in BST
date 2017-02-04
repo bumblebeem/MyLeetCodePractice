@@ -41,3 +41,33 @@ public class Solution {
 
 // Good link for both inorder and preorder successor:
 // https://discuss.leetcode.com/topic/25076/share-my-java-recursive-solution
+
+
+// less concise, but easier to understand iterative version
+public class Solution {
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        if(p.right != null){
+            return minValue(p.right);
+        }
+        
+        TreeNode successor = null;
+        while(root != null){
+            if(p.val < root.val){
+                successor = root;
+                root = root.left;
+            } else if(p.val > root.val) {
+                root = root.right;
+            } else {
+                break;
+            }
+        }
+        return successor;
+    }
+    
+    private TreeNode minValue(TreeNode node){
+        while(node.left != null){
+            node = node.left;
+        }
+        return node;
+    }
+}
