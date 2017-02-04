@@ -84,5 +84,9 @@ public class Solution {
     }
 }
 
+// 第65行也可以写成if(i - k >= 0 && deque.peekFirst() == i - k){
+// 注意，deque里边存的不是数本身，而是数的下标
+
+
 // Good link:
 // https://segmentfault.com/a/1190000003903509
