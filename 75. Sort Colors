@@ -44,3 +44,25 @@ public class Solution {
         nums[j] = temp;
     }
 }
+
+
+// 搞两个指针，一个指在当前0的最后一个下标，另一个指在当前1
+// 的最后一个下标，2不需要指针（因为剩下的都是2）。
+// 进行一次扫描，如果遇到0就两个指针都前进一步并赋值，
+// 如果遇到1就第二个指针前进一步并赋值
+public class Solution {
+    public void sortColors(int[] nums) {
+        int zero = 0;
+        int one = 0;
+        for(int i = 0; i < nums.length; i ++){
+            int cur = nums[i];
+            nums[i] = 2;
+            if(cur == 0){
+                nums[one ++] = 1;
+                nums[zero ++] = 0;
+            } else if(cur == 1){
+                nums[one ++] = 1;
+            }
+        }
+    }
+}
