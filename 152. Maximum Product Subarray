@@ -1,7 +1,7 @@
-//这道题目理解的还不是很好。。。
+// 这道题目理解的不是很好。。。
 
-//Solution
-//Pay attention to the code inside the for loop...
+// Solution
+// Pay attention to the code inside the for loop...
 public class Solution {
     public int maxProduct(int[] nums) {
         int max_pre = nums[0];
@@ -22,7 +22,7 @@ public class Solution {
 }
 
 
-//Yet another solution
+// Another solution
 public class Solution {
     public int maxProduct(int[] nums) {
         int min_so_far = nums[0];
@@ -42,5 +42,28 @@ public class Solution {
         }
         
         return max;
+    }
+}
+
+
+// 这种方法和上边第二种一样；下边这个链接解释比较详细
+// https://discuss.leetcode.com/topic/4417/possibly-simplest-solution-with-o-n-time-complexity
+public class Solution {
+    public int maxProduct(int[] nums) {
+        int res = nums[0];
+        int min = nums[0];
+        int max = nums[0];
+        
+        for(int i = 1; i < nums.length; i ++){
+            if(nums[i] < 0){
+                int temp = max;
+                max = min;
+                min = temp;
+            }
+            max = Math.max(nums[i], nums[i] * max);
+            min = Math.min(nums[i], nums[i] * min);
+            res = Math.max(max, res);
+        }
+        return res;
     }
 }
