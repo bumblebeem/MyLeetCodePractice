@@ -46,7 +46,7 @@ public class Solution {
         int leftMark = left + 1;
         int rightMark = right;
         
-        // the element in nums might not be distinct, so we use <=, >= instead of <, > in line 35 and 38
+        // the element in nums might not be distinct, so we use <=, >= instead of <, > in line 51 and 54
         while(true){
             while(leftMark < right && nums[leftMark] <= pivotValue){
                 leftMark ++;
