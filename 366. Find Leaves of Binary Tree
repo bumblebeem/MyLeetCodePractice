@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> findLeaves(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        findLeavesHelper(res, root);
+        return res;
+    }
+    
+    private int findLeavesHelper(List<List<Integer>> res, TreeNode root){
+        if(root == null){
+            return -1;
+        }
+        int level = Math.max(findLeavesHelper(res, root.left), findLeavesHelper(res, root.right)) + 1;
+        if(level == res.size()){
+            res.add(new ArrayList<Integer>());
+        }
+        res.get(level).add(root.val);
+        // root.left = root.right = null;
+        return level;
+    }
+}
+
+
+// 根据题意（是否需要从树中remove掉叶子节点），决定是否需要26行
+// https://discuss.leetcode.com/topic/49194/10-lines-simple-java-solution-using-recursion-with-explanation
