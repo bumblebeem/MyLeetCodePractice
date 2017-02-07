@@ -26,10 +26,10 @@ public class Solution {
     }
     // quickSelect也可以写成下边注释掉的这个样子！
     // public int quickSelect(int[] nums, int left, int right, int k){
+    //     if(left == right){
+    //         return nums[left];
+    //     }
     //     while(true){
-    //         if(left == right){
-    //             return nums[left];
-    //         }
     //         int pivotIndex = partition(nums, left, right);
     //         if(pivotIndex + 1 == k){
     //             return nums[pivotIndex];
@@ -58,17 +58,19 @@ public class Solution {
             if(leftMark >= rightMark){
                 break;
             } else {
-                int temp = nums[leftMark];
-                nums[leftMark] = nums[rightMark];
-                nums[rightMark] = temp;
+                swap(nums, leftMark, rightMark);
             }
         }
         
-        int temp = nums[left];
-        nums[left] = nums[rightMark];
-        nums[rightMark] = temp;
+        swap(nums, left, rightMark);
         
         return rightMark;
+    }
+    
+    private void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
 
