@@ -33,5 +33,7 @@ public class Solution {
 }
 
 
-//Notice the use of "sign".
-//Pay attention to the code from line 21 - 29(about how to deal with '(' and ')').
+// Notice the use of "sign".
+// Pay attention to the code from line 21 - 29(about how to deal with '(' and ')').
+
+// https://discuss.leetcode.com/topic/15816/iterative-java-solution-with-stack
