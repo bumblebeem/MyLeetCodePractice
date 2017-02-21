@@ -1,0 +1,60 @@
+public class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s == null || t == null || s.length() > t.length()){
+            return false;
+        }
+        if(s.length() == 0){
+            return true;
+        }
+        int indexS = 0, indexT = 0;
+        while(indexT < t.length()){
+            if(s.charAt(indexS) == t.charAt(indexT)){
+                indexS ++;
+            }
+            if(indexS == s.length()){
+                return true;
+            }
+            indexT ++;
+        }
+        return false;
+    }
+}
+
+// 这题一刷竟然没做出来，我也是醉了。。
+
+
+// follow-up倒是确实没啥思路，见下边解法：
+public class Solution {
+    public boolean isSubsequence(String s, String t) {
+        List<Integer>[] map = new List[26];
+        for(int i = 0; i < t.length(); i ++){
+            char cur = t.charAt(i);
+            if(map[cur - 'a'] == null){
+                map[cur - 'a'] = new ArrayList<Integer>();
+            }
+            map[cur - 'a'].add(i);
+        }
+        
+        int prev = 0;
+        for(int i = 0; i < s.length(); i ++){
+            char cur = s.charAt(i);
+            if(map[cur - 'a'] == null){
+                return false;
+            }
+            int j = Collections.binarySearch(map[cur - 'a'], prev);
+            if(j < 0){
+                j = - j - 1;
+            }
+            if(j == map[cur - 'a'].size()){
+                return false;
+            }
+            prev = map[cur - 'a'].get(j) + 1;
+        }
+        return true;
+    }
+}
+
+// 1. 这个解法理解了，本身想自己实现Collections.binarySearch这个函数，但是老AC不了。。
+// 2. 44 - 51行还需要加深理解
+// 3. Collections.binarySearch的文档：
+// https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#binarySearch-java.util.List-T-
