@@ -1,3 +1,4 @@
+// Naive:
 class Node{
     int[] nums;
     int sum;
@@ -39,6 +40,56 @@ public class Solution {
             Node cur = maxHeap.poll();
             res.add(cur.nums);
         }
+        return res;
+    }
+}
+
+
+// Advanced:
+class Node{
+    int[] nums;
+    int sum;
+    int index2;
+    
+    Node(int x, int y, int index2){
+        nums = new int[2];
+        nums[0] = x;
+        nums[1] = y;
+        sum = nums[0] + nums[1];
+        this.index2 = index2;
+    }
+}
+
+public class Solution {
+    public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<int[]> res = new ArrayList<int[]>();
+        if(nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0){
+            return res;
+        }
+         
+        PriorityQueue<Node> minHeap = new PriorityQueue<Node>(k,
+            new Comparator<Node>(){
+                public int compare(Node node1, Node node2){
+                    return node1.sum - node2.sum;
+                }
+            }    
+        );
+        
+        for(int i = 0; i < k && i < nums1.length; i ++){
+            minHeap.add(new Node(nums1[i], nums2[0], 0));
+        }
+
+        // Crucial!
+        while(k -- > 0 && !minHeap.isEmpty()){
+            Node cur = minHeap.poll();
+            res.add(cur.nums);
+            
+            int curIndex2 = cur.index2;
+            if(curIndex2 < nums2.length - 1){
+                minHeap.add(new Node(cur.nums[0], nums2[curIndex2 + 1], curIndex2 + 1));
+            }
+        }
+        
         return res;
     }
 }
