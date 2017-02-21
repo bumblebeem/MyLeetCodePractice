@@ -1,0 +1,44 @@
+class Node{
+    int[] nums;
+    int sum;
+    
+    Node(int x, int y){
+        nums = new int[2];
+        nums[0] = x;
+        nums[1] = y;
+        sum = nums[0] + nums[1];
+    }
+}
+
+public class Solution {
+    public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        PriorityQueue<Node> maxHeap = new PriorityQueue<Node>(k,
+            new Comparator<Node>(){
+                public int compare(Node node1, Node node2){
+                    return node2.sum - node1.sum;
+                }
+            }    
+        );
+        
+        for(int i = 0; i < nums1.length; i ++){
+            for(int j = 0; j < nums2.length; j ++){
+                Node cur = new Node(nums1[i], nums2[j]);
+                if(maxHeap.size() < k){
+                    maxHeap.add(cur);
+                } else {
+                    if(cur.sum < maxHeap.peek().sum){
+                        maxHeap.poll();
+                        maxHeap.add(cur);
+                    }
+                }
+            }
+        }
+        
+        List<int[]> res = new ArrayList<int[]>();
+        while(maxHeap.size() > 0){
+            Node cur = maxHeap.poll();
+            res.add(cur.nums);
+        }
+        return res;
+    }
+}
