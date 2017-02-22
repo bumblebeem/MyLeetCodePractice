@@ -1,25 +1,24 @@
-//DP solution,二刷出了一个小错误，不过dp问题的进步很可观啊！
-//the time complexity is O(n^2)
+// DP solution,二刷出了一个小错误，不过dp问题的进步很可观啊！
+// the time complexity is O(n^2)
 public class Solution {
     public int lengthOfLIS(int[] nums) {
         if(nums == null || nums.length == 0){
             return 0;
-        }
+        }   
         int[] dp = new int[nums.length];
         Arrays.fill(dp, 1);
-        int max = 1;
-        for(int i = 1; i < nums.length; i ++){
+        int res = 1;
+        for(int i = 0; i < nums.length; i ++){
             for(int j = 0; j < i; j ++){
                 if(nums[i] > nums[j]){
                     dp[i] = Math.max(dp[i], dp[j] + 1);
-                    //dp[i] = dp[j] + 1; 这是二刷时候的错误，不应该啊！
                 }
-                max = Math.max(dp[i], max);  //这条语句可以放到上边的if循环里
             }
+            res = Math.max(dp[i], res);
         }
-        return max;
+        return res;
     }
 }
 
-//Advanced solution
-//http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
+// Advanced solution
+// http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
