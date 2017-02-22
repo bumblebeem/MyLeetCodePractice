@@ -1,0 +1,27 @@
+public class Solution {
+    public int longestSubstring(String s, int k) {
+        return helper(s, 0, s.length(), k);
+    }
+    
+    int helper(String s, int begin, int end, int k){
+        if(end - begin < k){
+            return 0;
+        }
+        
+        int[] count = new int[26];
+        for(int i = begin; i < end; i ++){
+            count[s.charAt(i) - 'a'] ++;
+        }
+        
+        for(int i = begin; i < end; i ++){
+            if(count[s.charAt(i) - 'a'] < k){
+                return Math.max(helper(s, begin, i, k), helper(s, i + 1, end, k));
+            }
+        }
+        
+        return end - begin;
+    }
+}
+
+
+// http://bookshadow.com/weblog/2016/09/04/leetcode-longest-substring-with-at-least-k-repeating-characters/
