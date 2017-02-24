@@ -75,3 +75,6 @@ public class TwoSum {
     	    return sum.contains(value);
     	}
 }
+
+
+// https://discuss.leetcode.com/topic/32449/trade-off-in-this-problem-should-be-considered/2
