@@ -1,0 +1,30 @@
+public class Solution {
+    public int findMaximumXOR(int[] nums) {
+        int mask = 0, max = 0;
+        for(int i = 31; i >= 0; i --){
+            mask = mask | (1 << i);
+            Set<Integer> set = new HashSet<Integer>();
+            for(int num : nums){     // store prefix of all number with right i bits discarded
+                set.add(mask & num);
+            }
+            
+            // now find out if there are two prefix with different i-th bit
+            // if there is, the new max should be current max with one 1 bit at i-th position, which is candidate
+            // and the two prefix, say A and B, satisfies:
+            // A ^ B = candidate
+            // so we also have A ^ candidate = B or B ^ candidate = A
+            // thus we can use this method to find out if such A and B exists in the set 
+            int temp = max | (1 << i);      
+            for(int prefix : set){
+                if(set.contains(temp ^ prefix)){
+                    max = temp;
+                    break;
+                }
+            }
+        }
+        return max;
+    }
+}
+
+// 这个链接非常棒，这道题目还需要加深理解
+// https://discuss.leetcode.com/topic/63213/java-o-n-solution-using-bit-manipulation-and-hashmap/18
