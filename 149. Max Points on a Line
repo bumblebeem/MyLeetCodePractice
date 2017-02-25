@@ -56,6 +56,7 @@ public class Solution {
 
 
 // 法二：先算两个点的GCD，之后slope的值是除以最小公倍数
+// https://discuss.leetcode.com/topic/2979/a-java-solution-with-notes/34
 /*
     遍历每个点，看它和后面的每个点构成的直线上有多少个点
     对每个点建立map，斜率是key
