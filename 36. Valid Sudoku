@@ -1,0 +1,27 @@
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        boolean[][] rows = new boolean[10][10];
+        boolean[][] cols = new boolean[10][10];
+        boolean[][] subs = new boolean[10][10];
+        
+        for(int i = 0; i < board.length; i ++){
+            for(int j = 0; j < board[0].length; j ++){
+                if(board[i][j] != '.'){
+                    int num = board[i][j] - '0';
+                    int index = i / 3 * 3 + j / 3;
+                    if(rows[i][num] || cols[j][num] || subs[index][num]){
+                        return false;
+                    }
+                    rows[i][num] = true;
+                    cols[j][num] = true;
+                    subs[index][num] = true;
+                }
+            }
+        }
+        
+        return true;
+    }
+}
+
+// 1. 难点应该在于11行的index怎么计算出来
+// 2. 应该想到用三个矩阵分别来检查每行每列和每个小的九宫格，可惜似乎没想到。。
