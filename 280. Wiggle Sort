@@ -22,3 +22,5 @@ public class Solution {
         nums[i] = temp;
     }
 }
+
+// https://discuss.leetcode.com/topic/42605/my-explanations-of-the-best-voted-algo
