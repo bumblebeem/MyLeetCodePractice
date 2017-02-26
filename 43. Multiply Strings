@@ -1,0 +1,27 @@
+public class Solution {
+    public String multiply(String num1, String num2) {
+        if(num1.equals("0") || num2.equals("0")) {
+            return "0";
+        }
+        int[] res = new int[num1.length() + num2.length()];
+        for(int j = num2.length() - 1; j >= 0; j --){
+            int index = res.length - num2.length() + j;
+            for(int i = num1.length() - 1; i >= 0; i --){
+                int temp = (num1.charAt(i) - '0') * (num2.charAt(j) - '0') + res[index];
+                res[index] = temp % 10;
+                res[index - 1] += temp / 10;
+                index --;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        if(res[0] != 0){
+            sb.append(res[0]);
+        }
+        for(int i = 1; i < res.length; i ++){
+            sb.append(res[i]);
+        }
+        return sb.toString();
+    }
+}
+
+// 在草稿纸上画画图，不怎么难，稳住就好。。模仿小学手算的过程而已
