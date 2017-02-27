@@ -1,0 +1,11 @@
+public class Solution {
+    public char findTheDifference(String s, String t) {
+        char sum = t.charAt(t.length() - 1);
+        int i = 0;
+        for(; i < s.length(); i ++){
+            sum ^= s.charAt(i);
+            sum ^= t.charAt(i);
+        }
+        return sum;
+    }
+}
