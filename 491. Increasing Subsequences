@@ -1,0 +1,25 @@
+public class Solution {
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        Set<List<Integer>> res = new HashSet<List<Integer>>();
+        getAllSubsequences(res, new ArrayList<Integer>(), nums, 0);
+        return new ArrayList(res);
+    }
+    
+    private void getAllSubsequences(Set<List<Integer>> res, List<Integer> cur, int[] nums, int index){
+        if(index > nums.length){
+            return;
+        }
+        if(cur.size() > 1 && !res.contains(cur)){
+            res.add(new ArrayList<Integer>(cur));
+        }
+        for(int i = index; i < nums.length; i ++){
+            if(cur.size() == 0 || cur.get(cur.size() - 1) <= nums[i]){
+                cur.add(nums[i]);
+                getAllSubsequences(res, cur, nums, i + 1);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }   
+}
+
+// 唯一需要注意的点是第3行先用了Set，之后再第5行再转化成List，这个很6啊，否则的话会超时。。
